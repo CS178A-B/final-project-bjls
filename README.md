@@ -1,4 +1,5 @@
-# Undergraduate TA / Faculty Matching Tool
+# Reader Finder
+##Undergraduate TA / Faculty Matching Tool
 
 ## Table of Contents
 - [Overview](#overview)
