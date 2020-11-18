@@ -1,0 +1,936 @@
+{% load static %}
+<!DOCTYPE html>
+<!--  This site was created in Webflow. http://www.webflow.com  -->
+<!--  Last Published: Sun Jul 05 2020 01:29:40 GMT+0000 (Coordinated Universal Time)  -->
+<html data-wf-page="5ec730d61681b8295b9abb32" data-wf-site="5ec730d61681b8af4f9abb22">
+<head>
+  <meta charset="utf-8">
+  <title>Budget</title>
+  <meta content="Budget" property="og:title">
+  <meta content="Budget" property="twitter:title">
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+  <meta content="Webflow" name="generator">
+  <link href="{% static 'css/normalize.css' %}" rel="stylesheet" type="text/css">
+  <link href="{% static 'css/webflow.css' %}" rel="stylesheet" type="text/css">
+  <link href="{% static 'css/ad-launcher-website-c61ef933eac37281ed9.webflow.css' %}" rel="stylesheet" type="text/css">
+  <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" type="text/javascript"></script>
+  <script type="text/javascript">WebFont.load({  google: {    families: ["Montserrat:100,100italic,200,200italic,300,300italic,400,400italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic","Roboto:100,100italic,300,300italic,regular,italic,500,500italic,700,700italic,900"]  }});</script>
+  <script src="https://use.typekit.net/gis7qtt.js" type="text/javascript"></script>
+  <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+  <!-- [if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js" type="text/javascript"></script><![endif] -->
+  <script type="text/javascript">!function(o,c){var n=c.documentElement,t=" w-mod-";n.className+=t+"js",("ontouchstart"in o||o.DocumentTouch&&c instanceof DocumentTouch)&&(n.className+=t+"touch")}(window,document);</script>
+  <link href="{% static 'images/favicon.ico' %}" rel="shortcut icon" type="image/x-icon">
+  <link href="{% static 'images/webclip.png' %}" rel="apple-touch-icon">
+</head>
+<body class="dashboard-background">
+  <div class="dashboard-sidebar">
+    <div class="company-logo-wrapper"><img src="{% static 'images/al-logo-with-text.png' %}" width="144" srcset="{% static 'images/al-logo-with-text-p-500.png' %} 500w, images/al-logo-with-text-p-800.png 800w, images/al-logo-with-text-p-1080.png 1080w, images/al-logo-with-text-p-1600.png 1600w, images/al-logo-with-text-p-2000.png 2000w, images/al-logo-with-text-p-2600.png 2600w, images/al-logo-with-text-p-3200.png 3200w, images/al-logo-with-text.png 3725w" sizes="(max-width: 767px) 19vw, 144px" alt="" class="image-53"></div>
+    <div class="dashboard-title-wrapper w-container">
+      <h1 class="heading-26">My <br>Dashboard</h1>
+    </div>
+    <div class="div-block-128">
+      <div class="dashboard-title-line"></div>
+    </div>
+    <div class="dashbaord-main-buttons-wrapper">
+      <div class="div-block-129">
+        <a href="{% url 'account:index' %}" aria-current="page" class="link-block-7 w-inline-block w--current">
+          <div class="w-layout-grid dashboard-tabs"><img src="{% static 'images/Group-140.svg' %}" height="24" id="w-node-492f2f330756-1dd0385d" alt="" class="image-40">
+            <div id="w-node-492f2f330757-1dd0385d" class="text-block-48">Clicks</div>
+          </div>
+        </a>
+      </div>
+      <div class="div-block-130">
+        <a href="{% url 'account:ads' %}" class="link-block-8 w-inline-block">
+          <div class="w-layout-grid dashboard-tabs"><img src="{% static 'images/Vector-1.svg' %}" height="24" id="w-node-54a812aa2ba3-1dd0385d" alt="" class="image-42">
+            <div id="w-node-54a812aa2ba4-1dd0385d" class="text-block-49">Ads</div>
+          </div>
+        </a>
+      </div>
+      <div class="div-block-131">
+        <a href="{% url 'account:budget' %}" class="link-block-9 w-inline-block">
+          <div class="w-layout-grid dashboard-tabs"><img src="{% static 'images/dollar-icon.svg' %}" height="24" id="w-node-6ac7b108014d-1dd0385d" alt="" class="image-43">
+            <div id="w-node-6ac7b108014e-1dd0385d" class="text-block-50">Budget</div>
+          </div>
+        </a>
+      </div>
+      <div class="div-block-132">
+        <a href="{% url 'account:settings' %}" class="w-inline-block">
+          <div class="settings-button"></div>
+        </a>
+      </div>
+    </div>
+    <div class="settings-wrapper">
+      <div class="div-block-131">
+        <a href="{% url 'account:settings' %}" class="link-block-9 w-inline-block">
+          <div class="w-layout-grid grid-48"><img src="{% static 'images/customer-support-icon.svg' %}" height="21" width="43" id="w-node-ef581dd0386b-1dd0385d" alt="" class="image-55">
+            <div id="w-node-ef581dd0386c-1dd0385d" class="text-block-61">Support</div>
+          </div>
+        </a>
+      </div>
+      <div class="div-block-131">
+        <a href="{% url 'account:settings' %}" class="link-block-9 w-inline-block">
+          <div class="w-layout-grid grid-48"><img src="{% static 'images/settings-icon.svg' %}" height="17" id="w-node-c2da78f33564-1dd0385d" alt="">
+            <div id="w-node-c2da78f33565-1dd0385d" class="text-block-61">Settings</div>
+          </div>
+        </a>
+      </div>
+      <div class="div-block-131">
+        <a href="{% url 'account:logout' %}" class="link-block-9 w-inline-block">
+          <div class="w-layout-grid grid-48"><img src="{% static 'images/logout-icon.svg' %}" height="16" id="w-node-ef581dd03870-1dd0385d" alt="">
+            <div id="w-node-d46a3582140c-1dd0385d" class="text-block-61">Logout</div>
+          </div>
+        </a>
+      </div>
+      <div class="settings-button"></div>
+    </div>
+  </div>
+  <div class="fixed-backdrop"></div>
+  <div class="dashboard-content-block">
+    <div class="tabs-2">
+      <div class="mini-container-for-content-tab budget-mini-container-for-tab">
+        <div class="w-layout-grid grid-69">
+          <div></div>
+          <div>
+            <div class="w-layout-grid grid-76">
+              {% block content %}
+              <form method="POST" action="">
+                {% csrf_token %}
+                <div onclick="pressSave();" id="w-node-5a7a742fcfb3-5b9abb32" class="save-button-div-wrapper"><img src="{% static 'images/Save-Button.svg' %}" alt="" class="image-51 save-button">
+                  <div class="text-block-122">Save</div>
+                </div>
+              </form>
+              {% endblock %}
+              <div id="w-node-6f7e9e17d8c6-5b9abb32" class="edit-budget-button-wrapper">
+                <div class="div-block-137 e-budget-whole-button">
+                  <div class="div-block-135"><img src="{% static 'images/Group-281.svg' %}" width="17" alt=""></div>
+                  <div class="edit-budget-text-button">Edit Budget</div>
+                </div>
+              </div>
+              <div id="w-node-914bff0f3fdf-5b9abb32" class="cancel-button-div-wrapper"><img src="{% static 'images/Group-10.png' %}" alt="" class="image-52 cancel-button">
+                <div class="text-block-122">Cancel</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="div-block-157">
+          <div class="content-title budget-title">Monthly Budget</div>
+          <div class="content-subtitle budget-subtitle">View how much you&#x27;ve allocated to your ad campaigns.</div>
+        </div>
+        <div class="whole-timeline-wrapper">
+          <div class="just-the-timeline-wrapper">
+            <div class="w-form">
+              <form id="email-form" name="email-form" data-name="Email Form">
+                <div class="w-layout-grid grid-44">
+                  <div id="w-node-dc9a9351f3a2-5b9abb32" class="month-name-wrapper">
+                    <div class="month-text month--2-text">Janurary</div>
+                  </div>
+                  <div id="w-node-4a061b0c3bb3-5b9abb32" class="month-name-wrapper">
+                    <div class="month-text month--1-text">Janurary</div>
+                  </div>
+                  <div id="w-node-cf6447f1277a-5b9abb32" class="month-name-wrapper">
+                    <div class="month-text month-0-text">Janurary</div>
+                  </div>
+                  <div id="w-node-c355c84eddd2-5b9abb32" class="month-name-wrapper">
+                    <div class="month-text month-1-text">Janurary</div>
+                  </div>
+                  <div id="w-node-f0260de9bfb5-5b9abb32" class="month-name-wrapper">
+                    <div class="month-text month-2-text">Janurary</div>
+                  </div>
+                  <div id="w-node-b8322d8b8f20-5b9abb32" class="one-timeline-dot left-timeline-dot">
+                    <div class="red-timeline-dot"></div>
+                  </div>
+                  <div id="w-node-023388c7a083-5b9abb32" class="one-timeline-dot left-timeline-dot">
+                    <div class="red-timeline-dot"></div>
+                  </div>
+                  <div id="w-node-4b4b6953f679-5b9abb32" class="one-timeline-dot regular-timeline-dot">
+                    <div class="red-timeline-dot current-month-dot"></div>
+                  </div>
+                  <div id="w-node-f25215a864ea-5b9abb32" class="one-timeline-dot regular-timeline-dot">
+                    <div class="red-timeline-dot future-dot"></div>
+                  </div>
+                  <div id="w-node-f34d38b77d50-5b9abb32" class="one-timeline-dot right-timeline-dot">
+                    <div class="red-timeline-dot future-dot last-dot"></div>
+                  </div>
+                  <div id="w-node-520b1d3695b5-5b9abb32" data-w-id="cc4865cb-e239-9579-632f-520b1d3695b5" style="opacity:0" class="month-spend-wrapper">
+                    <div class="timeline-form-dollar-signs">$</div><input type="number" class="budget-month-text-field month--2-dollars-field w-input" maxlength="256" data-name="" placeholder="600" id="node"></div>
+                  <div class="month-spend-wrapper">
+                    <div class="timeline-form-dollar-signs">$</div><input type="number" class="budget-month-text-field month--1-dollars-field w-input" maxlength="256" name="name-8" data-name="Name 8" style="opacity:0" placeholder="600" data-w-id="4ca88f29-09a5-6662-0b53-1de07006b58a" id="name-8"></div>
+                  <div class="month-spend-wrapper">
+                    <div class="timeline-form-dollar-signs changing-color-dollar-sign">$</div><input type="number" class="budget-month-text-field month-0-dollars-field w-input" maxlength="256" name="name-7" data-name="Name 7" style="opacity:0" placeholder="600" data-w-id="3b846e73-b2e0-9faf-4a9a-df4cc0d1d936" id="name-7"></div>
+                  <div class="month-spend-wrapper">
+                    <div class="timeline-form-dollar-signs changing-color-dollar-sign">$</div><input type="number" class="budget-month-text-field month-1-dollars-field future-text-field w-input" maxlength="256" name="name-5" data-name="Name 5" style="opacity:0" placeholder="423" data-w-id="5d94a554-16dc-f93d-5213-2551a6b5179e" id="name-5"></div>
+                  <div class="month-spend-wrapper">
+                    <div class="timeline-form-dollar-signs changing-color-dollar-sign">$</div><input type="number" class="budget-month-text-field month-2-dollars-field future-text-field w-input" maxlength="256" name="name-4" data-name="Name 4" style="opacity:0" placeholder="423" data-w-id="498c8ee6-373c-fab8-46a6-57a563ba1d29" id="name-4"></div>
+                </div>
+                <div class="red-line"></div>
+                <div class="red-line grey-line"></div>
+                <div data-w-id="5b168eae-0417-8da7-dedc-b4466897f897" style="opacity:0" class="budget-cards-wrapper">
+                  <div class="budget-card budget-card--2">
+                    <div class="red-tops">
+                      <div class="free-trial-text">FREE TRIAL</div>
+                    </div>
+                    <div class="w-layout-grid grid-61">
+                      <div></div>
+                      <div class="div-block-150">
+                        <div id="prev2Spent" class="text-block-83 total-spent-value">$56.70</div>
+                        <div class="text-block-84">actual spend</div>
+                      </div>
+                      <div></div>
+                    </div>
+                    <div class="w-layout-grid grid-62">
+                      <div class="text-block-85">Budget</div>
+                      <div id="w-node-d5fb0ef6a1b3-5b9abb32" class="text-block-92 max-budget-value">$350</div>
+                      <div class="text-block-86">Service Fee</div>
+                      <div id="w-node-e8a916c1598f-5b9abb32" class="text-block-93 service-fee-value">$10.40</div>
+                      <div class="text-block-87">Avg. CPC</div>
+                      <div id="w-node-061cc04bd378-5b9abb32" class="text-block-94 avg-cpc-value">$0.40</div>
+                    </div>
+                  </div>
+                  <div class="budget-card budget-card--1">
+                    <div class="red-tops"></div>
+                    <div class="w-layout-grid grid-61">
+                      <div></div>
+                      <div id="w-node-715b2cc0eb14-5b9abb32" class="div-block-151">
+                        <div id="prev1Spent" class="text-block-83 total-spent-value">$56.70</div>
+                        <div class="text-block-84">actual spend</div>
+                      </div>
+                      <div></div>
+                    </div>
+                    <div class="w-layout-grid grid-62">
+                      <div class="text-block-85">Budget</div>
+                      <div id="w-node-715b2cc0eb1d-5b9abb32" class="text-block-88 max-budget-value">$350</div>
+                      <div class="text-block-86">Service Fee</div>
+                      <div id="w-node-715b2cc0eb21-5b9abb32" class="text-block-95 service-fee-value">$10.40</div>
+                      <div class="text-block-87">Avg. CPC</div>
+                      <div id="w-node-715b2cc0eb25-5b9abb32" class="text-block-96 avg-cpc-value">$0.40</div>
+                    </div>
+                  </div>
+                  <div class="budget-card current-month-card budget-card-0">
+                    <div class="red-tops"></div>
+                    <div class="w-layout-grid grid-61">
+                      <div></div>
+                      <div class="div-block-149">
+                        <div id="currSpent" class="text-block-83 total-spent-value current-total-spent-value">$56.70</div>
+                        <div class="text-block-84">actual spend</div>
+                      </div>
+                      <div></div>
+                    </div>
+                    <div class="w-layout-grid grid-62 grid-for-current-month-expenses">
+                      <div class="text-block-85">Budget</div>
+                      <div id="w-node-3f7638a3041d-5b9abb32" class="text-block-89 max-budget-value">$350</div>
+                      <div class="text-block-86">Service Fee</div>
+                      <div id="w-node-3f7638a30421-5b9abb32" class="text-block-90 service-fee-value">$10.40</div>
+                      <div class="text-block-87">Avg. CPC</div>
+                      <div id="w-node-3f7638a30425-5b9abb32" class="text-block-91 avg-cpc-value">$0.40</div>
+                    </div>
+                  </div>
+                  <div class="budget-card budget-card-1">
+                    <div class="red-tops future-card-color-top"></div>
+                    <div class="w-layout-grid grid-61">
+                      <div></div>
+                      <div class="div-block-152">
+                        <div id="next1Spent" class="text-block-83 total-spent-value">$56.70</div>
+                        <div class="text-block-84">actual spend</div>
+                      </div>
+                      <div></div>
+                    </div>
+                    <div class="w-layout-grid grid-62">
+                      <div class="text-block-85">Budget</div>
+                      <div id="w-node-dd7c40e48b4e-5b9abb32" class="text-block-97 max-budget-value">$350</div>
+                      <div class="text-block-86">Service Fee</div>
+                      <div id="w-node-dd7c40e48b52-5b9abb32" class="text-block-98 service-fee-value">$10.40</div>
+                      <div class="text-block-87">Avg. CPC</div>
+                      <div id="w-node-dd7c40e48b56-5b9abb32" class="text-block-99 avg-cpc-value">$0.40</div>
+                    </div>
+                  </div>
+                  <div class="budget-card budget-card-2">
+                    <div class="red-tops future-card-color-top"></div>
+                    <div class="w-layout-grid grid-61">
+                      <div></div>
+                      <div class="div-block-153">
+                        <div id="next2Spent" class="text-block-83 total-spent-value">$56.70</div>
+                        <div class="text-block-84">actual spend</div>
+                      </div>
+                      <div></div>
+                    </div>
+                    <div class="w-layout-grid grid-62">
+                      <div class="text-block-85">Budget</div>
+                      <div id="w-node-2942de21e5a1-5b9abb32" class="text-block-100 max-budget-value">$350</div>
+                      <div class="text-block-86">Service Fee</div>
+                      <div id="w-node-2942de21e5a5-5b9abb32" class="text-block-101 service-fee-value">$10.40</div>
+                      <div class="text-block-87">Avg. CPC</div>
+                      <div id="w-node-2942de21e5a9-5b9abb32" class="text-block-102 avg-cpc-value">$0.40</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="div-block-140">
+                  <div class="div-block-123"></div>
+                </div>
+                <div class="div-block-114">
+                  <div class="content-title">Budget Simulator</div>
+                  <div class="content-subtitle projected-clicks-subtitle">Input a different budget and see projected clicks.</div>
+                  <div class="div-block-148">
+                    <div class="w-layout-grid grid-70 simulator-button-grid">
+                      <div id="w-node-b8b8b99f504c-5b9abb32" class="simulator-input-wrapper">
+                        <div class="timeline-form-dollar-signs budget-simulator-dollar-sign">$</div><input type="number" class="budget-month-text-field new-budget-text-field simulator-input w-input" maxlength="256" name="name-6" data-name="Name 6" placeholder="423" id="name-6"></div>
+                      <div class="open-simulator-button-wrapper"><a href="#" class="edit-budget-button open-simulator w-button">Start Simulator</a></div>
+                      <div id="w-node-d18eb4ee1084-5b9abb32" class="div-block-155"><a href="#" class="edit-budget-button simulate-button w-button">Simulate</a></div>
+                    </div>
+                  </div>
+                </div><input type="submit" value="Submit" data-wait="Please wait..." class="submit-button w-button"></form>
+              <div class="w-form-done">
+                <div>Thank you! Your submission has been received!</div>
+              </div>
+              <div class="w-form-fail">
+                <div>Oops! Something went wrong while submitting the form.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="simulator-graph-wrapper">
+          <div class="w-layout-grid grid-64">
+            <div id="w-node-edbf39d629a9-5b9abb32" class="text-block-105">Clicks</div>
+            <div class="div-block-138">
+              <div class="html-embed-5 w-embed w-script">
+                <div class="row">
+                  <div class="col s12 m6 offset-m3">
+                    <div class="card white" style="padding: 5%;">
+                      <canvas id="cpcChart"></canvas>
+                    </div>
+                  </div>
+                </div>
+                <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/0.5.7/chartjs-plugin-annotation.min.js"></script>
+                <script>
+        var ctx2 = document.getElementById('cpcChart').getContext('2d');
+        // var cpcGradientFill = ctx2.createLinearGradient(500, 0, 100, 0);
+        // cpcGradientFill.addColorStop(0, "rgba(224, 85, 75, .8)");
+        // cpcGradientFill.addColorStop(1, "rgba(220, 53, 69, .8)");
+        /* NEW CODE */
+        var pastColor = '#DD4150';
+        var futureColor = '#9b9b9b'
+        var monthColors = [pastColor, pastColor, pastColor, futureColor, futureColor];
+        var nullArray = ['Nan', 'Nan']; 
+        /* END NEW CODE */
+        // MAKE API CALL FOR CLICK DATA 
+        cpcDataList = [5, 15, 40, 80, 100];
+        // cpcDataset = {
+        //     label: 'Cost Per Click',
+        //     backgroundColor: cpcGradientFill,
+        //     data: cpcDataList,
+        // };
+        // MAKE API CALL TO FIGURE OUT WHAT DATE IT WAS
+        labelsForChart = [
+            'January',
+            'February',
+            'March',
+            'April',
+            'May'
+        ]
+        // Create New Chart 
+        var cpcChart = new Chart(ctx2, {
+            // The type of chart we want to create
+            type: 'line',
+            // The data for our dataset
+            defaults: {
+                global: {
+                    // example font
+                    defaultFontFamily: "'Raleway'"
+                }
+            }, 
+            /* NEW CODE */
+            data: {
+                labels: labelsForChart,
+                datasets: [
+                    {
+                        data: cpcDataList.slice(0, 3).concat(nullArray),
+                        backgroundColor: 'rgba(221, 65, 80, 0.5)',
+                        borderColor: pastColor,
+                        pointRadius: 5,
+                        pointHoverRadius: 5,
+                        pointBackgroundColor: monthColors,
+                        pointHoverBackgroundColor: monthColors,
+                        pointHoverBorderColor: monthColors,
+                    }, 
+                    {
+                        data: nullArray.concat(cpcDataList.slice(2)),
+                        backgroundColor: 'rgba(155,155,155, 0.5)',
+                        borderColor: futureColor,
+                        pointRadius: 5,
+                        pointHoverRadius: 5,
+                        pointBackgroundColor: monthColors,
+                        pointHoverBackgroundColor: monthColors,
+                        pointHoverBorderColor: monthColors,
+                    }
+                ]
+            },
+            /* END OF NEW CODE */
+            // Configuration options go here
+            options: {
+                // For THIS MONTH vertical line: https://github.com/chartjs/chartjs-plugin-annotation
+                /* NEW CODE */
+                annotation: {
+                    annotations: [
+                    {
+                        type: "line",
+                        mode: "vertical",
+                        scaleID: "x-axis-0",
+                        value: "March",
+                        borderColor: pastColor,
+                        borderWidth: 3,
+                        label: {
+                            backgroundColor: pastColor,
+                            content: "THIS MONTH",
+                            enabled: true,
+                            position: "top"
+                        }
+                    }
+                    ]
+                },
+                /* END OF NEW CODE */
+                responsive: true,
+                scales: {
+                    xAxes: [{
+                        gridLines: {
+                            color: "rgba(0, 0, 0, 0)",
+                            defaultFontFamily: "Quasimoda",
+                        },
+                        ticks: {
+                            fontFamily: "Quasimoda",
+                        } 
+                    }],
+                    yAxes: [{
+                        gridLines: {
+                            color: "rgba(0, 0, 0, 0)",
+                        },
+                        ticks: {
+                            fontFamily: "Quasimoda",
+                        } 
+                    }]
+                },
+                legend: {
+                    display: false
+                },
+            }
+        });
+        </script>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="text-block-106">Month</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="dates-and-max-budget w-embed w-script">
+    <!--  Fill The Max Budget Text Boxes & Dates With Data  -->
+    <script>
+    // Define The Small Red + Grey Max Budget Thingies On The Cards
+    maxBudgetOnCardMinusTwo =document.querySelector(".budget-card--2 .max-budget-value");
+    maxBudgetOnCardMinusOne = document.querySelector(".budget-card--1 .max-budget-value");
+    maxBudgetOnCard0 = document.querySelector(".budget-card-0 .max-budget-value");
+    maxBudgetOnCard1 = document.querySelector(".budget-card-1 .max-budget-value");
+    maxBudgetOnCard2 = document.querySelector(".budget-card-2 .max-budget-value");
+    // Define Form Inputs On Timeline
+    textFieldMinusTwo = document.getElementsByClassName("month--2-dollars-field")[0];
+    textFieldMinusOne = document.getElementsByClassName("month--1-dollars-field")[0];
+    textFieldZero = document.getElementsByClassName("month-0-dollars-field")[0];
+    textFieldPlusOne = document.getElementsByClassName("month-1-dollars-field")[0];
+    textFieldPlusTwo = document.getElementsByClassName("month-2-dollars-field")[0];
+    // Populate Old Service Fee Entrees
+    // INSERT CODE
+    document.querySelector(".budget-card--2 .service-fee-value").innerHTML = '$' + 12;
+    document.querySelector(".budget-card--1 .service-fee-value").innerHTML = '$' + 12;
+    // INSERT CODE
+    // Populate the entry with 0 For Previous Months We Didn't Advertise For Them
+    // Define Service Fee Values in card
+    serviceFeeOnCard0 = document.querySelector(".budget-card-0 .service-fee-value");
+    serviceFeeOnCard1 = document.querySelector(".budget-card-1 .service-fee-value");
+    serviceFeeOnCard2 = document.querySelector(".budget-card-2 .service-fee-value");
+    // INSERT CODE -- GET SERVICE FEE STORED ON BACKEND
+    // Each Person Should Have A Function Stored On The Backend
+    // They'll have their own budget function -- a function that takes in (Month, Year, Max Budget) and will return expected dollars spent
+    function serviceFeeFunction (a, b, c) {
+        return 5 * c;
+    }  
+    // Pass The Month Number Through To Get The Proper Name
+    var monthArray = new Array();
+    monthArray[0] = "January";
+    monthArray[1] = "February";
+    monthArray[2] = "March";
+    monthArray[3] = "April";
+    monthArray[4] = "May";
+    monthArray[5] = "June";
+    monthArray[6] = "July";
+    monthArray[7] = "August";
+    monthArray[8] = "September";
+    monthArray[9] = "October";
+    monthArray[10] = "November";
+    monthArray[11] = "December";
+    var d = new Date();
+    var monthIndex = d.getMonth();
+    // Takes In A Valid Or Invalid Month Index And Returns A Valid One
+    function fixIndexingIssues(num) {
+        if (num < 0) {
+            num = 12 + num;
+        }
+        if (num > 11) {
+            num = num - 12;
+        } 
+        return num;
+    } 
+    var CACHE = window.localStorage;
+    // UNCOMMENT!!!!!
+    var data2 = JSON.parse(CACHE.getItem('budget'));
+    data2 = null
+    if (data2 === null) {
+        console.log('Fetching budget')
+        fetch("http://0.0.0.0:8000/budgetJson/")
+        .then(response => response.json())
+        .then(data2 => {
+            CACHE.setItem('budget', JSON.stringify(data2));
+            // console.log(data2)
+        });
+    } else {
+        console.log('Not Fetching budget')
+        // console.log(data2)
+    }
+
+    // Get Month -2 Index
+    var monthMinusTwoIndex = fixIndexingIssues(monthIndex - 2);
+    monthMinusTwoName = monthArray[monthMinusTwoIndex];
+    // INSERT CODE
+    // Get Month -2 Max Budget From Server
+    var monthMinusTwoMaxBudget; 
+    // Get Month -1 Name 
+    var monthMinusOneIndex = fixIndexingIssues(monthIndex - 1);
+    monthMinusOneName = monthArray[monthMinusOneIndex];
+    // INSERT CODE
+    // Get Month -1 Max Budget From Server
+    var monthMinusOneMaxBudget; 
+    // Get Month 0 Name
+    monthZeroName = monthArray[monthIndex];
+    // INSERT CODE
+    // Get Month 0 Max Budget From Server
+    var monthZeroMaxBudget; 
+    // Get Month 1 Name
+    var monthPlusOneIndex = fixIndexingIssues(monthIndex + 1);
+    monthPlusOneName = monthArray[monthPlusOneIndex];
+    // INSERT CODE
+    // Get Month 1 Max Budget From Server
+    var monthPlusOneMaxBudget;
+    // Get Month 2 Name 
+    var monthPlusTwoIndex = fixIndexingIssues(monthIndex + 2);
+    monthPlusTwoName = monthArray[monthPlusTwoIndex];
+    // INSERT CODE
+    // Get Month 2 Spend From Server
+    var monthPlusTwoMaxBudget;
+    // **** FIND ELEMENTS AND FILL BUDGET & DATE VALUES ****
+    // **** MONTH -2 FILL ****
+    // INSERT CODE
+    // Just Added Dummy Values For Testing
+    var data2 = JSON.parse(CACHE.getItem('budget'));
+    monthMinusTwoMaxBudget = data2.month_data.month2Prev.budget;
+    // Insert All Values For Month -2
+    textFieldMinusTwo.value = monthMinusTwoMaxBudget;
+    maxBudgetOnCardMinusTwo.innerHTML = '$' + monthMinusTwoMaxBudget;
+    textFieldMinusTwo.setAttribute('readonly', true);
+    textFieldMinusTwo.style.cursor = 'default';
+    textFieldMinusTwo.style.backgroundColor = "#dd4150";
+    // Fill In Month Name
+    document.getElementsByClassName("month--2-text")[0].innerHTML = monthMinusTwoName;
+    // **** MONTH -1 FILL ****
+    // INSERT CODE
+    // Just Added Dummy Values For Testing
+    monthMinusOneMaxBudget = data2.month_data.month1Prev.budget;
+    // Insert All Values For Month -1
+    textFieldMinusOne.value = monthMinusOneMaxBudget;
+    maxBudgetOnCardMinusOne.innerHTML = '$' + monthMinusOneMaxBudget;
+    textFieldMinusOne.setAttribute('readonly', true);
+    textFieldMinusOne.style.cursor = 'default';
+    textFieldMinusOne.style.backgroundColor = "#dd4150";
+    // Fill In Month Name
+    document.getElementsByClassName("month--1-text")[0].innerHTML = monthMinusOneName;
+    // **** MONTH 0 FILL ****
+    // INSERT CODE
+    // Just Added Dummy Values For Testing
+    monthZeroMaxBudget = data2.month_data.currMonth.budget;
+    // Insert All Values For Month 0
+    textFieldZero.value = monthZeroMaxBudget;
+    maxBudgetOnCard0.innerHTML = '$' + monthZeroMaxBudget;
+    textFieldZero.setAttribute('readonly', true);
+    textFieldZero.style.cursor = 'default';
+    textFieldZero.style.backgroundColor = "#dd4150";
+    // Fill In Month Name
+    document.getElementsByClassName("month-0-text")[0].innerHTML = monthZeroName;
+    // **** MONTH +1 FILL ****
+    // INSERT CODE
+    // If there's no manually stored information regarding budget for the next month, then we'll set this value to the current month max budget.
+    // If there's manually stored info for *only* next month (not the month after), just set the month 2 budget to next month's
+    // Should we save and update these default values on the backend? 
+    monthPlusOneMaxBudget = 400;
+    // Insert All Values For Month + 1
+    textFieldPlusOne.value = data2.month_data.month1Next.budget;
+    maxBudgetOnCard1.innerHTML = '$' + monthPlusOneMaxBudget;
+    textFieldPlusOne.setAttribute('readonly', true);
+    textFieldPlusOne.style.cursor = 'default';
+    // Fill In Month Text
+    document.getElementsByClassName("month-1-text")[0].innerHTML = monthPlusOneName;
+    // **** MONTH +2 FILL ****
+    // INSERT CODE
+    // If there's no manually stored information regarding budget for the next month, then we'll set this value to the current month max budget
+    monthPlusTwoMaxBudget = 400;
+    // Insert All Values For Month + 2
+    textFieldPlusTwo.value = data2.month_data.month2Next.budget;
+    maxBudgetOnCard2.innerHTML = '$' + monthPlusTwoMaxBudget;
+    textFieldPlusTwo.setAttribute('readonly', true);
+    textFieldPlusTwo.style.cursor = 'default';
+    document.getElementsByClassName("month-2-text")[0].innerHTML = monthPlusTwoName;
+    // Change Input Step For All Form Inputs To 20: 
+    textFields = document.getElementsByClassName("budget-month-text-field"); 
+    for (i = 0; i < textFields.length; i ++) {
+        textFields[i].step = 20;
+    }
+    function updateBudgetZeroValues() {
+        maxBudgetOnCard0.innerHTML = '$' + textFieldZero.value;
+    } 
+    function updateMonthZeroFee () {
+        serviceFee = serviceFeeFunction(monthIndex, d.getFullYear(), textFieldZero.value); 
+        serviceFeeOnCard0.innerHTML = '$' + serviceFee; 
+    } 
+    function updateBudgetOneValues() {
+        maxBudgetOnCard1.innerHTML = '$' + textFieldPlusOne.value;
+    }
+    function updateMonthOneFee () {
+        var nextMonthsYear;
+        // If Next Month Is Next Year
+        if (monthIndex == 12) {
+            nextMonthsYear = d.getFullYear() + 1; 
+        } 
+        else {
+            nextMonthsYear = d.getFullYear();
+        } 
+        serviceFee = serviceFeeFunction(monthIndex + 1, nextMonthsYear, textFieldPlusOne.value); 
+        serviceFeeOnCard1.innerHTML = '$' + serviceFee; 
+    } 
+    function updateBudgetTwoValues() {
+        maxBudgetOnCard2.innerHTML = '$' + textFieldPlusTwo.value;
+    }
+    function updateMonthTwoFee () {
+        var nextNextMonthsYear;
+        // If Next Month Is Next Year
+        if (monthIndex == 12 | monthIndex == 11) {
+            nextNextMonthsYear = d.getFullYear() + 1; 
+        } 
+        else {
+            nextNextMonthsYear = d.getFullYear();
+        } 
+        serviceFee = serviceFeeFunction(monthIndex + 1, nextNextMonthsYear, textFieldPlusTwo.value); 
+        serviceFeeOnCard2.innerHTML = '$' + serviceFee; 
+    } 
+    // Create Event Listeners To Dynamically Fill In Both The Max Budget & Service Fee On The Cards
+    textFieldZero.addEventListener('input',updateBudgetZeroValues);
+    textFieldZero.addEventListener('input',updateMonthZeroFee);
+    textFieldPlusOne.addEventListener('input',updateBudgetOneValues);
+    textFieldPlusOne.addEventListener('input',updateMonthOneFee);
+    textFieldPlusTwo.addEventListener('input',updateBudgetTwoValues);
+    textFieldPlusTwo.addEventListener('input',updateMonthTwoFee);
+</script>
+  </div>
+  <div class="update-card-values-js w-embed w-script">
+    <!--  Fills The Rest Of The Card Info  -->
+    <script>
+    // ****** Fill Service Fee ******
+    // INSERT CODE 
+    var data2 = JSON.parse(CACHE.getItem('budget'));
+    var monthMinusTwoServiceFee = data2.month_data.month2Prev.service_fee;
+    document.querySelector(".budget-card--2 .service-fee-value").innerHTML = '$' + monthMinusTwoServiceFee;
+    // INSERT CODE 
+    var monthMinusOneServiceFee = data2.month_data.month1Prev.service_fee;
+    document.querySelector(".budget-card--1 .service-fee-value").innerHTML = '$' + monthMinusOneServiceFee;
+    // INSERT CODE 
+    var monthZeroServiceFee = data2.month_data.currMonth.service_fee;
+    document.querySelector(".budget-card-0 .service-fee-value").innerHTML = '$' + monthZeroServiceFee;
+    // INSERT CODE 
+    var monthPlusOneServiceFee = data2.month_data.month1Next.service_fee;
+    document.querySelector(".budget-card-1 .service-fee-value").innerHTML = '$' + monthPlusOneServiceFee;
+    // INSERT CODE 
+    var monthPlusTwoServiceFee = data2.month_data.month2Next.service_fee;
+    document.querySelector(".budget-card-2 .service-fee-value").innerHTML = '$' + monthPlusTwoServiceFee;
+    // ****** Fill Avg. CPC ******
+    // INSERT CODE
+    var monthMinusTwoCPC = data2.month_data.month2Prev.average_cpc;
+    document.querySelector(".budget-card--2 .avg-cpc-value").innerHTML = '$' + monthMinusTwoCPC;
+    // INSERT CODE
+    var monthMinusOneCPC = data2.month_data.month1Prev.average_cpc;
+    document.querySelector(".budget-card--1 .avg-cpc-value").innerHTML = '$' + monthMinusOneCPC;
+    // INSERT CODE
+    var monthZeroCPC = data2.month_data.currMonth.average_cpc;
+    document.querySelector(".budget-card-0 .avg-cpc-value").innerHTML = '$' + monthZeroCPC;
+    // INSERT CODE
+    var monthPlusOneCPC = data2.month_data.month1Next.average_cpc;
+    document.querySelector(".budget-card-1 .avg-cpc-value").innerHTML = '$' + monthPlusOneCPC;
+    // INSERT CODE
+    var monthPlusTwoCPC = data2.month_data.month2Next.average_cpc;
+    document.querySelector(".budget-card-2 .avg-cpc-value").innerHTML = '$' + monthPlusTwoCPC;
+    // ****** Fill Total Spent ******
+
+    // INSERT CODE
+    var monthMinusTwoTotalSpent = Math.round(monthMinusTwoMaxBudget) + Math.round(monthMinusTwoServiceFee);
+    document.querySelector(".budget-card--2 .total-spent-value").innerHTML = '$' + monthMinusTwoTotalSpent;
+    // INSERT CODE
+    var monthMinusOneTotalSpent = Math.round(monthMinusOneMaxBudget) + Math.round(monthMinusOneServiceFee);
+    document.querySelector(".budget-card--1 .total-spent-value").innerHTML = '$' + monthMinusOneTotalSpent;
+    // INSERT CODE
+    var monthZeroTotalSpent = Math.round(monthZeroMaxBudget) + Math.round(monthZeroServiceFee);
+    document.querySelector(".budget-card-0 .total-spent-value").innerHTML = '$' + monthZeroTotalSpent;
+    document.querySelector(".budget-card-1 .total-spent-value").innerHTML = '$' + '0.00';
+    document.querySelector(".budget-card-2 .total-spent-value").innerHTML = '$' + '0.00';
+</script>
+  </div>
+  <div class="edit-button-js w-embed w-script">
+    <script>
+    // Set The Colors Of The Text Form Backgrounds
+    budgetFormRedBackground = document.getElementsByClassName("month-0-dollars-field")[0].style.backgroundImage; 
+    budgetFormGreyBackground = document.getElementsByClassName("month-1-dollars-field")[0].style.backgroundImage; 
+    editBudgetFormBackGround = "linear-gradient(90deg, #f3f3f3, #ffffff)";
+    // Set The Colors Of The Text Form Text Color
+    budgetFormTextColor = document.getElementsByClassName("month-0-dollars-field")[0].style.color;
+    editBudgetFormTextColor = "rgb(93, 93, 93)"; 
+    // Create Pointers To Budget Fields 
+    budgetFieldMo0 = document.getElementsByClassName("month-0-dollars-field")[0];
+    budgetFieldMo1 = document.getElementsByClassName("month-1-dollars-field")[0];
+    budgetFieldMo2 = document.getElementsByClassName("month-2-dollars-field")[0];
+    // Get Pointers To The Budget Field Dollar Signs
+    dollarsArray = document.getElementsByClassName("timeline-form-dollar-signs");
+    dollarSignMonth0 = dollarsArray[2];
+    dollarSignMonth1 = dollarsArray[3];
+    dollarSignMonth2 = dollarsArray[4];
+    // Save Original Budget Values
+    origBudgetFieldMo0Value = budgetFieldMo0.value; 
+    origBudgetFieldMo1Value = budgetFieldMo1.value; 
+    origBudgetFieldMo2Value = budgetFieldMo2.value; 
+    // This Function Will Display the Save And Cancel Buttons When You Click Edit
+    function showSaveCancelButtons() {
+        saveButton = document.getElementsByClassName("save-button-div-wrapper")[0];
+        cancelButton = document.getElementsByClassName("cancel-button-div-wrapper")[0];
+        editButton  = document.getElementsByClassName("edit-budget-button-wrapper")[0];
+        // Hide Edit Button 
+        editButton.style.opacity = "0";
+        editButton.style.width = "0px";
+        // Change Width Of Other Buttons 
+        saveButton.style.width = "45px";
+        cancelButton.style.width = "45px";
+        // Turn The Opacity Of Other Buttons On 
+        saveButton.style.opacity = "1";
+        cancelButton.style.opacity = "1";
+        document.getElementsByClassName("e-budget-whole-button")[0].style.display = "none";
+    }
+    function showEditButton() {
+        saveButton = document.getElementsByClassName("save-button-div-wrapper")[0];
+        cancelButton = document.getElementsByClassName("cancel-button-div-wrapper")[0];
+        editButton  = document.getElementsByClassName("edit-budget-button-wrapper")[0];
+        // Change Width Of Other Buttons 
+        saveButton.style.width = "0px";
+        cancelButton.style.width = "0px";
+        // Turn The Opacity Of Other Buttons Off
+        saveButton.style.opacity = "0";
+        cancelButton.style.opacity = "0";
+        // Show Edit Button 
+        document.getElementsByClassName("e-budget-whole-button")[0].style.display = "block";
+        editButton.style.width = "170px";
+        editButton.style.opacity = "1";
+    } 
+    // This Function Will Make The Money Values Editable
+    function turnEditModeOn() {
+        budgetFieldMo0.removeAttribute('readonly');
+        budgetFieldMo1.removeAttribute('readonly');
+        budgetFieldMo2.removeAttribute('readonly');
+    }
+    function turnEditModeOff() {
+        budgetFieldMo0.setAttribute('readonly', true);
+        budgetFieldMo1.setAttribute('readonly', true);
+        budgetFieldMo2.setAttribute('readonly', true); 
+    } 
+    function setEditModeColors() {
+        // Background Colors
+        budgetFieldMo0.style.backgroundImage = editBudgetFormBackGround;
+        budgetFieldMo1.style.backgroundImage = editBudgetFormBackGround;
+        budgetFieldMo2.style.backgroundImage = editBudgetFormBackGround;
+        // Text Colors
+        budgetFieldMo0.style.color = editBudgetFormTextColor;
+        budgetFieldMo1.style.color = editBudgetFormTextColor;
+        budgetFieldMo2.style.color = editBudgetFormTextColor;
+        // Dollars Colors 
+        dollarSignMonth0.style.color = editBudgetFormTextColor;
+        dollarSignMonth1.style.color = editBudgetFormTextColor;
+        dollarSignMonth2.style.color = editBudgetFormTextColor;
+    } 
+    function turnOffEditModeColors() {
+        // Background Colors
+        budgetFieldMo0.style.backgroundImage = budgetFormRedBackground;
+        budgetFieldMo1.style.backgroundImage = budgetFormGreyBackground;
+        budgetFieldMo2.style.backgroundImage = budgetFormGreyBackground;
+        // Text Colors
+        budgetFieldMo0.style.color = budgetFormTextColor;
+        budgetFieldMo1.style.color = budgetFormTextColor;
+        budgetFieldMo2.style.color = budgetFormTextColor;
+        // Dollars Colors
+        dollarSignMonth0.style.color = budgetFormTextColor;
+        dollarSignMonth1.style.color = budgetFormTextColor;
+        dollarSignMonth2.style.color = budgetFormTextColor;
+    }
+    function populateOldBudgetData() {
+        budgetFieldMo0.value = origBudgetFieldMo0Value;
+        budgetFieldMo1.value = origBudgetFieldMo1Value;
+        budgetFieldMo2.value = origBudgetFieldMo2Value;
+    } 
+    function updateOriginalBudgetVariables() {
+        origBudgetFieldMo0Value = budgetFieldMo0.value;
+        origBudgetFieldMo1Value = budgetFieldMo1.value;
+        origBudgetFieldMo2Value = budgetFieldMo2.value;
+    } 
+    // INSERT CODE
+    function saveNewBudgetToBackend() {
+        // Save These Variables To Backend
+        // console.log(budgetFieldMo0.value)
+        budgetFieldMo1.value;
+        budgetFieldMo2.value;
+        var updatedBudgets = {
+          "updatedBudgetField0": budgetFieldMo0.value, 
+          "updatedBudgetField1": budgetFieldMo1.value,
+          "updatedBudgetField2": budgetFieldMo2.value,
+          'csrfmiddlewaretoken': '{{ csrf_token }}'
+        };
+        // console.log(updatedBudgets)
+
+        postData("http://0.0.0.0:8000/budgetJson/", updatedBudgets);
+    } 
+    // Example POST method implementation:
+    function postData(url = '', data = {}) {
+      console.log(data)
+      // Default options are marked with *
+      fetch(url, {
+        method: 'POST', // *GET, POST, PUT, DELETE, etc.
+        headers : { 
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'X-CSRFToken': '{{ csrf_token }}'
+        },
+        credentials: 'same-origin', // include, *same-origin, omit
+        body: JSON.stringify(data) // body data type must match "Content-Type" header
+      });
+      // console.log(response.text())// parses JSON response into native JavaScript objects
+    }
+  // postData('https://example.com/answer', { answer: 42 })
+  // .then(data => {
+  //   console.log(data); // JSON data parsed by `data.json()` call
+  // });
+    // MASTER EDIT FUNCTION
+    function pressEdit() {
+        showSaveCancelButtons(); 
+        setEditModeColors();
+        turnEditModeOn(); 
+    } 
+    function pressSave() {
+        saveNewBudgetToBackend(); 
+        turnOffEditModeColors();
+        turnEditModeOff(); 
+        updateOriginalBudgetVariables();
+        showEditButton();
+    } 
+    function pressCancel() {
+        populateOldBudgetData();  
+        turnOffEditModeColors();
+        turnEditModeOff(); 
+        showEditButton();
+    } 
+    // Create Event Listener For Edit Budget Click
+    editBudgetButton = document.getElementsByClassName("e-budget-whole-button")[0];
+    editBudgetButton.addEventListener('click', pressEdit);
+    // Create Save Button Event Listener
+    saveButton = document.getElementsByClassName("save-button")[0];
+    saveButton.addEventListener('click', pressSave);
+    // Create Save Button Event Listener
+    cancelButton = document.getElementsByClassName("cancel-button")[0];
+    cancelButton.addEventListener('click', pressCancel);
+
+    var CACHE = window.localStorage;
+    // UNCOMMENT!!!!!
+    var data2 = JSON.parse(CACHE.getItem('budget'));
+    data2 = null
+    if (data2 === null) {
+        console.log('Fetching budget')
+        fetch("http://0.0.0.0:8000/budgetJson/")
+        .then(response => response.json())
+        .then(data2 => {
+            CACHE.setItem('budget', JSON.stringify(data2));
+            // console.log(data2)
+        });
+    } else {
+        console.log('Not Fetching budget')
+        // console.log(data2)
+    }
+</script>
+  </div>
+  <div class="see-projected-clicks w-embed w-script">
+    <script>
+    // Fill The New Budget Default Value
+    // INSERT CODE
+    // Get Current Month Spend
+    var currentSpend = 100;
+    projectedSpend = currentSpend + 200; 
+    document.getElementsByClassName("new-budget-text-field")[0].value = projectedSpend;
+    estimatedClicksGraphShown = false; 
+    function updateGraph() {
+        // **** Fill The Graph Values **** 
+        // document.getElementsByClassName("new-budget-text-field")[0].value
+        // Pass Desired Value Through Prediction Function
+        // Update Graph
+        // Show Graph, if it hasn't been shown yet
+        if (estimatedClicksGraphShown == false) {
+            // INSERT CODE -- Once we merge JS files, refer to the chart and then destroy/add a new one
+            // Destroy Chart use chart.destroy();
+            document.getElementsByClassName("simulator-graph-wrapper")[0].style.height = "auto";
+            document.getElementsByClassName("simulator-graph-wrapper")[0].style.opacity = "1";
+            estimatedClicksGraphShown = true;
+            // create new chart -- use chart = new Chart (ctx, config). This will give you the cool pop-up animation
+        }
+    }
+    projectionButton = document.getElementsByClassName("simulate-button")[0]; 
+    projectionButton.addEventListener('click', updateGraph)
+    function revealBudgetSimulatorForm() {
+        // Hide Try It Out Button
+        openSimulatorButton = document.getElementsByClassName('open-simulator-button-wrapper')[0];
+        openSimulatorButton.style.opacity = '0';
+        document.getElementsByClassName('open-simulator')[0].style.display = "none";
+        setTimeout(function () {openSimulatorButton.style.width = '0px';}, 150);
+        // Show Button
+        simulatorTextInput = document.getElementsByClassName('simulator-input-wrapper')[0]; 
+        simulatorTextInput.style.opacity = '1';
+        simButton = document.getElementsByClassName('simulate-button')[0];
+        simButton.style.opacity = '1';        
+    } 
+    tryItOutButton = document.getElementsByClassName('open-simulator')[0];
+    tryItOutButton.addEventListener('click', revealBudgetSimulatorForm);
+</script>
+  </div>
+  <div class="fix-save-changes-popup-coordinates w-embed w-script">
+    <script>
+    // Remember: We Keep Display Setting On For Popup On Load With Opacity 0.
+    // Once We Get The Elem Width, We Can Turn Diaply Off. 
+    window.addEventListener('load', function () {
+        saveChangesPopup = document.getElementsByClassName('save-changes-card')[0];
+        pos = .81 * window.innerWidth/2 - (saveChangesPopup.clientWidth)/2 + .19*window.innerWidth;
+        saveChangesPopup.style.left = pos.toString() + 'px';
+        saveChangesPopup.style.display = 'none';
+    })
+</script>
+  </div>
+  <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.4.1.min.220afd743d.js?site=5ec730d61681b8af4f9abb22" type="text/javascript" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+  <script src="{% static 'js/webflow.js' %}" type="text/javascript"></script>
+  <!-- [if lte IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif] -->
+</body>
+</html>
