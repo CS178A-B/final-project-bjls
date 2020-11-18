@@ -5,8 +5,9 @@ from django.views import View
 from application.api.braintree_api import Customer, Subscription, Transaction, PaymentMethod
 from django.contrib.auth.mixins import LoginRequiredMixin
 from dateutil.relativedelta import relativedelta
-# from .forms import FacultyForm, LoginForm, StudentUpdateForm, StudentForm, FacultyUpdateForm
-from .forms import LoginForm, StudentUpdateForm, StudentForm
+from .forms import FacultyForm, LoginForm, StudentUpdateForm, StudentForm, FacultyUpdateForm
+from .models import User
+# from .forms import LoginForm, StudentUpdateForm, StudentForm
 from django.contrib import messages
 from django.utils import timezone
 import braintree
@@ -58,6 +59,7 @@ class RegisterStudentView(View):
     """This how the register page is handled when attempting GET and POST requests
     """
     template_name = "account/register.html"
+    model = User
 
     # If a user is logged in, they should not have access to the registration page, so we redirect them to their dashboard
     # If a user is not logged in, they should not have access to the registration page, so we redirect them to the login page
@@ -90,33 +92,33 @@ class RegisterStudentView(View):
     #     return firstNext
 
 
-# class RegisterFacultyView(View):
-#     """This how the register page is handled when attempting GET and POST requests
-#     """
-#     template_name = "account/register.html"
+class RegisterFacultyView(View):
+    """This how the register page is handled when attempting GET and POST requests
+    """
+    template_name = "account/register.html"
 
-#     # If a user is logged in, they should not have access to the registration page, so we redirect them to their dashboard
-#     # If a user is not logged in, they should not have access to the registration page, so we redirect them to the login page
-#     # If a user is a superuser, they are the ONLY people that should be able to access the registration page, so we render the page and form for them
-#     def get(self, request):
-#         faculty_form = FacultyForm()
-#         if request.user.is_authenticated:
-#             # is_SuperUser = request.user.is_superuser
-#             # if is_SuperUser:
-#             return redirect(reverse('account:dashboard'))
-#         return render(request, self.template_name, {'form': faculty_form})
+    # If a user is logged in, they should not have access to the registration page, so we redirect them to their dashboard
+    # If a user is not logged in, they should not have access to the registration page, so we redirect them to the login page
+    # If a user is a superuser, they are the ONLY people that should be able to access the registration page, so we render the page and form for them
+    def get(self, request):
+        faculty_form = FacultyForm()
+        if request.user.is_authenticated:
+            # is_SuperUser = request.user.is_superuser
+            # if is_SuperUser:
+            return redirect(reverse('account:dashboard'))
+        return render(request, self.template_name, {'form': faculty_form})
 
-#     # When a user submits the fields on the login page, we want to ensure that the registration credentials are correct
-#     # If they are, we redirect them to their dashboard page
-#     # If they aren't, we render the registration page again, this time with an error message
-#     def post(self, request):
-#         faculty_form = FacultyForm(request.POST)
-#         if faculty_form.is_valid():
-#             faculty_form.instance.username = faculty_form.instance.email
-#             # customer_form.instance.billing_start_date = self.getBillingStart()
-#             faculty_form.save()
-#             return redirect(reverse('account:login'))
-#         return render(request, self.template_name, {'form': faculty_form})
+    # When a user submits the fields on the login page, we want to ensure that the registration credentials are correct
+    # If they are, we redirect them to their dashboard page
+    # If they aren't, we render the registration page again, this time with an error message
+    def post(self, request):
+        faculty_form = FacultyForm(request.POST)
+        if faculty_form.is_valid():
+            faculty_form.instance.username = faculty_form.instance.email
+            # customer_form.instance.billing_start_date = self.getBillingStart()
+            faculty_form.save()
+            return redirect(reverse('account:login'))
+        return render(request, self.template_name, {'form': faculty_form})
 
 
 class DashboardView(View):
@@ -200,32 +202,32 @@ class StudentUpdateView(View):
         return render(request, self.template_name, {'form': update_form})
 
 
-# class FacultyUpdateView(View):
-#     """This how the update page is handled when attempting GET and POST requests
-#     """
-#     template_name = "account/update_account.html"
+class FacultyUpdateView(View):
+    """This how the update page is handled when attempting GET and POST requests
+    """
+    template_name = "account/update_account.html"
 
-#     # If a user is logged in, they should be able to access the update account page, so we render the update page and its form
-#     # Otherwise, if they aren't logged in, they should not have access to the update account page, so we redirect them to the login page
-#     def get(self, request):
-#         update_form = FacultyUpdateForm()
-#         if request.user.is_authenticated:
-#             # validC = validPayingCustomer(request)
-#             # if not validC:
-#             #     return redirect(reverse('account:payment'))
-#             return render(request, self.template_name, {'form': update_form})
-#         return redirect(reverse('account:login'))
+    # If a user is logged in, they should be able to access the update account page, so we render the update page and its form
+    # Otherwise, if they aren't logged in, they should not have access to the update account page, so we redirect them to the login page
+    def get(self, request):
+        update_form = FacultyUpdateForm()
+        if request.user.is_authenticated:
+            # validC = validPayingCustomer(request)
+            # if not validC:
+            #     return redirect(reverse('account:payment'))
+            return render(request, self.template_name, {'form': update_form})
+        return redirect(reverse('account:login'))
     
-#     # When a user submits the fields on the update account page, we want to ensure that the update credentials are correct
-#     # If they are, we save the changes and redirect them to their dashboard page
-#     # If they aren't, we render the update account page again, this time with an error message
-#     def post(self, request):
-#         update_form = StudentUpdateForm(request.POST, instance=request.user)
-#         if update_form.is_valid():
-#             update_form.instance.username = update_form.instance.email
-#             update_form.save()
-#             return redirect(reverse('account:dashboard'))
-#         return render(request, self.template_name, {'form': update_form})
+    # When a user submits the fields on the update account page, we want to ensure that the update credentials are correct
+    # If they are, we save the changes and redirect them to their dashboard page
+    # If they aren't, we render the update account page again, this time with an error message
+    def post(self, request):
+        update_form = StudentUpdateForm(request.POST, instance=request.user)
+        if update_form.is_valid():
+            update_form.instance.username = update_form.instance.email
+            update_form.save()
+            return redirect(reverse('account:dashboard'))
+        return render(request, self.template_name, {'form': update_form})
 
 
 class DeleteView(View):

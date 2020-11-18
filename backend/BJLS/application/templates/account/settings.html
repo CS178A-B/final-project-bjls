@@ -14,21 +14,11 @@
             <div class="media-body">
                 <h2 class="account-heading">{{ request.user.name }}</h2>
                 <p class="text-secondary">{{ request.user.email }}</p>
-                <a class="nav-item nav-link" href="{% url 'account:update' %}">Update</a>
+                <a class="nav-item nav-link" href="{% url 'account:update_student' %}">Update</a>
                 <a class="nav-item nav-link" href="{% url 'account:delete' %}">Delete</a>
                 <a class="nav-item nav-link" href="{% url 'account:dashboard' %}">Go Back</a>
 
             </div>
-            <!-- <form method="POST">
-                {% csrf_token %}
-                {{ form.as_p }}
-                <div class="form-group">
-                    <button class="btn btn-outline-info" type="submit">Log In</button>
-                    <small class="text-muted ml-2">
-                        <a href="{% url 'account:register' %}">Forgot Password?</a>
-                    </small>
-                </div>
-            </form> -->
             {% endblock %}
         </div>
         
