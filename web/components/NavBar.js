@@ -40,7 +40,7 @@ export default function NavBar() {
                         <Typography variant="h6" className={styles.title}>
                             Dashboard
                         </Typography>
-                        <Button color="inherit">Login</Button>
+                        <Button color="inherit">Log out</Button>
                     </Toolbar>
                 </AppBar>
             </div>

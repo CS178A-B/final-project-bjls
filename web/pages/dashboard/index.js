@@ -35,7 +35,7 @@ const JobCard = () => {
                                 component="img"
                                 alt="jobcard"
                                 height="140"
-                                image=""
+                                image="../../assets/cs141+.png"
                                 title="JobCard"
                             />
                             <CardContent>
