@@ -78,12 +78,12 @@ WSGI_APPLICATION = 'application.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.environ.get('POSTGRES_HOST'),
-        'USER': os.environ.get('POSTGRES_USER'),
-        'PASSWORD': os.environ.get('POSTGRES_PASSWORD'),
-        'HOST': os.environ.get('POSTGRES_HOST'),
-        'PORT': os.environ.get('POSTGRES_PORT'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'tbeqdkda',
+        'USER': 'tbeqdkda',
+        'PASSWORD': 'l0RZXytXE1QLfU4WXyFGmiOgnD-Stv-n',
+        'HOST': 'ruby.db.elephantsql.com',
+        'PORT': 5432,
     }
 }
 
@@ -131,7 +131,7 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, "application/static"), ]
 # ]
 
 # Advanced Settings
-ALLOWED_HOSTS = ['0.0.0.0']
+ALLOWED_HOSTS = ['0.0.0.0', 'localhost']
 AUTH_USER_MODEL = 'account.User'
 LOGOUT_REDIRECT_URL = "account:login"
 
