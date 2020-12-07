@@ -37,6 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'dateutil',
     'crispy_forms',
+    'leads',
+    'rest_framework',
+    'frontend',
     # Django Apps
     'application.account'
 
@@ -79,11 +82,16 @@ WSGI_APPLICATION = 'application.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.environ.get('POSTGRES_HOST'),
-        'USER': os.environ.get('POSTGRES_USER'),
-        'PASSWORD': os.environ.get('POSTGRES_PASSWORD'),
-        'HOST': os.environ.get('POSTGRES_HOST'),
-        'PORT': os.environ.get('POSTGRES_PORT'),
+        # 'NAME': os.environ.get('POSTGRES_HOST'),
+        # 'USER': os.environ.get('POSTGRES_USER'),
+        # 'PASSWORD': os.environ.get('POSTGRES_PASSWORD'),
+        # 'HOST': os.environ.get('POSTGRES_HOST'),
+        # 'PORT': os.environ.get('POSTGRES_PORT'),
+        'NAME': 'tbeqdkda',
+        'USER': 'tbeqdkda',
+        'PASSWORD': 'l0RZXytXE1QLfU4WXyFGmiOgnD-Stv-n',
+        'HOST': 'ruby.db.elephantsql.com',
+        'PORT': '5432',
     }
 }
 
@@ -125,13 +133,16 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, "application/static"), ]
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "application/static"),
+    os.path.join(BASE_DIR, "frontend/static"),
+ ]
 # STATICFILES_DIR = [
 #     os.path.join(BASE_DIR, 'static'),
 # ]
 
 # Advanced Settings
-ALLOWED_HOSTS = ['0.0.0.0']
+ALLOWED_HOSTS = ['0.0.0.0', 'localhost']
 AUTH_USER_MODEL = 'account.User'
 LOGOUT_REDIRECT_URL = "account:login"
 
