@@ -47,7 +47,6 @@ class LoginView(View):
             # if not validC:
             #     return redirect(reverse('account:payment'))
             # else:
-            print("Valid Customer")
             return redirect(reverse('account:dashboard'))
         messages.error(request, "Your email or password is incorrect.")
         return render(request, self.template_name, {'form': login_form})
@@ -77,6 +76,7 @@ class RegisterStudentView(View):
         student_form = StudentForm(request.POST)
         if student_form.is_valid():
             student_form.instance.username = student_form.instance.email
+            student_form.instance.is_student = True
             # customer_form.instance.billing_start_date = self.getBillingStart()
             student_form.save()
             return redirect(reverse('account:login'))
@@ -113,6 +113,7 @@ class RegisterFacultyView(View):
         faculty_form = FacultyForm(request.POST)
         if faculty_form.is_valid():
             faculty_form.instance.username = faculty_form.instance.email
+            faculty_form.instance.is_faculty = True
             # customer_form.instance.billing_start_date = self.getBillingStart()
             faculty_form.save()
             return redirect(reverse('account:login'))

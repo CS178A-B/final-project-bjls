@@ -975,6 +975,7 @@ class TestAdsJsonView(TestCase):
         self.assertJSONEqual(
             str(response.content, encoding='utf8'),
             {
+            student_form.instance.is_student = True
                 "ads": ads
             }
         )
@@ -1451,8 +1452,3 @@ class TestValidCustomer(TestCase):
     #         }
     #     )
 
-
-class TestBraintree(TestCase):
-    def test_payment(self):
-        # TODO: For Nathan to test
-        self.assertTrue(True)
