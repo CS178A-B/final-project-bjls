@@ -2,7 +2,6 @@ from django.shortcuts import render, redirect, reverse
 from django.contrib.auth import login, logout
 from django.http import HttpResponse, JsonResponse
 from django.views import View
-from application.api.braintree_api import Customer, Subscription, Transaction, PaymentMethod
 from django.contrib.auth.mixins import LoginRequiredMixin
 from dateutil.relativedelta import relativedelta
 from .forms import FacultyForm, LoginForm, StudentUpdateForm, StudentForm, FacultyUpdateForm
@@ -10,7 +9,6 @@ from .models import User
 # from .forms import LoginForm, StudentUpdateForm, StudentForm
 from django.contrib import messages
 from django.utils import timezone
-import braintree
 import logging 
 import os
 import json

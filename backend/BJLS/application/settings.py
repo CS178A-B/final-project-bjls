@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'dateutil',
     'crispy_forms',
     'leads',
+    'interface',
     'rest_framework',
     'frontend',
     # Django Apps
