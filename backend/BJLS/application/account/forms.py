@@ -6,7 +6,7 @@ from .models import User
 class StudentForm(UserCreationForm):
     class Meta:
         model = User
-        model.is_student = True
+        # model.is_student = True
         fields = ('name', 'email', 'major', 'password1', 'password2')
         # model.save()
 
@@ -28,7 +28,7 @@ class StudentForm(UserCreationForm):
 class FacultyForm(UserCreationForm):
     class Meta:
         model = User
-        model.is_faculty = True
+        # model.is_faculty = True
         fields = ('name', 'email', 'department', 'password1', 'password2')
 
     def __init__(self, *args, **kwargs):
