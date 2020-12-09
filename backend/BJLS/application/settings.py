@@ -37,10 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'dateutil',
     'crispy_forms',
-    'leads',
     'interface',
     'rest_framework',
-    'frontend',
+
     # Django Apps
     'application.account'
 
