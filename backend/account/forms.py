@@ -44,8 +44,8 @@ class LoginForm(AuthenticationForm):
         super(LoginForm, self).__init__(*args, **kwargs)
 
     # Note: Customer.username == Customer.email
-    username = forms.EmailField(widget=forms.EmailInput(attrs={'class': 'ad-launcher-text-field w-input'}))
-    password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'ad-launcher-text-field w-input'}))
+    username = forms.EmailField(widget=forms.EmailInput(attrs={'class': 'r-finder-text-field w-input'}))
+    password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'r-finder-text-field w-input'}))
 
 
 class StudentUpdateForm(forms.ModelForm):

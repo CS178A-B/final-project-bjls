@@ -35,7 +35,7 @@
 }
 
 .logo {
-  background-image: url('../images/ad-launcher-logo.png');
+  background-image: url('../images/r-finder-logo.png');
   background-position: 50% 50%;
   background-size: contain;
   background-repeat: no-repeat;
@@ -2046,7 +2046,7 @@
   box-shadow: 1px 1px 4px -2px #000;
 }
 
-.action-button.delete-ad-launcher-account {
+.action-button.delete-r-finder-account {
   position: static;
   display: inline-block;
   margin-top: 17px;
@@ -2393,13 +2393,13 @@
   box-shadow: 3px 3px 4px -2px #000;
 }
 
-.ad-launcher-field {
+.r-finder-field {
   font-family: quasimoda, sans-serif;
   font-weight: 300;
   text-align: left;
 }
 
-.ad-launcher-text-field {
+.r-finder-text-field {
   border-radius: 6px;
   font-weight: 300;
 }
@@ -7398,12 +7398,12 @@
   .sign-in-field {
     text-align: left;
   }
-  .ad-launcher-field {
+  .r-finder-field {
     font-family: quasimoda, sans-serif;
     font-weight: 300;
     text-align: left;
   }
-  .ad-launcher-text-field {
+  .r-finder-text-field {
     border: 1px solid #e2e2e2;
     border-radius: 6px;
     font-family: quasimoda, sans-serif;
@@ -7853,7 +7853,7 @@
     margin-right: 4px;
     margin-left: 4px;
   }
-  .ad-launcher-text-field {
+  .r-finder-text-field {
     padding-top: 0px;
     padding-bottom: 0px;
     font-size: 12px;
@@ -8466,7 +8466,7 @@
   .image-22 {
     display: none;
   }
-  .ad-launcher-field {
+  .r-finder-field {
     margin-bottom: 0px;
     font-size: 13px;
   }
