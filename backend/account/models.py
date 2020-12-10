@@ -28,4 +28,4 @@ class User(AbstractUser):
 #     # department = models.CharField(max_length=50)
     
 #     # def __repr__(self):
-#     #     return "{0} - {1}".format(self.name, self.email)
+#     #     return "{0} - {1}".format(self.name, self.email
