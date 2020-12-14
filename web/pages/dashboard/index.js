@@ -16,6 +16,8 @@ import {
     Typography,
 } from "@material-ui/core";
 
+import axios from "axios";
+
 const JobCard = () => {
     const theme = createMuiTheme({
         palette: {
@@ -90,6 +92,20 @@ export default function DashBoard() {
         }
     };
 
+    const getUserData = () => {
+        let input = {
+            name: "333",
+            major: "444",
+            email: "888@2111.com",
+            is_student: false,
+        };
+        axios.get("http://localhost:8000/api/user").then((r) => {
+            console.log(r.data);
+        });
+        axios.post("http://localhost:8000/api/user", input).then((r) => {
+            console.log(r);
+        });
+    };
     return (
         <>
             <NavBar />
@@ -100,7 +116,7 @@ export default function DashBoard() {
                     gutterBottom
                     className={styles.greetingTitle}
                 >
-                    Good {checkGreeting()}!
+                    Good {checkGreeting()}!{getUserData()}
                 </Typography>
 
                 <Grid
