@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
+
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
-import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
@@ -12,7 +12,6 @@ import Grid from "@material-ui/core/Grid";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import styles from "../../styles/pages/Login.module.css";
-import dynamic from "next/dynamic";
 import Link from "next/link";
 
 function Copyright() {
@@ -59,11 +58,27 @@ function Copyright() {
 //   },
 // }));
 function SignInSide() {
-  // const styles = useStyles();
+  const [logedIn, setLogedIn] = useState(
+    localStorage.getItem("token") ? true : false
+  );
+  const [logedError, setLogedError] = useState(false);
+  const [loginInfo, setLoginInfo] = useState({
+    username: "",
+    password: "",
+  });
 
+  useEffect(() => {
+    if (logedIn) {
+      axios
+        .get("http://localhost:8000/api/current_user", {
+          header: { Authorization: `JWT ${localStorage.getItem("token")}` },
+        })
+        .then((r) => {});
+    }
+  }, []);
+  // const styles = useStyles();
   return (
     <Grid container component="main" className={styles.root}>
-      <CssBaseline />{" "}
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
         <div className={styles.paper}>
           <Avatar className={styles.avatar}>
@@ -77,10 +92,8 @@ function SignInSide() {
               margin="normal"
               required
               fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
+              id="username"
+              label="Username"
               autoFocus
             />
             <TextField
@@ -91,31 +104,26 @@ function SignInSide() {
               label="Password"
               type="password"
               id="password"
-              autoComplete="current-password"
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
             />
             <Link href="/dashboard" passHref>
-            <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={styles.submit}
-          >
-            Sign In
-            </Button>
-          </Link>
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                color="primary"
+                className={styles.submit}
+              >
+                Sign In
+              </Button>
+            </Link>
             <Grid container>
-              <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
-                </Link>
-              </Grid>
+              <Grid item xs></Grid>
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link href="/signup" variant="body2">
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>
@@ -130,9 +138,6 @@ function SignInSide() {
     </Grid>
   );
 }
-const DynamicComponentWithNoSSR = dynamic(() => import(SignInSide), {
-  ssr: false,
-});
 
 export default function LoginPage() {
   return <SignInSide />;
