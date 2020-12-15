@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from rest_framework_jwt.settings import api_settings
-from account.models import User
+from account.models import User, Job
 
 # User Serializer
 
@@ -37,3 +37,10 @@ class UserSerializerWithToken(serializers.ModelSerializer):
         model = User
         fields = ('token', 'name', 'email', 'username', 'password',
                   'major', 'department', 'is_student', 'is_faculty')
+
+# Job Serializer
+class JobSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Job
+        fields = ('name', 'description', 'poster')
+    
