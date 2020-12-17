@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-
+import React, { useState, useEffect, useLayoutEffect } from "react";
+import { useRouter } from "next/router";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
@@ -13,6 +13,8 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import styles from "../../styles/pages/Login.module.css";
 import Link from "next/link";
+
+import axios from "axios";
 
 function Copyright() {
   return (
@@ -58,24 +60,63 @@ function Copyright() {
 //   },
 // }));
 function SignInSide() {
-  const [logedIn, setLogedIn] = useState(
-    localStorage.getItem("token") ? true : false
-  );
+  const [logedIn, setLogedIn] = useState(false);
   const [logedError, setLogedError] = useState(false);
   const [loginInfo, setLoginInfo] = useState({
     username: "",
     password: "",
   });
+  const [userInfo, setUserInfo] = useState({});
+  const router = useRouter();
+
+  const handleChange = (event) => {
+    setLoginInfo({ ...loginInfo, [event.target.id]: event.target.value });
+  };
+  const handleCheck = (event) => {
+    setLoginInfo({ ...loginInfo, [event.target.id]: event.target.checked });
+  };
+
+  const handleSubmit = () => {
+    setLogedError(false);
+    axios
+      .post("http://localhost:8000/api/token-auth/", loginInfo)
+      .then((r) => {
+        console.log(r);
+        if (r.status === 200) {
+          setLogedIn(true);
+          if (typeof window !== "undefined") {
+            window.localStorage.setItem("token", r.data.token);
+          }
+          router.push("/dashboard");
+        }
+        setUserInfo(r.data.user);
+      })
+      .catch((error) => {
+        console.log(error.response);
+        if (error.response.status === 400) {
+          setLogedError(true);
+        }
+      });
+  };
 
   useEffect(() => {
-    if (logedIn) {
+    if (typeof window !== "undefined") {
+      localStorage.getItem("token");
       axios
         .get("http://localhost:8000/api/current_user", {
-          header: { Authorization: `JWT ${localStorage.getItem("token")}` },
+          headers: { Authorization: `JWT ${localStorage.getItem("token")}` },
         })
-        .then((r) => {});
+        .then((r) => {
+          console.log(r);
+          setUserInfo(r.data.user);
+          router.push("/dashboard"); 
+        })
+        .catch((e) => {
+          console.log(e.response);
+        });
     }
   }, []);
+
   // const styles = useStyles();
   return (
     <Grid container component="main" className={styles.root}>
@@ -87,51 +128,57 @@ function SignInSide() {
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          <form className={styles.form} noValidate>
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="username"
-              label="Username"
-              autoFocus
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-            />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
-            <Link href="/dashboard" passHref>
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                color="primary"
-                className={styles.submit}
-              >
-                Sign In
-              </Button>
-            </Link>
-            <Grid container>
-              <Grid item xs></Grid>
-              <Grid item>
-                <Link href="/signup" variant="body2">
-                  {"Don't have an account? Sign Up"}
-                </Link>
-              </Grid>
+          {logedError ? (
+            <div style={{ color: "red" }}> Login Failed </div>
+          ) : (
+            <div></div>
+          )}
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            id="username"
+            label="Username"
+            value={loginInfo.username}
+            onChange={handleChange}
+            autoFocus
+          />
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            name="password"
+            label="Password"
+            type="password"
+            id="password"
+            value={loginInfo.password}
+            onChange={handleChange}
+          />
+          <FormControlLabel
+            control={<Checkbox value="remember" color="primary" />}
+            label="Remember me"
+          />
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+            className={styles.submit}
+            onClick={handleSubmit}
+          >
+            Sign In
+          </Button>
+          <Grid container>
+            <Grid item xs></Grid>
+            <Grid item>
+              <Link href="/signup" variant="body2">
+                {"Don't have an account? Sign Up"}
+              </Link>
             </Grid>
-            <Box mt={5}>
-              <Copyright />
-            </Box>
-          </form>
+          </Grid>
+          <Box mt={5}>
+            <Copyright />
+          </Box>
         </div>
       </Grid>
       <Grid item xs={false} sm={4} md={7} className={styles.image} />
