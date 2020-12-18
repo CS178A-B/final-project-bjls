@@ -1,0 +1,15 @@
+.listItem {
+  width: 300px;
+}
+
+.avatar {
+  margin: 1rem 0 1rem 2rem;
+}
+
+.nameList {
+  margin: 0 2rem 0rem 2rem;
+}
+
+.buttonGrid {
+  text-align: center;
+}
