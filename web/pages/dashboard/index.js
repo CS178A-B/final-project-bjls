@@ -1,6 +1,7 @@
-import React from "react";
+import React, { createRef, useEffect, useRef, useState } from "react";
 import styles from "../../styles/pages/Dashboard.module.css";
 import NavBar from "../../components/NavBar";
+import ProfileDrawer from "../../components/ProfileDrawer";
 import {
     Button,
     Card,
@@ -16,7 +17,11 @@ import {
     Typography,
 } from "@material-ui/core";
 
-const JobCard = () => {
+import axios from "axios";
+
+import { useRouter } from "next/router";
+
+const JobCard = ({ name, description, poster }) => {
     const theme = createMuiTheme({
         palette: {
             primary: {
@@ -44,23 +49,21 @@ const JobCard = () => {
                                     variant="h5"
                                     component="h2"
                                 >
-                                    Ex veniam consectetur
+                                    {name}
                                 </Typography>
                                 <Typography
                                     variant="body2"
                                     color="textSecondary"
                                     component="p"
                                 >
-                                    Reprehenderit incididunt sit occaecat
-                                    proident Lorem reprehenderit in. Excepteur
-                                    irure fugiat amet est sit. Elit Lorem eu
-                                    fugiat incididunt ut eu sint. Nulla officia
-                                    consectetur dolor qui labore exercitation.
-                                    Laboris adipisicing nisi officia ut mollit
-                                    cupidatat minim enim nisi est minim elit ex.
-                                    Mollit ea sit elit eiusmod eiusmod eiusmod
-                                    eiusmod sint veniam voluptate aliqua magna
-                                    commodo officia.
+                                    {description}
+                                </Typography>
+                                <Typography
+                                    variant="body2"
+                                    color="textSecondary"
+                                    component="p"
+                                >
+                                    {poster}
                                 </Typography>
                             </CardContent>
                         </CardActionArea>
@@ -79,7 +82,13 @@ const JobCard = () => {
     );
 };
 
-export default function DashBoard() {
+export default function DashBoard({ userInfo }) {
+    const router = useRouter();
+    const [logedIn, setLogedIn] = useState(true);
+    const [jobData, setJobData] = useState();
+
+    const childRef = createRef();
+
     const checkGreeting = () => {
         if (Date.now.getHours < 12) {
             return "Morning";
@@ -90,9 +99,48 @@ export default function DashBoard() {
         }
     };
 
+    const handleLogout = () => {
+        setLogedIn(false);
+        if (typeof window !== "undefined") {
+            window.localStorage.removeItem("token");
+        }
+        router.push("/");
+    };
+
+    useEffect(() => {
+        if (typeof window !== "undefined") {
+            window.localStorage.getItem("token")
+                ? setLogedIn(true)
+                : setLogedIn(false);
+            axios
+                .get("http://localhost:8000/api/job", {
+                    headers: {
+                        Authorization: `JWT ${localStorage.getItem("token")}`,
+                    },
+                })
+                .then((r) => {
+                    console.log(r);
+                    setJobData(r.data);
+                })
+                .catch((e) => {
+                    console.log(e.response);
+                });
+        }
+
+        if (!logedIn) {
+            router.push("/login");
+        }
+    }, []);
+
     return (
         <>
-            <NavBar />
+            <NavBar
+                toggleDrawer={childRef.toggleDrawer}
+                handleLogout={handleLogout}
+                jobData={jobData}
+                setJobData={setJobData}
+            />
+
             <Container maxWidth="xl">
                 <Typography
                     variant="h2"
@@ -114,18 +162,59 @@ export default function DashBoard() {
                             Available Jobs
                         </Typography>
                     </Grid>
-                    {[1, 2, 3, 4, 5].map(() => {
-                        return <JobCard />;
-                    })}
+                    {jobData !== undefined ? (
+                        jobData.map((item) => {
+                            console.log;
+                            return (
+                                <JobCard
+                                    name={item.name}
+                                    description={item.description}
+                                    poster={item.poster}
+                                />
+                            );
+                        })
+                    ) : (
+                        <></>
+                    )}
 
                     <Grid item xs={12} style={{ paddingTop: "15rem" }}>
                         <Typography variant="h4" component="h2" gutterBottom>
                             Pending Jobs
                         </Typography>
                     </Grid>
-                    {[1, 2, 3, 4, 5].map(() => {
-                        return <JobCard />;
+                    {[
+                        {
+                            name: "Undergruate Research",
+                            description:
+                                "Looking for eager CS / CE / CSBA students looking to get involved in my Machine Learning Lab",
+                            poster: "John Huh",
+                        },
+                        {
+                            name: "Undergruate Research",
+                            description:
+                                "Looking for eager CS / CE / CSBA students looking to get involved in my Machine Learning Lab",
+                            poster: "John Huh",
+                        },
+                        {
+                            name: "Undergruate Research",
+                            description:
+                                "Looking for eager CS / CE / CSBA students looking to get involved in my Machine Learning Lab",
+                            poster: "John Huh",
+                        },
+                    ].map((item) => {
+                        return (
+                            <JobCard
+                                name={item.name}
+                                description={item.description}
+                                poster={item.poster}
+                            />
+                        );
                     })}
+                    {/* <JobCard
+                name={"Undergruate Research"}
+                description={"Looking for eager CS / CE / CSBA students looking to get involved in my Machine Learning Lab"}
+                poster={"John Huh"}
+              /> */}
                 </Grid>
             </Container>
         </>

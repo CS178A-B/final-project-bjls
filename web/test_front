@@ -1,0 +1,10 @@
+#!/bin/bash
+
+GREEN='\033[1;32m'
+if [ -z "$1" ]; then
+    echo -e "No argument supplied"
+fi
+
+npm install
+
+npm run dev
