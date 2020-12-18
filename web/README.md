@@ -7,6 +7,7 @@ In this directory, run:
 This will install the corresponding dependency for the frontend structure.
 
 ## How To Run
+
 In this directory, you can run:
 
 ### `npm run dev`
@@ -18,5 +19,7 @@ The page will reload if you make edits.<br />
 You will also see any lint errors in the console.
 
 ## Dependencies
-Install Node Package Manager (npm). [Helpful Documentation](https://www.npmjs.com/get-npm)
 
+[NodeJS](https://nodejs.org/en/download/)
+
+Install Node Package Manager (npm). [Helpful Documentation](https://www.npmjs.com/get-npm)
