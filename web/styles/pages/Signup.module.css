@@ -1,0 +1,15 @@
+.paper {
+  margin-top: 64px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.avatar {
+  margin: 40px;
+}
+.form {
+  margin-top: 24px;
+}
+.signinDirect{
+  margin-top: 8px;
+}

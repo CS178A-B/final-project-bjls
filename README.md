@@ -34,7 +34,6 @@ To run, execute the following command:
 
 ### ./rFind
 
-
 ## Diagrams
 
 Sequence Diagram
