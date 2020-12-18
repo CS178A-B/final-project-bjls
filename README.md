@@ -26,6 +26,10 @@ It is a good bridge between faculty members and students, which provides opportu
 Demo: <Link to youtube video>
 
 <Screenshot of application>
+## Dependencies:
+Python 3.4+
+pip3
+npm
 
 ## How To Run
 In this Directory, run the command:
