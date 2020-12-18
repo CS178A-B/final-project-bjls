@@ -23,7 +23,7 @@ It is a good bridge between faculty members and students, which provides opportu
 
 <a href="https://github.com/DiamondKen" target="_blank"><img src="https://avatars2.githubusercontent.com/u/27392703?s=460&u=ac0fe50ecb3188b0ba99488948daefcc461a7f68&v=4" align="left" height="30px">Shuang Zhou </a>
 ## Usage
-Demo: <Link to youtube video>
+Demo: https://youtu.be/9_Cb_bhoX0c
 
 <Screenshot of application>
 
