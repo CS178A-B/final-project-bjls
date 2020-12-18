@@ -1,4 +1,4 @@
-# Reader Finder
+# R'Finder
  Undergraduate TA / Faculty Matching Tool
 
 ## Table of Contents
@@ -10,7 +10,9 @@
 
 ## Overview
 Currently, for some existing web apps for faculty to post jobs and students to apply for jobs, students get overwhelmed by all on-campus and off-campus jobs on the UI page.
+
 In order to be more concentrated on connecting students with faculties members who are seeking undergraduate readers and research assistants. Our app pushes notifications of available applicants to faculties, so they get notified and not missed out. Students’ GPA, courses taken with good grades, preferred course to do reader or research, etc. are listed on students' profiles as well to help faculties to verify and pick. The web also recommends most matched students to faculties as a reference.
+
 It is a good bridge between faculty members and students, which provides opportunities to those excellent and eligible students and faculty members who need to hire students.
 
 
@@ -26,32 +28,28 @@ It is a good bridge between faculty members and students, which provides opportu
 Demo: <Link to youtube video>
 
 <Screenshot of application>
-## Dependencies:
-Python 3.4+
-pip3
-npm
 
 ## How To Run
-In this Directory, run the command:
+To run, execute the following command:
 
-### `./rFind`
+### ./rFind
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-[http://localhost:8000](http://localhost:8000) hosts the backend of the web application.
-
-
-log files will be stored in the respective back.log and front.log.<br />
 
 ## Diagrams
 
 Sequence Diagram
+![Alt text](web/assets/Sequence-Diagram-for-CS178A.png "Sequence diagram")
 
 Frontend Structure
 
 
 Overall System Diagram
+![Alt text](web/assets/Overll_system_diagram.png "Overll_system_diagram.png")
+
+ER-diagram
+![Alt text](web/assets/ER_diagram.jpg "ER-diagram.png")
 
 ## Dependencies
 Install Node Package Manager (npm). [Helpful Documentation](https://www.npmjs.com/get-npm)
+Install the Python Package Installer [(pip3)](https://pip.pypa.io/en/stable/).
 
