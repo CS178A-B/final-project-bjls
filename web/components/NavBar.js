@@ -13,47 +13,57 @@ import { ThemeProvider } from "@material-ui/styles";
 import ProfileDrawer from "./ProfileDrawer";
 
 const theme = createMuiTheme({
-  palette: {
-    primary: {
-      main: "#c1cc98",
+    palette: {
+        primary: {
+            main: "#c1cc98",
+        },
+        secondary: {
+            main: "#d2bdff",
+            dark: "#a08dcc",
+            light: "#fff0ff",
+        },
     },
-    secondary: {
-      main: "#d2bdff",
-      dark: "#a08dcc",
-      light: "#fff0ff",
-    },
-  },
 });
 
-export default function NavBar({ UserInfo, handleLogout }) {
-  const [drawerOpen, setDrawerOpen] = useState(false);
+export default function NavBar({
+    jobData,
+    setJobData,
+    UserInfo,
+    handleLogout,
+}) {
+    const [drawerOpen, setDrawerOpen] = useState(false);
 
-  return (
-    <ThemeProvider theme={theme}>
-      <ProfileDrawer drawerOpen={drawerOpen} setDrawerOpen={setDrawerOpen} />
-      <div className={styles.root}>
-        <AppBar position="static" color="primary">
-          <Toolbar>
-            <IconButton
-              edge="start"
-              className={styles.menuButton}
-              color="inherit"
-              aria-label="menu"
-              onClick={() => {
-                setDrawerOpen(true);
-              }}
-            >
-              <MenuIcon />
-            </IconButton>
-            <Typography variant="h6" className={styles.title}>
-              Dashboard
-            </Typography>
-            <Button color="inherit" onClick={handleLogout}>
-              Log out
-            </Button>
-          </Toolbar>
-        </AppBar>
-      </div>
-    </ThemeProvider>
-  );
+    return (
+        <ThemeProvider theme={theme}>
+            <ProfileDrawer
+                drawerOpen={drawerOpen}
+                setDrawerOpen={setDrawerOpen}
+                jobData={jobData}
+                setJobData={setJobData}
+            />
+            <div className={styles.root}>
+                <AppBar position="static" color="primary">
+                    <Toolbar>
+                        <IconButton
+                            edge="start"
+                            className={styles.menuButton}
+                            color="inherit"
+                            aria-label="menu"
+                            onClick={() => {
+                                setDrawerOpen(true);
+                            }}
+                        >
+                            <MenuIcon />
+                        </IconButton>
+                        <Typography variant="h6" className={styles.title}>
+                            Dashboard
+                        </Typography>
+                        <Button color="inherit" onClick={handleLogout}>
+                            Log out
+                        </Button>
+                    </Toolbar>
+                </AppBar>
+            </div>
+        </ThemeProvider>
+    );
 }
