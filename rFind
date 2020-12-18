@@ -1,0 +1,15 @@
+#!/bin/bash
+
+trap 'kill 0' EXIT
+
+
+cd web
+./test_front > ../front.log 2>&1 &
+
+cd ../backend
+source setup_dev
+./test_server > ../back.log 2>&1 &
+cd ..
+deactivate
+
+wait

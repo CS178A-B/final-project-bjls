@@ -30,8 +30,9 @@ Demo: <Link to youtube video>
 <Screenshot of application>
 
 ## How To Run
-Please see the README file for both directories.
+To run, execute the following command:
 
+### ./rFind
 
 ## Diagrams
 
@@ -49,4 +50,5 @@ ER-diagram
 
 ## Dependencies
 Install Node Package Manager (npm). [Helpful Documentation](https://www.npmjs.com/get-npm)
+Install the Python Package Installer [(pip3)](https://pip.pypa.io/en/stable/).
 
