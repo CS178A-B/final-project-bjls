@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.core.validators import MinLengthValidator as Min
+from django.contrib.postgres.fields import ArrayField
 
 
 class User(AbstractUser):
@@ -11,6 +12,9 @@ class User(AbstractUser):
     email = models.EmailField(unique=True)
     major = models.CharField(max_length=50, default="")
     department = models.CharField(max_length=50, default="")
+    GPA = models.IntegerField(default=0)
+    courses = ArrayField(models.CharField(max_length=50, blank=True))
+    applied_positions = ArrayField(models.CharField(max_length=50, blank=True))
     
     def __repr__(self):
         return "{0} - {1}".format(self.name, self.email)
