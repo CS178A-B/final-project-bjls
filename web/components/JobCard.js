@@ -5,7 +5,6 @@ import {
   CardActionArea,
   CardActions,
   CardContent,
-  CardMedia,
   Grid,
   Typography,
 } from "@material-ui/core";
@@ -16,13 +15,6 @@ const JobCard = ({ name, description, poster }) => {
       <Grid item xs={4}>
         <Card>
           <CardActionArea>
-            <CardMedia
-              component="img"
-              alt="jobcard"
-              height="140"
-              image="../../assets/cs141+.png"
-              title="JobCard"
-            />
             <CardContent>
               <Typography gutterBottom variant="h5" component="h2">
                 {name}
