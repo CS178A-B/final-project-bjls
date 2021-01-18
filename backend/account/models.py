@@ -15,7 +15,10 @@ class User(AbstractUser):
     GPA = models.IntegerField(default=0)
     courses = ArrayField(models.CharField(max_length=50, blank=True))
     applied_positions = ArrayField(models.CharField(max_length=50, blank=True))
-    
+    title = models.CharField(max_length=50)
+    profile_completeness = models.IntegerField(default=0)
+    takenClass = ArrayField(ArrayField(models.CharField(max_length=50), size=2))
+
     def __repr__(self):
         return "{0} - {1}".format(self.name, self.email)
 
