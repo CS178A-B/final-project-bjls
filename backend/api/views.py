@@ -1,13 +1,12 @@
 from django.shortcuts import render
-from account.models import User, Job
-from .serializers import UserSerializer, JobSerializer
+from account.models import User, Student, Faculty, Job
+from .serializers import UserSerializer, UserSerializerWithToken, StudentSerializer, FacultySerializer, JobSerializer
 from rest_framework import generics, permissions, status
 from django.http import HttpResponseRedirect
 from django.contrib.auth.models import User
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from .serializers import UserSerializer, UserSerializerWithToken
 
 
 # # Create your views here.
@@ -40,6 +39,16 @@ class UserList(APIView):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class StudentList(generics.ListCreateAPIView):
+    queryset = Student.objects.all()
+    serializer_class = StudentSerializer
+
+
+class FacultyList(generics.ListCreateAPIView):
+    queryset = Faculty.objects.all()
+    serializer_class = FacultySerializer
 
 
 class JobList(generics.ListCreateAPIView):
