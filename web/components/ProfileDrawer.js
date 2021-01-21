@@ -23,18 +23,20 @@ import PostJobDialog from "./PostJobDialog";
 
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-import EventIcon from "@material-ui/icons/Event";
-import AddBoxIcon from "@material-ui/icons/AddBox";
-import FavoriteIcon from "@material-ui/icons/Favorite";
+import SettingsIcon from "@material-ui/icons/Settings";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
     list: {
         width: 250,
     },
     avatar: {
         padding: "2rem",
     },
-});
+    logOut: {
+        color: "red",
+    },
+}));
 
 export default function ProfileDrawer({
     jobData,
@@ -56,13 +58,13 @@ export default function ProfileDrawer({
                 setJobData={setJobData}
             />
             <Drawer
-                anchor="left"
+                anchor="right"
                 open={drawerOpen}
                 onClose={() => {
                     setDrawerOpen(false);
                 }}
             >
-                <Grid
+                {/* <Grid
                     className={styles.buttonGrid}
                     container
                     justify="center"
@@ -100,7 +102,7 @@ export default function ProfileDrawer({
                         </Tooltip>
                     </Grid>
                 </Grid>
-                <Divider />
+                <Divider /> */}
                 <List>
                     <Avatar className={styles.avatar}>
                         <LockOutlinedIcon />
@@ -153,13 +155,21 @@ export default function ProfileDrawer({
                 <Divider />
                 <div className={styles.listItem}>
                     <List>
-                        {["Applied Jobs", "Favoirte Jobs"].map(
-                            (text, index) => (
-                                <ListItem button key={text}>
-                                    <ListItemText primary={text} />
-                                </ListItem>
-                            )
-                        )}
+                        <ListItem button key="logout">
+                            <ListItemIcon>
+                                <SettingsIcon />
+                            </ListItemIcon>
+                            <ListItemText primary="Account Settings" />
+                        </ListItem>
+                        <ListItem button key="logout">
+                            <ListItemIcon>
+                                <ExitToAppIcon />
+                            </ListItemIcon>
+                            <ListItemText
+                                primary="Log Out"
+                                className={classes.logOut}
+                            />
+                        </ListItem>
                     </List>
                 </div>
             </Drawer>
