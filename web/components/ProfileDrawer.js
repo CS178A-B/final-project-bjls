@@ -25,6 +25,7 @@ import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import SettingsIcon from "@material-ui/icons/Settings";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import Link from "next/link";
 
 const useStyles = makeStyles((theme) => ({
     list: {
@@ -64,45 +65,6 @@ export default function ProfileDrawer({
                     setDrawerOpen(false);
                 }}
             >
-                {/* <Grid
-                    className={styles.buttonGrid}
-                    container
-                    justify="center"
-                    spacing={2}
-                >
-                    <Grid item xs={3}>
-                        <Tooltip title="Favorite">
-                            <IconButton>
-                                <FavoriteIcon />
-                            </IconButton>
-                        </Tooltip>
-                    </Grid>
-                    <Grid item xs={1}>
-                        <Divider orientation="vertical" />
-                    </Grid>
-                    <Grid item xs={3}>
-                        <Tooltip title="Post Job">
-                            <IconButton
-                                onClick={() => {
-                                    setPostOpen(true);
-                                }}
-                            >
-                                <AddBoxIcon />
-                            </IconButton>
-                        </Tooltip>
-                    </Grid>
-                    <Grid item xs={1}>
-                        <Divider orientation="vertical" />
-                    </Grid>
-                    <Grid item xs={3}>
-                        <Tooltip title="Calender">
-                            <IconButton>
-                                <EventIcon />
-                            </IconButton>
-                        </Tooltip>
-                    </Grid>
-                </Grid>
-                <Divider /> */}
                 <List>
                     <Avatar className={styles.avatar}>
                         <LockOutlinedIcon />
@@ -155,12 +117,15 @@ export default function ProfileDrawer({
                 <Divider />
                 <div className={styles.listItem}>
                     <List>
-                        <ListItem button key="logout">
-                            <ListItemIcon>
-                                <SettingsIcon />
-                            </ListItemIcon>
-                            <ListItemText primary="Account Settings" />
-                        </ListItem>
+                        <Link href="/dashboard/profile">
+                            <ListItem button key="profile">
+                                <ListItemIcon>
+                                    <SettingsIcon />
+                                </ListItemIcon>
+
+                                <ListItemText primary="Account Settings" />
+                            </ListItem>
+                        </Link>
                         <ListItem button key="logout">
                             <ListItemIcon>
                                 <ExitToAppIcon />
