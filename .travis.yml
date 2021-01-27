@@ -11,5 +11,8 @@ before_script:
   - psql -c 'create database codeideas;' -U postgres
 install:
   - cd backend && pip install -r requirements.txt
+  - cd ../web && npm install
+  - cd ..
 script:
-  - cd .. && ./rFind
+  - cd web && npm run dev
+  - cd ../backend && python manage.py runserver localhost:8000
