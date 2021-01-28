@@ -1,29 +1,33 @@
-import Link from "next/link";
-import styles from "../styles/components/NavBar.module.css";
 import React, { createRef, useRef, useState } from "react";
-import { createMuiTheme, makeStyles } from "@material-ui/core/styles";
+import Image from "next/image";
+import { fade, makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
-import { ThemeProvider } from "@material-ui/styles";
+import Typography from "@material-ui/core/Typography";
+import InputBase from "@material-ui/core/InputBase";
+import SearchIcon from "@material-ui/icons/Search";
+import AccountCircle from "@material-ui/icons/AccountCircle";
 
 import ProfileDrawer from "./ProfileDrawer";
+import { Button } from "@material-ui/core";
+import Link from "next/link";
 
-const theme = createMuiTheme({
-    palette: {
-        primary: {
-            main: "#c1cc98",
-        },
-        secondary: {
-            main: "#d2bdff",
-            dark: "#a08dcc",
-            light: "#fff0ff",
+const useStyles = makeStyles((theme) => ({
+    grow: {
+        flexGrow: 1,
+    },
+    title: {
+        marginLeft: theme.spacing(5),
+        marginRight: theme.spacing(1),
+        textTransform: "none",
+        "&:hover": {
+            backgroundColor: "#0069d9",
+            borderColor: "#0062cc",
+            boxShadow: "none",
         },
     },
-});
+}));
 
 export default function NavBar({
     jobData,
@@ -31,39 +35,83 @@ export default function NavBar({
     UserInfo,
     handleLogout,
 }) {
+    const classes = useStyles();
     const [drawerOpen, setDrawerOpen] = useState(false);
-
     return (
-        <ThemeProvider theme={theme}>
+        <React.Fragment>
             <ProfileDrawer
                 drawerOpen={drawerOpen}
                 setDrawerOpen={setDrawerOpen}
                 jobData={jobData}
                 setJobData={setJobData}
             />
-            <div className={styles.root}>
-                <AppBar position="static" color="primary">
+            <div className={classes.grow}>
+                <AppBar position="static">
                     <Toolbar>
-                        <IconButton
-                            edge="start"
-                            className={styles.menuButton}
+                        <Image
+                            src="/images/ucrLogo.png"
+                            alt="ucr_logo"
+                            width={40}
+                            height={40}
+                        />
+                        <Link href="/dashboard">
+                            <Button
+                                className={classes.title}
+                                size="large"
+                                color="inherit"
+                            >
+                                Dashboard
+                            </Button>
+                        </Link>
+
+                        <Button
+                            className={classes.title}
+                            size="large"
                             color="inherit"
-                            aria-label="menu"
+                        >
+                            Applied Jobs
+                        </Button>
+                        <Button
+                            className={classes.title}
+                            size="large"
+                            color="inherit"
+                        >
+                            Favorite Jobs
+                        </Button>
+                        <Button
+                            className={classes.title}
+                            size="large"
+                            color="inherit"
+                        >
+                            Applications
+                        </Button>
+                        {/* <div className={classes.search}>
+              <div className={classes.searchIcon}>
+                <SearchIcon />
+              </div>
+              <InputBase
+                placeholder="Search…"
+                classes={{
+                  root: classes.inputRoot,
+                  input: classes.inputInput,
+                }}
+                inputProps={{ "aria-label": "search" }}
+              />
+            </div> */}
+                        <div className={classes.grow} />
+                        <IconButton
+                            edge="end"
                             onClick={() => {
                                 setDrawerOpen(true);
                             }}
+                            className={classes.title}
+                            color="inherit"
                         >
-                            <MenuIcon />
+                            <AccountCircle />
                         </IconButton>
-                        <Typography variant="h6" className={styles.title}>
-                            Dashboard
-                        </Typography>
-                        <Button color="inherit" onClick={handleLogout}>
-                            Log out
-                        </Button>
                     </Toolbar>
                 </AppBar>
             </div>
-        </ThemeProvider>
+        </React.Fragment>
     );
 }

@@ -1,24 +1,36 @@
-import '../styles/globals.css'
-import Head from 'next/head'
+import "../styles/globals.css";
+import Head from "next/head";
+import { CssBaseline, ThemeProvider } from "@material-ui/core";
+import theme from "../src/theme.js";
 
 function MyApp({ Component, pageProps }) {
-  const RenderHead = () => {
-    return (
-      <Head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta httpEquiv="X-UA-Compatible" content="ie=edge" />
-        <title>Reader Matching Tool</title>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
-      </Head>
-    )
-  }
+  React.useEffect(() => {
+    // Remove the server-side injected CSS.
+    const jssStyles = document.querySelector("#jss-server-side");
+    if (jssStyles) {
+      jssStyles.parentElement.removeChild(jssStyles);
+    }
+  }, []);
+
   return (
     <>
-      <RenderHead />
-      <Component {...pageProps} />
+      <ThemeProvider theme={theme}>
+        <Head>
+          {/* <meta charset="utf-8" />
+          <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"
+          />
+          <meta httpEquiv="X-UA-Compatible" content="ie=edge" /> */}
+          <title>Reader Matching Tool</title>
+        </Head>
+        {/* CssBaseline kickstart an elegant, consistent, 
+        and simple baseline to build upon. */}
+        <CssBaseline />
+        <Component {...pageProps} />
+      </ThemeProvider>
     </>
-  )
+  );
 }
 
-export default MyApp
+export default MyApp;
