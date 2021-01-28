@@ -1,13 +1,13 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, PasswordResetForm, SetPasswordForm
 # from .models import User, Student, Faculty
-from .models import User
+from .models import User, Student, Faculty
 
-class StudentForm(UserCreationForm):
+class UserForm(UserCreationForm):
     class Meta:
         model = User
         # model.is_student = True
-        fields = ('name', 'email', 'major', 'password1', 'password2')
+        fields = ('username', 'email', 'password1', 'password2')
         # model.save()
 
     # def save(self):
@@ -19,20 +19,7 @@ class StudentForm(UserCreationForm):
     #     return user
 
     def __init__(self, *args, **kwargs):
-        super(StudentForm, self).__init__(*args, **kwargs)
-        self.fields['password1'].help_text = "Minimum length of 8 characters."
-        self.fields['password2'].label = "Password Confirmation"
-        self.fields['password2'].help_text = "Enter the same password for confirmation."
-
-
-class FacultyForm(UserCreationForm):
-    class Meta:
-        model = User
-        # model.is_faculty = True
-        fields = ('name', 'email', 'department', 'password1', 'password2')
-
-    def __init__(self, *args, **kwargs):
-        super(FacultyForm, self).__init__(*args, **kwargs)
+        super(UserForm, self).__init__(*args, **kwargs)
         self.fields['password1'].help_text = "Minimum length of 8 characters."
         self.fields['password2'].label = "Password Confirmation"
         self.fields['password2'].help_text = "Enter the same password for confirmation."
@@ -48,19 +35,19 @@ class LoginForm(AuthenticationForm):
     password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'r-finder-text-field w-input'}))
 
 
-class StudentUpdateForm(forms.ModelForm):
-    class Meta:
-        model = User
-        fields = ('name', 'email', 'major')
+# class StudentUpdateForm(forms.ModelForm):
+#     class Meta:
+#         model = Student
+#         fields = ('name', 'email', 'major')
 
-    def __init__(self, *args, **kwargs):
-        super(StudentUpdateForm, self).__init__(*args, **kwargs)
+#     def __init__(self, *args, **kwargs):
+#         super(StudentUpdateForm, self).__init__(*args, **kwargs)
 
 
-class FacultyUpdateForm(forms.ModelForm):
-    class Meta:
-        model = User
-        fields = ('name', 'email', 'department')
+# class FacultyUpdateForm(forms.ModelForm):
+#     class Meta:
+#         model = User
+#         fields = ('name', 'email', 'department')
 
-    def __init__(self, *args, **kwargs):
-        super(FacultyUpdateForm, self).__init__(*args, **kwargs)
+#     def __init__(self, *args, **kwargs):
+#         super(FacultyUpdateForm, self).__init__(*args, **kwargs)
