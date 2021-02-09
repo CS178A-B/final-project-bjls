@@ -13,24 +13,31 @@ class User(AbstractUser):
     # def __repr__(self):
     #     return "{0} - {1}".format(self.name, self.email)
 
-class Student(models.Model):
+class Course(models.Model):
     name = models.CharField(max_length=50)
-    major = models.CharField(max_length=50, default="")
-    GPA = models.IntegerField(default=0)
-    courses = ArrayField(models.CharField(max_length=50, blank=True))
-    applied_positions = ArrayField(models.CharField(max_length=50, blank=True))
-    profile_completeness = models.IntegerField(default=0)
-    takenClass = ArrayField(ArrayField(models.CharField(max_length=50), size=2))
-
-class Faculty(models.Model):
-    name = models.CharField(max_length=50)
-    department = models.CharField(max_length=50, default="")
-    profile_completeness = models.IntegerField(default=0)
+    abbrev = models.CharField(max_length=12)
 
 class Job(models.Model):
     name = models.CharField(max_length=50)
     description = models.CharField(max_length=150)
     poster = models.CharField(max_length=50)
+    posted_date = models.DateField(auto_now_add=True)
+    hourly_salary = models.FloatField(max_length=10)
+    hours_per_week = models.IntegerField()
+
+class Student(models.Model):
+    name = models.CharField(max_length=50)
+    major = models.CharField(max_length=50, default="")
+    GPA = models.IntegerField(default=0)
+    applied_positions = models.ManyToManyField(Job)
+    profile_completeness = models.IntegerField(default=0)
+    course_taken = models.ManyToManyField(Course)
+
+class Faculty(models.Model):
+    name = models.CharField(max_length=50)
+    department = models.CharField(max_length=50, default="")
+    profile_completeness = models.IntegerField(default=0)
+    posted_jobs = models.ManyToManyField(Job)
 
 # class Student(models.Model):
 #     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True, related_name='student_profile')
