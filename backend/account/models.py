@@ -32,6 +32,8 @@ class Job(models.Model):
     description = models.CharField(max_length=150)
     poster = models.CharField(max_length=50)
 
+
+
 # class Student(models.Model):
 #     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True, related_name='student_profile')
 #     # user.is_student
