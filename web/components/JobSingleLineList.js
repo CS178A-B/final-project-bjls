@@ -9,9 +9,12 @@ const useStyles = makeStyles((theme) => ({
         padding: 0,
         overflowX: "auto",
     },
-    card: {
+    ListCard: {
         height: theme.spacing(50),
         padding: theme.spacing(0, 2, 0, 2),
+    },
+    card: {
+        padding: theme.spacing(2),
     },
 }));
 
@@ -22,9 +25,10 @@ const JobSingelLineList = ({ data }) => {
             <List className={classes.flexContainer}>
                 {data.map((item) => {
                     return (
-                        <ListItem className={classes.card}>
+                        <ListItem className={classes.ListCard}>
                             <JobCard
                                 // className={classes.card}
+                                key={item.name}
                                 name={item.name}
                                 description={item.description}
                                 poster={item.poster}

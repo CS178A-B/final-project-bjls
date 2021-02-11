@@ -9,7 +9,13 @@ import {
     Typography,
 } from "@material-ui/core";
 
-const JobCard = ({ name, description, poster }) => {
+const JobCard = ({
+    name,
+    description,
+    poster,
+    handlePopover,
+    handlePopoverClose,
+}) => {
     return (
         <React.Fragment>
             <Card>
