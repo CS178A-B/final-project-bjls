@@ -45,6 +45,7 @@ export default function ProfileDrawer({
     UserInfo,
     drawerOpen,
     setDrawerOpen,
+    handleLogout,
 }) {
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = useState(null);
@@ -107,7 +108,6 @@ export default function ProfileDrawer({
                                     >
                                         <MenuItem>Seeking</MenuItem>
                                         <MenuItem>Not Seeking</MenuItem>
-                                        <MenuItem>Idk</MenuItem>
                                     </Menu>
                                 </Typography>
                             </React.Fragment>
@@ -126,7 +126,7 @@ export default function ProfileDrawer({
                                 <ListItemText primary="Account Settings" />
                             </ListItem>
                         </Link>
-                        <ListItem button key="logout">
+                        <ListItem button onClick={handleLogout} key="logout">
                             <ListItemIcon>
                                 <ExitToAppIcon />
                             </ListItemIcon>

@@ -42,6 +42,7 @@ export default function NavBar({
             <ProfileDrawer
                 drawerOpen={drawerOpen}
                 setDrawerOpen={setDrawerOpen}
+                handleLogout={handleLogout}
                 jobData={jobData}
                 setJobData={setJobData}
             />
@@ -64,7 +65,7 @@ export default function NavBar({
                             </Button>
                         </Link>
 
-                        <Button
+                        {/* <Button
                             className={classes.title}
                             size="large"
                             color="inherit"
@@ -77,7 +78,7 @@ export default function NavBar({
                             color="inherit"
                         >
                             Favorite Jobs
-                        </Button>
+                        </Button> */}
                         <Button
                             className={classes.title}
                             size="large"
