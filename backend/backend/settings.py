@@ -22,6 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '4@ure+c2!g!6ou60(0)(538v^5y1y0&gjf058sh-r2k4vulng7'
+DATABASE_KEY = 'l0RZXytXE1QLfU4WXyFGmiOgnD-Stv-n'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -86,7 +87,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'tbeqdkda',
         'USER': 'tbeqdkda',
-        'PASSWORD': 'l0RZXytXE1QLfU4WXyFGmiOgnD-Stv-n',
+        'PASSWORD': DATABASE_KEY,
         'HOST': 'ruby.db.elephantsql.com',
         'PORT': '5432',
     }
