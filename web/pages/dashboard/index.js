@@ -1,24 +1,11 @@
 import React, { createRef, useEffect, useRef, useState } from "react";
 import styles from "../../styles/pages/Dashboard.module.css";
 import NavBar from "../../components/NavBar";
-import ProfileDrawer from "../../components/ProfileDrawer";
 import JobCard from "../../components/JobCard";
 import JobSingleLineList from "../../components/JobSingleLineList";
-import {
-    Button,
-    Card,
-    CardActionArea,
-    CardActions,
-    CardContent,
-    CardMedia,
-    Container,
-    createMuiTheme,
-    Grid,
-    Paper,
-    ThemeProvider,
-    Typography,
-} from "@material-ui/core";
+import { Container, Grid, Typography } from "@material-ui/core";
 
+import ApplyPopover from "../../components/ApplyPopover";
 import mockdata from "../../src/MockData";
 
 import axios from "axios";
@@ -27,6 +14,7 @@ import { useRouter } from "next/router";
 
 export default function DashBoard({ userInfo }) {
     const router = useRouter();
+    const ref = useRef();
     const [logedIn, setLogedIn] = useState(true);
     const [jobData, setJobData] = useState();
 
@@ -151,10 +139,13 @@ export default function DashBoard({ userInfo }) {
                     ].map((item) => {
                         return (
                             <Grid item xs={4}>
+                                <ApplyPopover ref={ref} />
                                 <JobCard
                                     name={item.name}
                                     description={item.description}
                                     poster={item.poster}
+                                    // handlePopover={ref.current.handleClick}
+                                    // handlePopoverClose={ref.current.handleClose}
                                 />
                             </Grid>
                         );

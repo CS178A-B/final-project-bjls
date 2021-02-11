@@ -6,37 +6,37 @@ export default [
         poster: "Liam Robbins",
     },
     {
-        name: "Undergruate Research",
+        name: "CS152",
         description:
             "Looking for eager CS / CE / CSBA students looking to get involved in my Machine Learning Lab",
         poster: "John Huh",
     },
     {
-        name: "Undergruate Research",
+        name: "CS105",
         description:
             "Looking for eager CS / CE / CSBA students looking to get involved in my Machine Learning Lab",
         poster: "Shuang Zhou",
     },
     {
-        name: "Undergruate Research",
+        name: "CS111",
         description:
             "Looking for eager CS / CE / CSBA students looking to get involved in my Machine Learning Lab",
         poster: "Biqian Cheng",
     },
     {
-        name: "Undergruate Research",
+        name: "CS273",
         description:
             "Looking for eager CS / CE / CSBA students looking to get involved in my Machine Learning Lab",
         poster: "John Huh",
     },
     {
-        name: "Undergruate Research",
+        name: "CS123",
         description:
             "Looking for eager CS / CE / CSBA students looking to get involved in my Machine Learning Lab",
         poster: "Shuang Zhou",
     },
     {
-        name: "Undergruate Research",
+        name: "CS152",
         description:
             "Looking for eager CS / CE / CSBA students looking to get involved in my Machine Learning Lab",
         poster: "Biqian Cheng",

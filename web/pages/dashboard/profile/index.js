@@ -10,6 +10,7 @@ import {
     ListItemText,
     makeStyles,
     Paper,
+    TextField,
     Typography,
 } from "@material-ui/core";
 import Image from "next/image";
@@ -37,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
     },
     descriptionPaper: {
         height: theme.spacing(10),
-        // marginRight: theme.spacing(2),
+        padding: theme.spacing(2),
     },
     middlePaper: {
         height: theme.spacing(40),
@@ -85,6 +86,7 @@ const CommentsItem = (title, description) => {
 function ProfilePage(props) {
     const classes = useStyles();
     const [userData, setUserData] = useState();
+    const [updateState, setUpdateState] = useState(false);
     return (
         <>
             <NavBar />
@@ -103,24 +105,63 @@ function ProfilePage(props) {
                             <Avatar className={classes.profilePic}>BQ</Avatar>
                         </Grid>
                         <Grid item xs={3}>
-                            <Typography variant="h6" component="h2">
-                                Biqian Cheng
-                            </Typography>
-                            <Typography variant="body2" component="p">
-                                Univerist of California, Riverside
-                            </Typography>
-                            <Typography variant="body2" component="p">
-                                BCOE Department
-                            </Typography>
-                            <Typography variant="body2" component="p">
-                                GPA: 3.83
-                            </Typography>
-                            <Typography variant="body2" component="p">
-                                Expected graduate dates: June 2021
-                            </Typography>
+                            {updateState ? (
+                                <TextField
+                                    size="small"
+                                    label="Name"
+                                ></TextField>
+                            ) : (
+                                <Typography variant="h6" component="h2">
+                                    Biqian Cheng
+                                </Typography>
+                            )}
+
+                            {updateState ? (
+                                <TextField
+                                    size="small"
+                                    label="School"
+                                ></TextField>
+                            ) : (
+                                <Typography variant="body2" component="p">
+                                    Univerist of California, Riverside
+                                </Typography>
+                            )}
+
+                            {updateState ? (
+                                <TextField
+                                    size="small"
+                                    label="Department"
+                                ></TextField>
+                            ) : (
+                                <Typography variant="body2" component="p">
+                                    BCOE Department
+                                </Typography>
+                            )}
+
+                            {updateState ? (
+                                <TextField size="small" label="GPA"></TextField>
+                            ) : (
+                                <Typography variant="body2" component="p">
+                                    GPA: 3.83
+                                </Typography>
+                            )}
+                            {updateState ? (
+                                <TextField
+                                    size="small"
+                                    label="Expcted dates"
+                                ></TextField>
+                            ) : (
+                                <Typography variant="body2" component="p">
+                                    Expected graduate dates: June 2021
+                                </Typography>
+                            )}
                         </Grid>
                         <Grid item xs={8}>
-                            <Paper className={classes.descriptionPaper}></Paper>
+                            <Paper className={classes.descriptionPaper}>
+                                <Typography variant="body2" component="p">
+                                    Description: Lorem Ipsum
+                                </Typography>
+                            </Paper>
                         </Grid>
                         <Grid item xs={4}>
                             <Paper className={classes.middlePaper}>
@@ -189,9 +230,8 @@ function ProfilePage(props) {
                                                         component="h2"
                                                         gutterBottom
                                                     >
-                                                        Drag 'n' drop some files
-                                                        here, or click to select
-                                                        files
+                                                        Drop some files here, or
+                                                        click to select files
                                                     </Typography>
                                                 </Paper>
                                             </div>
@@ -231,9 +271,8 @@ function ProfilePage(props) {
                                                         component="h2"
                                                         gutterBottom
                                                     >
-                                                        Drag 'n' drop some files
-                                                        here, or click to select
-                                                        files
+                                                        Drop some files here, or
+                                                        click to select files
                                                     </Typography>
                                                 </Paper>
                                             </div>
@@ -254,7 +293,11 @@ function ProfilePage(props) {
                                 <Typography variant="h6" component="h2">
                                     Comments:
                                 </Typography>
-                                {CommentsItem("CS111", "dsadwads")}
+                                <div className={classes.middlePaperPlaceholder}>
+                                    {CommentsItem("CS111", "Good Grader")}
+                                    {CommentsItem("CS105", "Awesome Grader")}
+                                    {CommentsItem("CS171", "HAHA you are good")}
+                                </div>
                             </Paper>
                         </Grid>
                     </Grid>
@@ -265,6 +308,9 @@ function ProfilePage(props) {
                     variant="contained"
                     color="secondary"
                     className={classes.button}
+                    onClick={() => {
+                        setUpdateState(!updateState);
+                    }}
                 >
                     Update
                 </Button>
