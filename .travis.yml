@@ -4,4 +4,4 @@ python:
 install:
   - cd backend && pip install -r requirements.txt
 script:
-  - cd ../backend && python manage.py runserver localhost:8000
+  - cd ../backend #&& python manage.py runserver localhost:8000
