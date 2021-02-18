@@ -6,7 +6,7 @@ import JobSingleLineList from "../../components/JobSingleLineList";
 import { Container, Grid, Typography } from "@material-ui/core";
 
 import ApplyPopover from "../../components/ApplyPopover";
-import mockdata from "../../src/MockData";
+import mockdata from "../../src/MockJob";
 
 import axios from "axios";
 

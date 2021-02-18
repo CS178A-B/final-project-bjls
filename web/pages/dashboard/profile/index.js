@@ -123,7 +123,7 @@ function ProfilePage(props) {
                                 ></TextField>
                             ) : (
                                 <Typography variant="body2" component="p">
-                                    Univerist of California, Riverside
+                                    Univeristy of California, Riverside
                                 </Typography>
                             )}
 
