@@ -47,6 +47,8 @@ class Job(models.Model):
 
 
 
+
+
 # class Student(models.Model):
 #     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True, related_name='student_profile')
 #     # user.is_student

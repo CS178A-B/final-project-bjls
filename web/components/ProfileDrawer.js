@@ -23,18 +23,21 @@ import PostJobDialog from "./PostJobDialog";
 
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-import EventIcon from "@material-ui/icons/Event";
-import AddBoxIcon from "@material-ui/icons/AddBox";
-import FavoriteIcon from "@material-ui/icons/Favorite";
+import SettingsIcon from "@material-ui/icons/Settings";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import Link from "next/link";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
     list: {
         width: 250,
     },
     avatar: {
         padding: "2rem",
     },
-});
+    logOut: {
+        color: "red",
+    },
+}));
 
 export default function ProfileDrawer({
     jobData,
@@ -56,51 +59,12 @@ export default function ProfileDrawer({
                 setJobData={setJobData}
             />
             <Drawer
-                anchor="left"
+                anchor="right"
                 open={drawerOpen}
                 onClose={() => {
                     setDrawerOpen(false);
                 }}
             >
-                <Grid
-                    className={styles.buttonGrid}
-                    container
-                    justify="center"
-                    spacing={2}
-                >
-                    <Grid item xs={3}>
-                        <Tooltip title="Favorite">
-                            <IconButton>
-                                <FavoriteIcon />
-                            </IconButton>
-                        </Tooltip>
-                    </Grid>
-                    <Grid item xs={1}>
-                        <Divider orientation="vertical" />
-                    </Grid>
-                    <Grid item xs={3}>
-                        <Tooltip title="Post Job">
-                            <IconButton
-                                onClick={() => {
-                                    setPostOpen(true);
-                                }}
-                            >
-                                <AddBoxIcon />
-                            </IconButton>
-                        </Tooltip>
-                    </Grid>
-                    <Grid item xs={1}>
-                        <Divider orientation="vertical" />
-                    </Grid>
-                    <Grid item xs={3}>
-                        <Tooltip title="Calender">
-                            <IconButton>
-                                <EventIcon />
-                            </IconButton>
-                        </Tooltip>
-                    </Grid>
-                </Grid>
-                <Divider />
                 <List>
                     <Avatar className={styles.avatar}>
                         <LockOutlinedIcon />
@@ -153,13 +117,24 @@ export default function ProfileDrawer({
                 <Divider />
                 <div className={styles.listItem}>
                     <List>
-                        {["Applied Jobs", "Favoirte Jobs"].map(
-                            (text, index) => (
-                                <ListItem button key={text}>
-                                    <ListItemText primary={text} />
-                                </ListItem>
-                            )
-                        )}
+                        <Link href="/dashboard/profile">
+                            <ListItem button key="profile">
+                                <ListItemIcon>
+                                    <SettingsIcon />
+                                </ListItemIcon>
+
+                                <ListItemText primary="Account Settings" />
+                            </ListItem>
+                        </Link>
+                        <ListItem button key="logout">
+                            <ListItemIcon>
+                                <ExitToAppIcon />
+                            </ListItemIcon>
+                            <ListItemText
+                                primary="Log Out"
+                                className={classes.logOut}
+                            />
+                        </ListItem>
                     </List>
                 </div>
             </Drawer>

@@ -16,3 +16,4 @@ class JobViewSet(viewsets.ModelViewSet):
         permissions.AllowAny
     ]
     serializer_class = JobSerializer
+    

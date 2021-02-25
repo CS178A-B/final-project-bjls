@@ -2,6 +2,8 @@ import React, { createRef, useEffect, useRef, useState } from "react";
 import styles from "../../styles/pages/Dashboard.module.css";
 import NavBar from "../../components/NavBar";
 import ProfileDrawer from "../../components/ProfileDrawer";
+import JobCard from "../../components/JobCard";
+import JobSingleLineList from "../../components/JobSingleLineList";
 import {
     Button,
     Card,
@@ -17,70 +19,11 @@ import {
     Typography,
 } from "@material-ui/core";
 
+import mockdata from "../../src/MockData";
+
 import axios from "axios";
 
 import { useRouter } from "next/router";
-
-const JobCard = ({ name, description, poster }) => {
-    const theme = createMuiTheme({
-        palette: {
-            primary: {
-                main: "#a08dcc",
-            },
-        },
-    });
-
-    return (
-        <React.Fragment>
-            <ThemeProvider theme={theme}>
-                <Grid item xs={4}>
-                    <Card className={styles.jobCard}>
-                        <CardActionArea>
-                            <CardMedia
-                                component="img"
-                                alt="jobcard"
-                                height="140"
-                                image="../../assets/cs141+.png"
-                                title="JobCard"
-                            />
-                            <CardContent>
-                                <Typography
-                                    gutterBottom
-                                    variant="h5"
-                                    component="h2"
-                                >
-                                    {name}
-                                </Typography>
-                                <Typography
-                                    variant="body2"
-                                    color="textSecondary"
-                                    component="p"
-                                >
-                                    {description}
-                                </Typography>
-                                <Typography
-                                    variant="body2"
-                                    color="textSecondary"
-                                    component="p"
-                                >
-                                    {poster}
-                                </Typography>
-                            </CardContent>
-                        </CardActionArea>
-                        <CardActions>
-                            <Button size="small" color="primary">
-                                Apply
-                            </Button>
-                            <Button size="small" color="primary">
-                                Detail
-                            </Button>
-                        </CardActions>
-                    </Card>
-                </Grid>
-            </ThemeProvider>
-        </React.Fragment>
-    );
-};
 
 export default function DashBoard({ userInfo }) {
     const router = useRouter();
@@ -141,7 +84,7 @@ export default function DashBoard({ userInfo }) {
                 setJobData={setJobData}
             />
 
-            <Container maxWidth="xl">
+            <Container maxWidth="lg">
                 <Typography
                     variant="h2"
                     component="h2"
@@ -151,18 +94,21 @@ export default function DashBoard({ userInfo }) {
                     Good {checkGreeting()}!
                 </Typography>
 
+                <Typography variant="h4" component="h2" gutterBottom>
+                    Recommended Jobs
+                </Typography>
+                <JobSingleLineList data={mockdata} />
+
                 <Grid
                     container
                     justify="center"
                     spacing={5}
-                    className={styles.cardContainer}
+                    // className={styles.cardContainer}
                 >
-                    <Grid item xs={12}>
-                        <Typography variant="h4" component="h2" gutterBottom>
-                            Available Jobs
-                        </Typography>
-                    </Grid>
-                    {jobData !== undefined ? (
+                    {/* <Grid item xs={12}></Grid>
+                    <Grid item xs={12}></Grid> */}
+
+                    {/* {jobData !== undefined ? (
                         jobData.map((item) => {
                             console.log;
                             return (
@@ -175,13 +121,14 @@ export default function DashBoard({ userInfo }) {
                         })
                     ) : (
                         <></>
-                    )}
+                    )} */}
 
                     <Grid item xs={12} style={{ paddingTop: "15rem" }}>
                         <Typography variant="h4" component="h2" gutterBottom>
-                            Pending Jobs
+                            All Available Jobs
                         </Typography>
                     </Grid>
+
                     {[
                         {
                             name: "Undergruate Research",
@@ -203,11 +150,13 @@ export default function DashBoard({ userInfo }) {
                         },
                     ].map((item) => {
                         return (
-                            <JobCard
-                                name={item.name}
-                                description={item.description}
-                                poster={item.poster}
-                            />
+                            <Grid item xs={4}>
+                                <JobCard
+                                    name={item.name}
+                                    description={item.description}
+                                    poster={item.poster}
+                                />
+                            </Grid>
                         );
                     })}
                     {/* <JobCard

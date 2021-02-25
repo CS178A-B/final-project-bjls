@@ -3,7 +3,7 @@
 }
 
 .image {
-  background-image: url(https://source.unsplash.com/random);
+  background-image: url(../../public/images/ucrBanner.jpg);
   background-repeat: no-repeat;
 
   background-size: cover;

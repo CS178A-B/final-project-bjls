@@ -83,14 +83,14 @@ export default function PostJobDialog({ jobData, setJobData, open, setOpen }) {
             </DialogContent>
             <DialogActions>
                 <Button
-                    color="primary"
+                    color="secondary"
                     onClick={() => {
                         setOpen(false);
                     }}
                 >
                     Cancel
                 </Button>
-                <Button color="primary" onClick={handleSubmit}>
+                <Button color="secondary" onClick={handleSubmit}>
                     Submit
                 </Button>
             </DialogActions>
