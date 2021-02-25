@@ -40,20 +40,20 @@ class UserSerializerWithToken(serializers.ModelSerializer):
 class StudentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Student
-        fields = ('first_name', 'last_name', 'major', 'GPA', 'course_taken', 'applied_positions', 'profile_completeness')
+        fields = ('major', 'GPA', 'course_taken', 'applied_positions', 'profile_completeness')
 
 
 class FacultySerializer(serializers.ModelSerializer):
     class Meta:
         model = Faculty
-        fields = ('first_name', 'last_name', 'department', 'profile_completeness', 'posted_jobs')
+        fields = ('department', 'profile_completeness', 'posted_jobs')
 
 
 # Job Serializer
 class JobSerializer(serializers.ModelSerializer):
     class Meta:
         model = Job
-        fields = ('first_name', 'last_name', 'description', 'poster', 'posted_date', 'hourly_salary', 'hours_per_week')
+        fields = ('description', 'poster', 'posted_date', 'hourly_salary', 'hours_per_week')
 
 class CourseSerializer(serializers.ModelSerializer):
     class Meta:

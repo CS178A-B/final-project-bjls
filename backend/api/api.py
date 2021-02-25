@@ -17,7 +17,6 @@ class JobViewSet(viewsets.ModelViewSet):
     ]
     serializer_class = JobSerializer
     
-
 class StudentViewSet(viewsets.ModelViewSet):
     queryset = Student.objects.all()
     permission_classes = [

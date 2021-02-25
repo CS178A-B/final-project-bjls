@@ -4,7 +4,6 @@ from django.core.validators import MinLengthValidator as Min
 from django.contrib.postgres.fields import ArrayField
 from datetime import date
 
-
 class Course(models.Model):
     name = models.CharField(max_length=50)
     abbrev = models.CharField(max_length=12)
@@ -16,18 +15,35 @@ class Job(models.Model):
     hourly_salary = models.FloatField(max_length=10, default=0)
     hours_per_week = models.IntegerField(default=10)
 
+
+class Job(models.Model):
+    description = models.CharField(max_length=150)
+    poster = models.CharField(max_length=50)
+    posted_date = models.DateField(date.today())
+    hourly_salary = models.FloatField(max_length=10, default=10)
+    hours_per_week = models.IntegerField(default=10)
+    def __repr__(self):
+        return "{0} - {1} - {2}".format(self.id, self.name, self.description)
+
 class Student(models.Model):
     major = models.CharField(max_length=50, default="")
     GPA = models.IntegerField(default=0)
     applied_positions = models.ManyToManyField(Job)
     profile_completeness = models.IntegerField(default=0)
+    # taken_class = models.ManyToManyField(Course)
+    applied_positions = models.ManyToManyField(Job)
+    profile_completeness = models.IntegerField(default=0)
     course_taken = models.ManyToManyField(Course)
+
+    def __repr__(self):
+        return "{0} - {1} - {2}".format(self.id, self.major, self.GPA)
 
 class Faculty(models.Model):
     department = models.CharField(max_length=50, default="")
     profile_completeness = models.IntegerField(default=0)
     posted_jobs = models.ManyToManyField(Job)
-
+    def __repr__(self):
+        return "{0} - {1}".format(self.id, self.department)
 
 class User(AbstractUser):
     # User Login Information
@@ -35,8 +51,8 @@ class User(AbstractUser):
     is_faculty = models.ForeignKey(Faculty, on_delete=models.CASCADE)
     email = models.EmailField(unique=True)
 
-    # def __repr__(self):
-    #     return "{0} - {1}".format(self.name, self.email)
+    def __repr__(self):
+        return "{0} - {1}".format(self.id, self.email)
 
 
 

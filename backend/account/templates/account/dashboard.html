@@ -15,10 +15,10 @@
                 <h2 class="account-heading">{{ request.user.name }}</h2>
                 <p class="text-secondary">{{ request.user.email }}</p>
                 <a class="nav-item nav-link" href="{% url 'account:logout' %}">Logout</a>
-                <a class="nav-item nav-link" href="{% url 'account:settings' %}">Settings</a>
+                <!-- <a class="nav-item nav-link" href="{% url 'account:settings' %}">Settings</a>
                 {% if request.user.is_superuser %} 
-                    <a class="nav-item nav-link" href="{% url 'account:register' %}">Register New User</a>
-                {% endif %}
+                    <a class="nav-item nav-link" href="">Register New User</a>
+                {% endif %} -->
                 
             </div>
             {% endblock %}
