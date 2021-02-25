@@ -14,14 +14,14 @@ import {
     Typography,
 } from "@material-ui/core";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import Accordion from "@material-ui/core/Accordion";
 import AccordionSummary from "@material-ui/core/AccordionSummary";
 import AccordionDetails from "@material-ui/core/AccordionDetails";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Dropzone from "react-dropzone";
-
+import { useSnackbar } from "notistack";
 import NavBar from "../../../components/NavBar";
 
 const useStyles = makeStyles((theme) => ({
@@ -83,10 +83,43 @@ const CommentsItem = (title, description) => {
     );
 };
 
-function ProfilePage(props) {
+// function StudentPage{{userData}}{
+
+// }
+
+function ProfilePage({ userData }) {
+    const { enqueueSnackbar, closeSnackbar } = useSnackbar();
     const classes = useStyles();
-    const [userData, setUserData] = useState();
+    const [userProfile, setUserProfile] = useState({
+        name: "NaN",
+        major: "NaN",
+        department: "BCOE",
+        school: "University of California, Riverside",
+        gpa: "NaN",
+        expDate: "",
+        description: "",
+        courses: [
+            "CS171",
+            "CS180",
+            "CS165",
+            "CS105",
+            "CS100",
+            "CS061",
+            "CS235",
+        ],
+        comments: [
+            { course: "CS111", comment: "Good Grader" },
+            { course: "CS105", comment: "Awesome Grader" },
+            { course: "CS171", comment: "HAHA you are good" },
+        ],
+    });
     const [updateState, setUpdateState] = useState(false);
+
+    useEffect(() => {
+        if (userData) {
+            setUserProfile(userData);
+        }
+    }, [userData]);
     return (
         <>
             <NavBar />
@@ -102,17 +135,24 @@ function ProfilePage(props) {
                 <Grid container spacing={5}>
                     <Grid container item xs={10} spacing={4}>
                         <Grid item xs={1}>
-                            <Avatar className={classes.profilePic}>BQ</Avatar>
+                            <Avatar className={classes.profilePic} />
                         </Grid>
                         <Grid item xs={3}>
                             {updateState ? (
                                 <TextField
                                     size="small"
                                     label="Name"
+                                    value={userProfile.name}
+                                    onChange={(e) => {
+                                        setUserProfile({
+                                            ...userProfile,
+                                            name: e.target.value,
+                                        });
+                                    }}
                                 ></TextField>
                             ) : (
                                 <Typography variant="h6" component="h2">
-                                    Biqian Cheng
+                                    {userProfile ? userProfile.name : "NaN"}
                                 </Typography>
                             )}
 
@@ -120,10 +160,17 @@ function ProfilePage(props) {
                                 <TextField
                                     size="small"
                                     label="School"
+                                    value={userProfile.school}
+                                    onChange={(e) => {
+                                        setUserProfile({
+                                            ...userProfile,
+                                            school: e.target.value,
+                                        });
+                                    }}
                                 ></TextField>
                             ) : (
                                 <Typography variant="body2" component="p">
-                                    Univeristy of California, Riverside
+                                    {userProfile.school}
                                 </Typography>
                             )}
 
@@ -131,35 +178,70 @@ function ProfilePage(props) {
                                 <TextField
                                     size="small"
                                     label="Department"
+                                    value={userProfile.department}
+                                    onChange={(e) => {
+                                        setUserProfile({
+                                            ...userProfile,
+                                            department: e.target.value,
+                                        });
+                                    }}
                                 ></TextField>
                             ) : (
                                 <Typography variant="body2" component="p">
-                                    BCOE Department
+                                    Department: {userProfile.department}
                                 </Typography>
                             )}
 
                             {updateState ? (
-                                <TextField size="small" label="GPA"></TextField>
+                                <TextField
+                                    size="small"
+                                    label="GPA"
+                                    value={userProfile.gpa}
+                                    onChange={(e) => {
+                                        setUserProfile({
+                                            ...userProfile,
+                                            gpa: e.target.value,
+                                        });
+                                    }}
+                                ></TextField>
                             ) : (
                                 <Typography variant="body2" component="p">
-                                    GPA: 3.83
+                                    GPA: {userProfile.gpa}
                                 </Typography>
                             )}
                             {updateState ? (
                                 <TextField
                                     size="small"
                                     label="Expcted dates"
+                                    value={userProfile.expDate}
+                                    onChange={(e) => {
+                                        setUserProfile({
+                                            ...userProfile,
+                                            expDate: e.target.value,
+                                        });
+                                    }}
                                 ></TextField>
                             ) : (
                                 <Typography variant="body2" component="p">
-                                    Expected graduate dates: June 2021
+                                    Expected graduate dates:{" "}
+                                    {userProfile.expDate}
                                 </Typography>
                             )}
                         </Grid>
                         <Grid item xs={8}>
                             <Paper className={classes.descriptionPaper}>
-                                <Typography variant="body2" component="p">
-                                    Description: Lorem Ipsum
+                                <Typography
+                                    variant="body2"
+                                    component="p"
+                                    value={userProfile.description}
+                                    onChange={(e) => {
+                                        setUserProfile({
+                                            ...userProfile,
+                                            description: e.target.value,
+                                        });
+                                    }}
+                                >
+                                    Description: {userProfile.description}
                                 </Typography>
                             </Paper>
                         </Grid>
@@ -174,26 +256,22 @@ function ProfilePage(props) {
                                             classes.middlePaperPlaceholder
                                         }
                                     >
-                                        {[
-                                            "CS171",
-                                            "CS180",
-                                            "CS165",
-                                            "CS105",
-                                            "CS100",
-                                            "CS061",
-                                            "CS235",
-                                        ].map((item) => {
-                                            return (
-                                                <React.Fragment>
-                                                    <ListItem>
-                                                        <ListItemText
-                                                            primary={item}
-                                                        />
-                                                    </ListItem>
-                                                    <Divider />
-                                                </React.Fragment>
-                                            );
-                                        })}
+                                        {userProfile ? (
+                                            userProfile.courses.map((item) => {
+                                                return (
+                                                    <React.Fragment>
+                                                        <ListItem>
+                                                            <ListItemText
+                                                                primary={item}
+                                                            />
+                                                        </ListItem>
+                                                        <Divider />
+                                                    </React.Fragment>
+                                                );
+                                            })
+                                        ) : (
+                                            <></>
+                                        )}
                                     </List>
                                 </Box>
 
@@ -294,9 +372,21 @@ function ProfilePage(props) {
                                     Comments:
                                 </Typography>
                                 <div className={classes.middlePaperPlaceholder}>
-                                    {CommentsItem("CS111", "Good Grader")}
-                                    {CommentsItem("CS105", "Awesome Grader")}
-                                    {CommentsItem("CS171", "HAHA you are good")}
+                                    {userProfile ? (
+                                        userProfile.comments.map((item) => {
+                                            CommentsItem(
+                                                item.course,
+                                                item.comment
+                                            );
+                                        })
+                                    ) : (
+                                        <Typography
+                                            variant="body1"
+                                            component="h2"
+                                        >
+                                            Emptiness
+                                        </Typography>
+                                    )}
                                 </div>
                             </Paper>
                         </Grid>
@@ -310,9 +400,12 @@ function ProfilePage(props) {
                     className={classes.button}
                     onClick={() => {
                         setUpdateState(!updateState);
+                        updateState
+                            ? enqueueSnackbar("Update Successful", 'success')
+                            : {};
                     }}
                 >
-                    Update
+                    {updateState ? "Confirm" : "Update"}
                 </Button>
             </Container>
         </>
