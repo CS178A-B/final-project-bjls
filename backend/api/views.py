@@ -1,6 +1,6 @@
 from django.shortcuts import render
-from account.models import User, Student, Faculty, Job
-from .serializers import UserSerializer, UserSerializerWithToken, StudentSerializer, FacultySerializer, JobSerializer
+from account.models import User, Student, Faculty, Job, Course
+from .serializers import UserSerializer, UserSerializerWithToken, StudentSerializer, FacultySerializer, JobSerializer, CourseSerializer
 from rest_framework import generics, permissions, status
 from django.http import HttpResponseRedirect
 from django.contrib.auth.models import User
@@ -54,3 +54,7 @@ class FacultyList(generics.ListCreateAPIView):
 class JobList(generics.ListCreateAPIView):
     queryset = Job.objects.all()
     serializer_class = JobSerializer
+
+class CourseList(generics.ListCreateAPIView):
+    queryset = Course.objects.all()
+    serializer_class = CourseSerializer
