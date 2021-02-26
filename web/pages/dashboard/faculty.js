@@ -1,13 +1,12 @@
 import React, { createRef, useEffect, useRef, useState } from "react";
 import styles from "../../styles/pages/Dashboard.module.css";
 import NavBar from "../../components/NavBar";
-import JobCard from "../../components/JobCard";
-import JobSingleLineList from "../../components/JobSingleLineList";
+import ApplicantCard from "../../components/ApplicantCard";
 import { Container, Grid, Typography } from "@material-ui/core";
 
 import ApplyPopover from "../../components/ApplyPopover";
 import mockdata from "../../src/MockJob";
-
+import PostJobDialog from "../../components/PostJobDialog";
 import axios from "axios";
 
 import { useRouter } from "next/router";
@@ -17,6 +16,7 @@ export default function DashBoard({ userInfo }) {
     const ref = useRef();
     const [logedIn, setLogedIn] = useState(true);
     const [jobData, setJobData] = useState(mockdata);
+    // const [postOpen, setPostOpen] = useState(false);
 
     const childRef = createRef();
 
@@ -70,6 +70,7 @@ export default function DashBoard({ userInfo }) {
                 handleLogout={handleLogout}
                 jobData={jobData}
                 setJobData={setJobData}
+                isFaculty
             />
 
             <Container maxWidth="lg">
@@ -81,51 +82,22 @@ export default function DashBoard({ userInfo }) {
                 >
                     Good {checkGreeting()}!
                 </Typography>
-
-                <Typography variant="h4" component="h2" gutterBottom>
-                    Recommended Jobs
-                </Typography>
-                <JobSingleLineList data={jobData} />
-
-                <Grid
-                    container
-                    justify="center"
-                    spacing={5}
-                    // className={styles.cardContainer}
-                >
-                    {/* <Grid item xs={12}></Grid>
-                    <Grid item xs={12}></Grid> */}
-
-                    {/* {jobData !== undefined ? (
-                        jobData.map((item) => {
-                            console.log;
-                            return (
-                                <JobCard
-                                    name={item.name}
-                                    description={item.description}
-                                    poster={item.poster}
-                                />
-                            );
-                        })
-                    ) : (
-                        <></>
-                    )} */}
-
-                    <Grid item xs={12} style={{ paddingTop: "15rem" }}>
+                <Grid container justify="center" spacing={5}>
+                    <Grid item xs={12}>
                         <Typography variant="h4" component="h2" gutterBottom>
                             All Available Jobs
                         </Typography>
                     </Grid>
-
                     {jobData ? (
                         jobData.map((item) => {
                             return (
                                 <Grid item xs={4}>
                                     <ApplyPopover ref={ref} />
-                                    <JobCard
+                                    <ApplicantCard
                                         name={item.name}
                                         description={item.description}
                                         poster={item.poster}
+
                                         // handlePopover={ref.current.handleClick}
                                         // handlePopoverClose={ref.current.handleClose}
                                     />
@@ -135,12 +107,13 @@ export default function DashBoard({ userInfo }) {
                     ) : (
                         <div>Loading</div>
                     )}
-                    {/* <JobCard
+                </Grid>
+
+                {/* <JobCard
                 name={"Undergruate Research"}
                 description={"Looking for eager CS / CE / CSBA students looking to get involved in my Machine Learning Lab"}
                 poster={"John Huh"}
               /> */}
-                </Grid>
             </Container>
         </>
     );
