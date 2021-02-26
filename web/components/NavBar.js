@@ -12,6 +12,7 @@ import AccountCircle from "@material-ui/icons/AccountCircle";
 import ProfileDrawer from "./ProfileDrawer";
 import { Button } from "@material-ui/core";
 import Link from "next/link";
+import PostJobDialog from "./PostJobDialog";
 
 const useStyles = makeStyles((theme) => ({
     grow: {
@@ -21,11 +22,6 @@ const useStyles = makeStyles((theme) => ({
         marginLeft: theme.spacing(5),
         marginRight: theme.spacing(1),
         textTransform: "none",
-        "&:hover": {
-            backgroundColor: "#0069d9",
-            borderColor: "#0062cc",
-            boxShadow: "none",
-        },
     },
 }));
 
@@ -33,10 +29,12 @@ export default function NavBar({
     jobData,
     setJobData,
     UserInfo,
+    isFaculty,
     handleLogout,
 }) {
     const classes = useStyles();
     const [drawerOpen, setDrawerOpen] = useState(false);
+    const [postOpen, setPostOpen] = useState(false);
     return (
         <React.Fragment>
             <ProfileDrawer
@@ -65,27 +63,28 @@ export default function NavBar({
                             </Button>
                         </Link>
 
-                        {/* <Button
-                            className={classes.title}
-                            size="large"
-                            color="inherit"
-                        >
-                            Applied Jobs
-                        </Button>
-                        <Button
-                            className={classes.title}
-                            size="large"
-                            color="inherit"
-                        >
-                            Favorite Jobs
-                        </Button> */}
-                        <Button
-                            className={classes.title}
-                            size="large"
-                            color="inherit"
-                        >
-                            Applications
-                        </Button>
+                        {isFaculty ? (
+                            <React.Fragment>
+                                <Button
+                                    className={classes.title}
+                                    size="large"
+                                    color="inherit"
+                                >
+                                    Applied Jobs
+                                </Button>
+                            </React.Fragment>
+                        ) : (
+                            <React.Fragment>
+                                <Button
+                                    className={classes.title}
+                                    size="large"
+                                    color="inherit"
+                                >
+                                    Applications
+                                </Button>
+                            </React.Fragment>
+                        )}
+
                         {/* <div className={classes.search}>
               <div className={classes.searchIcon}>
                 <SearchIcon />
@@ -100,6 +99,23 @@ export default function NavBar({
               />
             </div> */}
                         <div className={classes.grow} />
+                        {isFaculty ? (
+                            <React.Fragment>
+                                <Button
+                                    className={classes.title}
+                                    size="large"
+                                    variant="contained"
+                                    color="secondary"
+                                    onClick={() => {
+                                        setPostOpen(true);
+                                    }}
+                                >
+                                    Post Job
+                                </Button>
+                            </React.Fragment>
+                        ) : (
+                            <></>
+                        )}
                         <IconButton
                             edge="end"
                             onClick={() => {
@@ -113,6 +129,16 @@ export default function NavBar({
                     </Toolbar>
                 </AppBar>
             </div>
+            {isFaculty ? (
+                <PostJobDialog
+                    open={postOpen}
+                    setOpen={setPostOpen}
+                    jobData={jobData}
+                    setJobData={setJobData}
+                />
+            ) : (
+                <></>
+            )}
         </React.Fragment>
     );
 }
