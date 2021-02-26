@@ -23,7 +23,7 @@ import AccordionDetails from "@material-ui/core/AccordionDetails";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Dropzone from "react-dropzone";
 import { useSnackbar } from "notistack";
-import NavBar from "../../../components/NavBar";
+import NavBar from "../../../../components/NavBar";
 
 const useStyles = makeStyles((theme) => ({
     banner: {
