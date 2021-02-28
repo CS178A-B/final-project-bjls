@@ -23,7 +23,6 @@ class StudentViewSet(viewsets.ModelViewSet):
         permissions.AllowAny
     ]
     serializer_class = StudentSerializer
-    
 
 class FacultyViewSet(viewsets.ModelViewSet):
     queryset = Faculty.objects.all()
@@ -32,12 +31,9 @@ class FacultyViewSet(viewsets.ModelViewSet):
     ]
     serializer_class = FacultySerializer
     
-
 class CourseViewSet(viewsets.ModelViewSet):
     queryset = Course.objects.all()
     permission_classes = [
         permissions.AllowAny
     ]
     serializer_class = CourseSerializer
-    
-
