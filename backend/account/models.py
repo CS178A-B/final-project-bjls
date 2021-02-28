@@ -4,6 +4,16 @@ from django.core.validators import MinLengthValidator as Min
 from django.contrib.postgres.fields import ArrayField
 from datetime import date
 
+
+class User(AbstractUser):
+    # User Login Information
+    is_student = models.BooleanField(default=False)
+    is_faculty = models.BooleanField(default=False)
+    email = models.EmailField(unique=True)
+
+    def __repr__(self):
+        return "{0} - {1}".format(self.id, self.email)
+
 class Course(models.Model):
     name = models.CharField(max_length=50)
     description = models.CharField(max_length=150)
@@ -17,7 +27,7 @@ class Job(models.Model):
     description = models.CharField(max_length=150)
     poster = models.CharField(max_length=50)
     posted_date = models.DateField(date.today())
-    hourly_salary = models.FloatField(max_length=10)
+    hourly_salary = models.FloatField(max_length=10, default=10)
     hours_per_week = models.IntegerField(default=10)
     def __repr__(self):
         return "{0} - {1} - {2}".format(self.id, self.name, self.description)
