@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.core.validators import MinLengthValidator as Min
 from django.contrib.postgres.fields import ArrayField
+from datetime import date
 
 
 class User(AbstractUser):
@@ -21,9 +22,9 @@ class Job(models.Model):
     name = models.CharField(max_length=50)
     description = models.CharField(max_length=150)
     poster = models.CharField(max_length=50)
-    posted_date = models.DateField(auto_now_add=True)
-    hourly_salary = models.FloatField(max_length=10)
-    hours_per_week = models.IntegerField()
+    posted_date = models.DateField(default=date.today)
+    hourly_salary = models.FloatField(max_length=10, default=0)
+    hours_per_week = models.IntegerField(default=10)
 
 class Student(models.Model):
     name = models.CharField(max_length=50)
