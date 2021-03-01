@@ -10,27 +10,42 @@ class User(AbstractUser):
     is_faculty = models.BooleanField(default=False)
     email = models.EmailField(unique=True)
 
-    # def __repr__(self):
-    #     return "{0} - {1}".format(self.name, self.email)
+    def __repr__(self):
+        return "{0} - {1}".format(self.id, self.email)
+
+class Course(models.Model):
+    name = models.CharField(max_length=50)
+    description = models.CharField(max_length=150)
+    abbrev = models.CharField(max_length=50)
+    def __repr__(self):
+        return "{0} - {1} - {2}".format(self.id, self.name, self.description)
 
 class Student(models.Model):
     name = models.CharField(max_length=50)
     major = models.CharField(max_length=50, default="")
-    GPA = models.IntegerField(default=0)
-    courses = ArrayField(models.CharField(max_length=50, blank=True))
-    applied_positions = ArrayField(models.CharField(max_length=50, blank=True))
+    GPA = models.FloatField(default=0)
+    # courses = ArrayField(models.CharField(max_length=50, blank=True))
+    # applied_positions = ArrayField(models.CharField(max_length=50, blank=True))
     profile_completeness = models.IntegerField(default=0)
-    takenClass = ArrayField(ArrayField(models.CharField(max_length=50), size=2))
+    # taken_class = models.ManyToManyField(Course)
+    def __repr__(self):
+        return "{0} - {1} - {2}".format(self.id, self.name, self.GPA)
 
 class Faculty(models.Model):
     name = models.CharField(max_length=50)
     department = models.CharField(max_length=50, default="")
     profile_completeness = models.IntegerField(default=0)
+    def __repr__(self):
+        return "{0} - {1}".format(self.id, self.name)
 
 class Job(models.Model):
     name = models.CharField(max_length=50)
     description = models.CharField(max_length=150)
     poster = models.CharField(max_length=50)
+    def __repr__(self):
+        return "{0} - {1} - {2}".format(self.id, self.name, self.description)
+
+
 
 
 

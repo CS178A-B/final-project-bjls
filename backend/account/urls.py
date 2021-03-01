@@ -1,15 +1,15 @@
 from django.urls import path
-from .views import LoginView, DashboardView, SettingsView, DeleteView
-# from .views import LoginView, DashboardView, SettingsView, StudentUpdateView, DeleteView, IndexView, RegisterStudentView
+from .views import LoginView, DashboardView, SettingsView, DeleteView, RegisterStudentView
+# from .views import LoginView, DashboardView, SettingsView, DeleteView, IndexView, RegisterStudentView
 from django.contrib.auth.views import LogoutView, PasswordResetView, PasswordResetDoneView, PasswordResetCompleteView, PasswordResetConfirmView
 from django.shortcuts import reverse
 app_name = 'account'
 
 urlpatterns = [
     path('', LoginView.as_view(), name='login'),
-    # path('register-student/', RegisterStudentView.as_view(), name='register_student'),
+    path('register-student/', RegisterStudentView.as_view(), name='register_student'),
     # path('register-faculty/', RegisterFacultyView.as_view(), name='register_faculty'),
-    # path('dashboard/', DashboardView.as_view(), name='dashboard'),
+    path('dashboard/', DashboardView.as_view(), name='dashboard'),
     path('logout/', LogoutView.as_view(), name='logout'),
     path('password-reset/', PasswordResetView.as_view(success_url='/password-reset-done'), name='password_reset'),
     path('password-reset-done/', PasswordResetDoneView.as_view(), name='password_reset_done'),
