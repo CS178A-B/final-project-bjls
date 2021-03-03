@@ -8,7 +8,7 @@ from account.models import User, Student, Faculty, Job, Course
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('username', 'password', 'email', 'is_student', 'is_faculty')
+        fields = ('first_name', 'last_name', 'username', 'password', 'email', 'is_student', 'is_faculty')
 
 
 class UserSerializerWithToken(serializers.ModelSerializer):
@@ -53,7 +53,7 @@ class FacultySerializer(serializers.ModelSerializer):
 class JobSerializer(serializers.ModelSerializer):
     class Meta:
         model = Job
-        fields = ('name', 'description', 'poster', 'posted_date', 'hourly_salary', 'hours_per_week')
+        fields = ('first_name', 'last_name', 'description', 'poster', 'posted_date', 'hourly_salary', 'hours_per_week')
 
 class CourseSerializer(serializers.ModelSerializer):
     class Meta:
