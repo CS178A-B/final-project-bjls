@@ -19,7 +19,7 @@ class Job(models.Model):
     hourly_salary = models.FloatField(max_length=10, default=10)
     hours_per_week = models.IntegerField(default=10)
     def __repr__(self):
-        return "{0} - {1} - {2}".format(self.id, self.name, self.description)
+        return "{0} - {1} - {2}".format(self.id, self.description)
 
 class Student(models.Model):
     major = models.CharField(max_length=50, default="")
@@ -50,7 +50,6 @@ class User(AbstractUser):
 
     def __repr__(self):
         return "{0} - {1}".format(self.id, self.email)
-
 
 
 
