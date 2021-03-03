@@ -8,7 +8,7 @@ from account.models import User, Student, Faculty, Job, Course
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('username', 'password', 'email', 'is_student', 'is_faculty')
+        fields = ('first_name', 'last_name', 'username', 'password', 'email', 'is_student', 'is_faculty')
 
 
 class UserSerializerWithToken(serializers.ModelSerializer):
@@ -40,20 +40,20 @@ class UserSerializerWithToken(serializers.ModelSerializer):
 class StudentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Student
-        fields = ('name', 'major', 'GPA', 'course_taken', 'applied_positions', 'profile_completeness')
+        fields = ('first_name', 'last_name', 'major', 'GPA', 'course_taken', 'applied_positions', 'profile_completeness')
 
 
 class FacultySerializer(serializers.ModelSerializer):
     class Meta:
         model = Faculty
-        fields = ('name', 'department', 'profile_completeness', 'posted_jobs')
+        fields = ('first_name', 'last_name', 'department', 'profile_completeness', 'posted_jobs')
 
 
 # Job Serializer
 class JobSerializer(serializers.ModelSerializer):
     class Meta:
         model = Job
-        fields = ('name', 'description', 'poster', 'posted_date', 'hourly_salary', 'hours_per_week')
+        fields = ('first_name', 'last_name', 'description', 'poster', 'posted_date', 'hourly_salary', 'hours_per_week')
 
 class CourseSerializer(serializers.ModelSerializer):
     class Meta:

@@ -5,21 +5,11 @@ from django.contrib.postgres.fields import ArrayField
 from datetime import date
 
 
-class User(AbstractUser):
-    # User Login Information
-    is_student = models.BooleanField(default=False)
-    is_faculty = models.BooleanField(default=False)
-    email = models.EmailField(unique=True)
-
-    # def __repr__(self):
-    #     return "{0} - {1}".format(self.name, self.email)
-
 class Course(models.Model):
     name = models.CharField(max_length=50)
     abbrev = models.CharField(max_length=12)
 
 class Job(models.Model):
-    name = models.CharField(max_length=50)
     description = models.CharField(max_length=150)
     poster = models.CharField(max_length=50)
     posted_date = models.DateField(default=date.today)
@@ -27,7 +17,6 @@ class Job(models.Model):
     hours_per_week = models.IntegerField(default=10)
 
 class Student(models.Model):
-    name = models.CharField(max_length=50)
     major = models.CharField(max_length=50, default="")
     GPA = models.IntegerField(default=0)
     applied_positions = models.ManyToManyField(Job)
@@ -35,10 +24,20 @@ class Student(models.Model):
     course_taken = models.ManyToManyField(Course)
 
 class Faculty(models.Model):
-    name = models.CharField(max_length=50)
     department = models.CharField(max_length=50, default="")
     profile_completeness = models.IntegerField(default=0)
     posted_jobs = models.ManyToManyField(Job)
+
+
+class User(AbstractUser):
+    # User Login Information
+    is_student = models.ForeignKey(Student, on_delete=models.CASCADE)
+    is_faculty = models.ForeignKey(Faculty, on_delete=models.CASCADE)
+    email = models.EmailField(unique=True)
+
+    # def __repr__(self):
+    #     return "{0} - {1}".format(self.name, self.email)
+
 
 
 
