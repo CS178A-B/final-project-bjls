@@ -12,9 +12,9 @@ fi
 
 echo -e "Installing virtualenv"
 
-$PIP install virtualenv
 
 if ! virtualenv pyvenv; then
+$PIP install virtualenv
 echo -e "${RED}virtualenv failed."
 exit 1
 fi
@@ -24,6 +24,6 @@ if ! source pyvenv/bin/activate; then
     exit 1
 fi
 
-
+source .env
 
 $PIP install -r requirements.txt
