@@ -23,7 +23,6 @@ class Course(models.Model):
 
 
 class Job(models.Model):
-    name = models.CharField(max_length=50)
     description = models.CharField(max_length=150)
     poster = models.CharField(max_length=50)
     posted_date = models.DateField(date.today())
@@ -63,6 +62,17 @@ class User(AbstractUser):
         return "{0} - {1}".format(self.id, self.email)
 
 
+
+
+
+class User(AbstractUser):
+    # User Login Information
+    is_student = models.ForeignKey(Student, on_delete=models.CASCADE)
+    is_faculty = models.ForeignKey(Faculty, on_delete=models.CASCADE)
+    email = models.EmailField(unique=True)
+
+    # def __repr__(self):
+    #     return "{0} - {1}".format(self.name, self.email)
 
 
 
