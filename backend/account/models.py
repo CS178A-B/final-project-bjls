@@ -39,13 +39,14 @@ class Faculty(models.Model):
     department = models.CharField(max_length=50, default="")
     profile_completeness = models.IntegerField(default=0)
     posted_jobs = models.ManyToManyField(Job)
+
     def __repr__(self):
         return "{0} - {1}".format(self.id, self.department)
 
 class User(AbstractUser):
     # User Login Information
-    is_student = models.ForeignKey(Student, on_delete=models.CASCADE)
-    is_faculty = models.ForeignKey(Faculty, on_delete=models.CASCADE)
+    is_student = models.ForeignKey(Student, on_delete=models.CASCADE, null=True)
+    is_faculty = models.ForeignKey(Faculty, on_delete=models.CASCADE, null=True)
     email = models.EmailField(unique=True)
 
     def __repr__(self):
