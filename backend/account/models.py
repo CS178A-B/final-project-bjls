@@ -8,6 +8,8 @@ class Course(models.Model):
     name = models.CharField(max_length=50)
     description = models.CharField(max_length=150)
     abbrev = models.CharField(max_length=50)
+    grade = models.CharField(max_length=3, default="")
+    
     def __repr__(self):
         return "{0} - {1} - {2}".format(self.id, self.name, self.description)
 
@@ -18,6 +20,9 @@ class Job(models.Model):
     posted_date = models.DateField(date.today())
     hourly_salary = models.FloatField(max_length=10, default=10)
     hours_per_week = models.IntegerField(default=10)
+    course_req = models.ManyToManyField(Course, default=0)
+    applicants = models.ManyToManyField('Student', default=0)
+
     def __repr__(self):
         return "{0} - {1} - {2}".format(self.id, self.description)
 
@@ -28,9 +33,11 @@ class Student(models.Model):
     # applied_positions = ArrayField(models.CharField(max_length=50, blank=True))
     profile_completeness = models.IntegerField(default=0)
     # taken_class = models.ManyToManyField(Course)
-    applied_positions = models.ManyToManyField(Job)
+    applied_positions = models.ManyToManyField(Job, default=0, blank=True)
     profile_completeness = models.IntegerField(default=0)
-    course_taken = models.ManyToManyField(Course)
+    course_taken = models.ManyToManyField(Course, default=0)
+    resume_pdf = models.FileField(upload_to='pdf', null=True, blank=True)
+    transcript = models.FileField(upload_to='pdf', null=True, blank=True)
 
     def __repr__(self):
         return "{0} - {1} - {2}".format(self.id, self.major, self.GPA)
@@ -39,6 +46,7 @@ class Faculty(models.Model):
     department = models.CharField(max_length=50, default="")
     profile_completeness = models.IntegerField(default=0)
     posted_jobs = models.ManyToManyField(Job)
+    courses_taught = models.ManyToManyField(Course, default=0)
 
     def __repr__(self):
         return "{0} - {1}".format(self.id, self.department)
