@@ -1,6 +1,6 @@
-from account.models import User, Job, Student, Faculty, Course
+from account.models import User, Job, Student, Faculty, Course, Comment
 from rest_framework import viewsets, permissions
-from .serializers import UserSerializer, JobSerializer, StudentSerializer, FacultySerializer, CourseSerializer
+from .serializers import UserSerializer, JobSerializer, StudentSerializer, FacultySerializer, CourseSerializer, CommentSerializer
 
 # Lead Viewset
 class UserViewSet(viewsets.ModelViewSet):
@@ -37,3 +37,10 @@ class CourseViewSet(viewsets.ModelViewSet):
         permissions.AllowAny
     ]
     serializer_class = CourseSerializer
+
+class CommentViewSet(viewsets.ModelViewSet):
+    queryset = Comment.objects.all()
+    permission_classes = [
+        permissions.AllowAny
+    ]
+    serializer_class = CommentSerializer
