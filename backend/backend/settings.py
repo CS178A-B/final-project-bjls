@@ -152,6 +152,6 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 
-ALLOWED_HOSTS = ['0.0.0.0', 'localhost']
-AUTH_USER_MODEL = 'account.User'
+ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1']
+AUTH_USER_MODEL = 'account.Student'
 LOGOUT_REDIRECT_URL = "account:login"
