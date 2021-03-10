@@ -6,27 +6,15 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const ApplyPopover = forwardRef((props, ref) => {
+const ApplyJobPopover = ({ anchorEl, handleClose, data }) => {
     const classes = useStyles();
-    const [anchorEl, setAnchorEl] = React.useState(null);
-    useImperativeHandle(ref, () => {
-        handleClick, handleClose;
-    });
-
-    const handleClick = (event) => {
-        setAnchorEl(event.currentTarget);
-    };
-
-    const handleClose = () => {
-        setAnchorEl(null);
-    };
-
     const open = Boolean(anchorEl);
     const id = open ? "simple-popover" : undefined;
 
     return (
         <div>
             <Popover
+                elevation={2}
                 id={id}
                 open={open}
                 anchorEl={anchorEl}
@@ -41,11 +29,11 @@ const ApplyPopover = forwardRef((props, ref) => {
                 }}
             >
                 <Typography className={classes.typography}>
-                    The content of the Popover.
+                    {data.name}
                 </Typography>
             </Popover>
         </div>
     );
-});
+};
 
-export default ApplyPopover;
+export default ApplyJobPopover;

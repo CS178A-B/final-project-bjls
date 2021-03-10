@@ -13,8 +13,8 @@ const JobCard = ({
     name,
     description,
     poster,
-    handlePopover,
-    handlePopoverClose,
+    handleApplyClick,
+    handleDetailClick,
 }) => {
     return (
         <React.Fragment>
@@ -41,7 +41,11 @@ const JobCard = ({
                     </CardContent>
                 </CardActionArea>
                 <CardActions>
-                    <Button size="small" color="secondary">
+                    <Button
+                        size="small"
+                        color="secondary"
+                        onClick={handleApplyClick}
+                    >
                         Apply
                     </Button>
                     <Button size="small" color="secondary">

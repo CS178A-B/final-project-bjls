@@ -4,7 +4,7 @@ import NavBar from "../../components/NavBar";
 import ApplicantCard from "../../components/ApplicantCard";
 import { Container, Grid, Typography } from "@material-ui/core";
 
-import ApplyPopover from "../../components/ApplyPopover";
+// import ApplyPopover from "../../components/ApplyPopover";
 import mockdata from "../../src/MockJob";
 import PostJobDialog from "../../components/PostJobDialog";
 import axios from "axios";
@@ -13,12 +13,9 @@ import { useRouter } from "next/router";
 
 export default function DashBoard({ userInfo }) {
     const router = useRouter();
-    const ref = useRef();
     const [logedIn, setLogedIn] = useState(true);
     const [jobData, setJobData] = useState(mockdata);
     // const [postOpen, setPostOpen] = useState(false);
-
-    const childRef = createRef();
 
     const checkGreeting = () => {
         if (Date.now.getHours < 12) {
@@ -66,11 +63,10 @@ export default function DashBoard({ userInfo }) {
     return (
         <>
             <NavBar
-                toggleDrawer={childRef.toggleDrawer}
                 handleLogout={handleLogout}
                 jobData={jobData}
                 setJobData={setJobData}
-                isFaculty
+                identity="faculty"
             />
 
             <Container maxWidth="lg">
@@ -92,7 +88,7 @@ export default function DashBoard({ userInfo }) {
                         jobData.map((item) => {
                             return (
                                 <Grid item xs={4}>
-                                    <ApplyPopover ref={ref} />
+                                    {/* <ApplyPopover ref={ref} /> */}
                                     <ApplicantCard
                                         name={item.name}
                                         description={item.description}

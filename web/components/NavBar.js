@@ -29,7 +29,7 @@ export default function NavBar({
     jobData,
     setJobData,
     UserInfo,
-    isFaculty,
+    identity,
     handleLogout,
 }) {
     const classes = useStyles();
@@ -41,8 +41,7 @@ export default function NavBar({
                 drawerOpen={drawerOpen}
                 setDrawerOpen={setDrawerOpen}
                 handleLogout={handleLogout}
-                jobData={jobData}
-                setJobData={setJobData}
+                identity={identity}
             />
             <div className={classes.grow}>
                 <AppBar position="static">
@@ -53,7 +52,7 @@ export default function NavBar({
                             width={40}
                             height={40}
                         />
-                        <Link href="/dashboard">
+                        <Link href={"/dashboard/" + identity}>
                             <Button
                                 className={classes.title}
                                 size="large"
@@ -63,7 +62,7 @@ export default function NavBar({
                             </Button>
                         </Link>
 
-                        {isFaculty ? (
+                        {identity === "student" ? (
                             <React.Fragment>
                                 <Button
                                     className={classes.title}
@@ -99,7 +98,7 @@ export default function NavBar({
               />
             </div> */}
                         <div className={classes.grow} />
-                        {isFaculty ? (
+                        {identity === "faculty" ? (
                             <React.Fragment>
                                 <Button
                                     className={classes.title}
@@ -129,7 +128,7 @@ export default function NavBar({
                     </Toolbar>
                 </AppBar>
             </div>
-            {isFaculty ? (
+            {identity === "faculty" ? (
                 <PostJobDialog
                     open={postOpen}
                     setOpen={setPostOpen}

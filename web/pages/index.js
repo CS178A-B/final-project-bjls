@@ -38,85 +38,22 @@ const Slider = () => {
                         We are here to help you building connection between
                         faculty members and potential Readers at UCR!
                     </Typography>
-                    <Link href="/login" passHref>
+                    <Link href="/login/student" passHref>
                         <Button
                             variant="contained"
                             color="Secondary"
                             component="a"
                         >
-                            Click here to log in
+                            Click here to log in as a student
                         </Button>
                     </Link>
-                </Carousel.Caption>
-            </Carousel.Item>
-            <Carousel.Item interval={2600}>
-                <img
-                    className="d-block w-100"
-                    src="https://a.scpr.org/i/41cb598a2283191f11d4e5f6632c353c/36303-full.jpg"
-                    alt="first slide"
-                    style={{ maxWidth: "100vw", maxHeight: "100vh" }}
-                />
-                <Carousel.Caption>
-                    <Typography
-                        style={{ paddingBottom: "25rem" }}
-                        variant="h2"
-                        component="h2"
-                        gutterBottom
-                    >
-                        Welcome to R'Finder!
-                    </Typography>
-                    <Typography
-                        style={{ paddingBottom: "8rem" }}
-                        variant="h3"
-                        component="h3"
-                        gutterBottom
-                    >
-                        We are here to help you building connection between
-                        faculty members and potential Readers at UCR!
-                    </Typography>
-                    <Link href="/login" passHref>
+                    <Link href="/login/faculty" passHref>
                         <Button
                             variant="contained"
-                            color="Secondary"
+                            color="Primary"
                             component="a"
                         >
-                            Click here to log in
-                        </Button>
-                    </Link>
-                </Carousel.Caption>
-            </Carousel.Item>
-            <Carousel.Item interval={2600}>
-                <img
-                    className="d-block w-100"
-                    src="https://ucrtoday.ucr.edu/wp-content/uploads/2018/05/ucrsign.jpg"
-                    alt="Second slide"
-                    style={{ maxWidth: "100vw", maxHeight: "100vh" }}
-                />
-                <Carousel.Caption>
-                    <Typography
-                        style={{ paddingBottom: "25rem", color: "Black" }}
-                        variant="h2"
-                        component="h2"
-                        gutterBottom
-                    >
-                        Welcome to R'Finder!
-                    </Typography>
-                    <Typography
-                        style={{ paddingBottom: "8rem" }}
-                        variant="h3"
-                        component="h3"
-                        gutterBottom
-                    >
-                        We are here to help you building connection between
-                        faculty members and potential Readers at UCR!
-                    </Typography>
-                    <Link href="/login" passHref>
-                        <Button
-                            variant="contained"
-                            color="Secondary"
-                            component="a"
-                        >
-                            Click here to log in
+                            Click here to log in as a faculty
                         </Button>
                     </Link>
                 </Carousel.Caption>

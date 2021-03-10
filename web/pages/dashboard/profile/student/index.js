@@ -22,7 +22,7 @@ import AccordionDetails from "@material-ui/core/AccordionDetails";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Dropzone from "react-dropzone";
 import { useSnackbar } from "notistack";
-import NavBar from "../../../components/NavBar";
+import NavBar from "../../../../components/NavBar";
 
 const useStyles = makeStyles((theme) => ({
     banner: {
@@ -65,6 +65,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const CommentsItem = (title, description) => {
+    console.log(title);
+    console.log(description);
     return (
         <React.Fragment>
             <Accordion>
@@ -90,7 +92,7 @@ const CommentsItem = (title, description) => {
 function ProfilePage({ userData }) {
     const { enqueueSnackbar, closeSnackbar } = useSnackbar();
     const classes = useStyles();
-    const [userProfile, setUserProfile] = useState({
+    const [userInfo, setUserInfo] = useState({
         name: "NaN",
         major: "NaN",
         department: "BCOE",
@@ -117,12 +119,12 @@ function ProfilePage({ userData }) {
 
     useEffect(() => {
         if (userData) {
-            setUserProfile(userData);
+            setUserInfo(userData);
         }
     }, [userData]);
     return (
         <>
-            <NavBar />
+            <NavBar identity="student" />
             <div className={classes.banner}>
                 <Image
                     src="/images/ucrBanner.png"
@@ -142,17 +144,17 @@ function ProfilePage({ userData }) {
                                 <TextField
                                     size="small"
                                     label="Name"
-                                    value={userProfile.name}
+                                    value={userInfo.name}
                                     onChange={(e) => {
-                                        setUserProfile({
-                                            ...userProfile,
+                                        setUserInfo({
+                                            ...userInfo,
                                             name: e.target.value,
                                         });
                                     }}
                                 ></TextField>
                             ) : (
                                 <Typography variant="h6" component="h2">
-                                    {userProfile ? userProfile.name : "NaN"}
+                                    {userInfo ? userInfo.name : "NaN"}
                                 </Typography>
                             )}
 
@@ -160,17 +162,17 @@ function ProfilePage({ userData }) {
                                 <TextField
                                     size="small"
                                     label="School"
-                                    value={userProfile.school}
+                                    value={userInfo.school}
                                     onChange={(e) => {
-                                        setUserProfile({
-                                            ...userProfile,
+                                        setUserInfo({
+                                            ...userInfo,
                                             school: e.target.value,
                                         });
                                     }}
                                 ></TextField>
                             ) : (
                                 <Typography variant="body2" component="p">
-                                    {userProfile.school}
+                                    {userInfo.school}
                                 </Typography>
                             )}
 
@@ -178,17 +180,17 @@ function ProfilePage({ userData }) {
                                 <TextField
                                     size="small"
                                     label="Department"
-                                    value={userProfile.department}
+                                    value={userInfo.department}
                                     onChange={(e) => {
-                                        setUserProfile({
-                                            ...userProfile,
+                                        setUserInfo({
+                                            ...userInfo,
                                             department: e.target.value,
                                         });
                                     }}
                                 ></TextField>
                             ) : (
                                 <Typography variant="body2" component="p">
-                                    Department: {userProfile.department}
+                                    Department: {userInfo.department}
                                 </Typography>
                             )}
 
@@ -196,35 +198,34 @@ function ProfilePage({ userData }) {
                                 <TextField
                                     size="small"
                                     label="GPA"
-                                    value={userProfile.gpa}
+                                    value={userInfo.gpa}
                                     onChange={(e) => {
-                                        setUserProfile({
-                                            ...userProfile,
+                                        setUserInfo({
+                                            ...userInfo,
                                             gpa: e.target.value,
                                         });
                                     }}
                                 ></TextField>
                             ) : (
                                 <Typography variant="body2" component="p">
-                                    GPA: {userProfile.gpa}
+                                    GPA: {userInfo.gpa}
                                 </Typography>
                             )}
                             {updateState ? (
                                 <TextField
                                     size="small"
                                     label="Expcted dates"
-                                    value={userProfile.expDate}
+                                    value={userInfo.expDate}
                                     onChange={(e) => {
-                                        setUserProfile({
-                                            ...userProfile,
+                                        setUserInfo({
+                                            ...UserInfo,
                                             expDate: e.target.value,
                                         });
                                     }}
                                 ></TextField>
                             ) : (
                                 <Typography variant="body2" component="p">
-                                    Expected graduate dates:{" "}
-                                    {userProfile.expDate}
+                                    Expected graduate dates: {userInfo.expDate}
                                 </Typography>
                             )}
                         </Grid>
@@ -233,15 +234,15 @@ function ProfilePage({ userData }) {
                                 <Typography
                                     variant="body2"
                                     component="p"
-                                    value={userProfile.description}
+                                    value={userInfo.description}
                                     onChange={(e) => {
-                                        setUserProfile({
-                                            ...userProfile,
+                                        setUserInfo({
+                                            ...userInfo,
                                             description: e.target.value,
                                         });
                                     }}
                                 >
-                                    Description: {userProfile.description}
+                                    Description: {userInfo.description}
                                 </Typography>
                             </Paper>
                         </Grid>
@@ -256,8 +257,8 @@ function ProfilePage({ userData }) {
                                             classes.middlePaperPlaceholder
                                         }
                                     >
-                                        {userProfile ? (
-                                            userProfile.courses.map((item) => {
+                                        {userInfo ? (
+                                            userInfo.courses.map((item) => {
                                                 return (
                                                     <React.Fragment>
                                                         <ListItem>
@@ -372,12 +373,27 @@ function ProfilePage({ userData }) {
                                     Comments:
                                 </Typography>
                                 <div className={classes.middlePaperPlaceholder}>
-                                    {userProfile ? (
-                                        userProfile.comments.map((item) => {
-                                            CommentsItem(
-                                                item.course,
-                                                item.comment
-                                            );
+                                    {userInfo ? (
+                                        userInfo.comments.map((item, index) => {
+                                            console.log("hello1");
+                                            <Accordion>
+                                                <AccordionSummary
+                                                    expandIcon={
+                                                        <ExpandMoreIcon />
+                                                    }
+                                                    aria-controls={index}
+                                                    id={index + item.course}
+                                                >
+                                                    <Typography>
+                                                        {item.course}
+                                                    </Typography>
+                                                </AccordionSummary>
+                                                <AccordionDetails>
+                                                    <Typography>
+                                                        {item.comment}
+                                                    </Typography>
+                                                </AccordionDetails>
+                                            </Accordion>;
                                         })
                                     ) : (
                                         <Typography
@@ -401,7 +417,7 @@ function ProfilePage({ userData }) {
                     onClick={() => {
                         setUpdateState(!updateState);
                         updateState
-                            ? enqueueSnackbar("Update Successful", 'success')
+                            ? enqueueSnackbar("Update Successful", "success")
                             : {};
                     }}
                 >

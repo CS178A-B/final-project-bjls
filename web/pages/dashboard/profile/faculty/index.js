@@ -126,7 +126,7 @@ function ProfilePage({ userData }) {
     }, [userData]);
     return (
         <>
-            <NavBar />
+            <NavBar identity="faculty" />
             <div className={classes.banner}>
                 <Image
                     src="/images/ucrBanner.png"

@@ -40,12 +40,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function ProfileDrawer({
-    jobData,
-    setJobData,
-    UserInfo,
+    userInfo,
     drawerOpen,
     setDrawerOpen,
     handleLogout,
+    identity,
 }) {
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = useState(null);
@@ -53,12 +52,6 @@ export default function ProfileDrawer({
     const statusMenu = Boolean(anchorEl);
     return (
         <React.Fragment>
-            <PostJobDialog
-                open={postOpen}
-                setOpen={setPostOpen}
-                jobData={jobData}
-                setJobData={setJobData}
-            />
             <Drawer
                 anchor="right"
                 open={drawerOpen}
@@ -78,7 +71,7 @@ export default function ProfileDrawer({
                                 variant="h5"
                                 color="textPrimary"
                             >
-                                Biqian Cheng
+                                B
                             </Typography>
                         }
                         secondary={
@@ -117,7 +110,7 @@ export default function ProfileDrawer({
                 <Divider />
                 <div className={styles.listItem}>
                     <List>
-                        <Link href="/dashboard/profile">
+                        <Link href={"/dashboard/profile/" + identity}>
                             <ListItem button key="profile">
                                 <ListItemIcon>
                                     <SettingsIcon />

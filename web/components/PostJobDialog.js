@@ -49,17 +49,13 @@ export default function PostJobDialog({ jobData, setJobData, open, setOpen }) {
                             onChange={handleChange}
                         />
                     </Grid>
-                    <Grid item xs={5}>
-                        <Paper elevation={3} className={styles.paper}></Paper>
-                    </Grid>
-                    <Grid item xs={7}>
-                        <Paper elevation={3} className={styles.paper}></Paper>
-                    </Grid>
                     <Grid item xs={12}>
                         <TextField
                             autoFocus
+                            multiline
+                            rows={6}
                             variant="outlined"
-                            margin="dense"
+                            // margin="dense"
                             id="description"
                             label="Job Description"
                             fullWidth

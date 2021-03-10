@@ -111,7 +111,6 @@ export default function FacultySignUp() {
                                     fullWidth
                                     id="last_name"
                                     label="Last Name"
-                                    autoFocus
                                     value={signUpInfo.last_name}
                                     onChange={handleChange}
                                 />

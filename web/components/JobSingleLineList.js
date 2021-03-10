@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { List, ListItem, makeStyles } from "@material-ui/core";
 import JobCard from "./JobCard";
-
+import ApplyJobPopover from "./ApplyJobPopover";
 const useStyles = makeStyles((theme) => ({
     flexContainer: {
         display: "flex",
@@ -20,18 +20,32 @@ const useStyles = makeStyles((theme) => ({
 
 const JobSingelLineList = ({ data }) => {
     const classes = useStyles();
+    const [anchorEl, setAnchorEl] = useState(null);
+    const handleApplyClick = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+    const handleApplyClose = () => {
+        setAnchorEl(null);
+    };
+
     return (
         <React.Fragment>
             <List className={classes.flexContainer}>
                 {data.map((item) => {
                     return (
                         <ListItem className={classes.ListCard}>
+                            <ApplyJobPopover
+                                anchorEl={anchorEl}
+                                handleClose={handleApplyClose}
+                                data={item}
+                            />
                             <JobCard
                                 // className={classes.card}
                                 key={item.name}
                                 name={item.name}
                                 description={item.description}
                                 poster={item.poster}
+                                handleApplyClick={handleApplyClick}
                             />
                         </ListItem>
                     );

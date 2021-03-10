@@ -66,7 +66,6 @@ function SignInSide() {
         username: "",
         password: "",
     });
-    const [userInfo, setUserInfo] = useState({});
     const router = useRouter();
 
     const handleChange = (event) => {
@@ -85,11 +84,10 @@ function SignInSide() {
                 if (r.status === 200) {
                     setLogedIn(true);
                     if (typeof window !== "undefined") {
-                        window.localStorage.setItem("token", r.data.token);
+                        window.localStorage.setItem("tokenF", r.data.token);
                     }
-                    router.push("/dashboard");
+                    router.push("/dashboard/faculty");
                 }
-                setUserInfo(r.data.user);
             })
             .catch((error) => {
                 console.log(error.response);
@@ -100,18 +98,16 @@ function SignInSide() {
     };
 
     useEffect(() => {
-        if (typeof window !== "undefined") {
-            localStorage.getItem("token");
+        if (localStorage.getItem("tokenF")) {
             axios
                 .get("http://localhost:8000/api/current_user", {
                     headers: {
-                        Authorization: `JWT ${localStorage.getItem("token")}`,
+                        Authorization: `JWT ${localStorage.getItem("tokenF")}`,
                     },
                 })
                 .then((r) => {
                     console.log(r);
-                    setUserInfo(r.data.user);
-                    router.push("/dashboard");
+                    router.push("/dashboard/faculty");
                 })
                 .catch((e) => {
                     console.log(e.response);
@@ -136,10 +132,12 @@ function SignInSide() {
                         <LockOutlinedIcon />
                     </Avatar>
                     <Typography component="h1" variant="h5">
-                        Sign in
+                        Sign in As a faculty
                     </Typography>
                     {logedError ? (
-                        <div style={{ color: "red" }}> Login Failed </div>
+                        <div style={{ color: "red" }}>
+                            Incorrect Username or Password{" "}
+                        </div>
                     ) : (
                         <div></div>
                     )}
