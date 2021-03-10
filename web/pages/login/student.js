@@ -179,7 +179,7 @@ function SignInSide() {
                                 Sign In
                             </Button>
                         </Grid>
-                        <Grid item xs={6}>
+                        <Grid item xs={12}>
                             <Link href="/signup/student" variant="body2">
                                 <Button
                                     type="submit"
@@ -192,7 +192,7 @@ function SignInSide() {
                                 </Button>
                             </Link>
                         </Grid>
-                        <Grid item xs={6}>
+                        {/* <Grid item xs={6}>
                             <Link href="/signup/faculty" variant="body2">
                                 <Button
                                     type="submit"
@@ -204,7 +204,7 @@ function SignInSide() {
                                     Sign Up as a Faculty
                                 </Button>
                             </Link>
-                        </Grid>
+                        </Grid> */}
                     </Grid>
                     <Box mt={5}>
                         <Copyright />
