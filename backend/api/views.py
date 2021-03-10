@@ -1,6 +1,6 @@
 from django.shortcuts import render
-from account.models import User, Student, Faculty, Job, Course, Comment
-from .serializers import UserSerializer, UserSerializerWithToken, StudentSerializer, FacultySerializer, JobSerializer, CourseSerializer, CommentSerializer
+from account.models import Student, Faculty, Job, Course, Comment
+from .serializers import StudentSerializerWithToken, FacultySerializerWithToken, StudentSerializer, FacultySerializer, JobSerializer, CourseSerializer, CommentSerializer
 from rest_framework import generics, permissions, status
 from django.http import HttpResponseRedirect
 from django.contrib.auth.models import User
@@ -16,16 +16,24 @@ from rest_framework.views import APIView
 
 
 @api_view(['GET'])
-def current_user(request):
+def current_student(request):
     """
     Determine the current user by their token, and return their data
     """
 
-    serializer = UserSerializer(request.user)
+    serializer = StudentSerializer(request.user)
+    return Response(serializer.data)
+
+def current_faculty(request):
+    """
+    Determine the current user by their token, and return their data
+    """
+
+    serializer = FacultySerializer(request.user)
     return Response(serializer.data)
 
 
-class UserList(APIView):
+class StudentList(APIView):
     """
     Create a new user. It's called 'UserList' because normally we'd have a get
     method here too, for retrieving a list of all User objects.
@@ -34,21 +42,36 @@ class UserList(APIView):
     permission_classes = (permissions.AllowAny,)
 
     def post(self, request, format=None):
-        serializer = UserSerializerWithToken(data=request.data)
+        serializer = StudentSerializerWithToken(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class FacultyList(APIView):
+    """
+    Create a new user. It's called 'UserList' because normally we'd have a get
+    method here too, for retrieving a list of all User objects.
+    """
+
+    permission_classes = (permissions.AllowAny,)
+
+    def post(self, request, format=None):
+        serializer = FacultySerializerWithToken(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class StudentList(generics.ListCreateAPIView):
-    queryset = Student.objects.all()
-    serializer_class = StudentSerializer
+# class StudentList(generics.ListCreateAPIView):
+#     queryset = Student.objects.all()
+#     serializer_class = StudentSerializer
 
 
-class FacultyList(generics.ListCreateAPIView):
-    queryset = Faculty.objects.all()
-    serializer_class = FacultySerializer
+# class FacultyList(generics.ListCreateAPIView):
+#     queryset = Faculty.objects.all()
+#     serializer_class = FacultySerializer
 
 
 class JobList(generics.ListCreateAPIView):

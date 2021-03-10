@@ -33,7 +33,7 @@ class Job(models.Model):
     def __repr__(self):
         return "{0} - {1} - {2}".format(self.id, self.description)
 
-class Student(models.Model):
+class Student(AbstractUser):
     major = models.CharField(max_length=50, default="")
     GPA = models.FloatField(default=0, blank=True, null=True)
     # courses = ArrayField(models.CharField(max_length=50, blank=True))
@@ -46,6 +46,7 @@ class Student(models.Model):
     resume_pdf = models.FileField(upload_to='pdf', null=True, blank=True)
     transcript = models.FileField(upload_to='pdf', null=True, blank=True)
     comments_recv = models.ManyToManyField('Comment', default=0, blank=True)
+    password = models.CharField(max_length=150, default="")
 
     def __repr__(self):
         return "{0} - {1} - {2}".format(self.id, self.major, self.GPA)
@@ -60,14 +61,14 @@ class Faculty(models.Model):
     def __repr__(self):
         return "{0} - {1}".format(self.id, self.department)
 
-class User(AbstractUser):
-    # User Login Information
-    is_student = models.ForeignKey(Student, on_delete=models.CASCADE, null=True)
-    is_faculty = models.ForeignKey(Faculty, on_delete=models.CASCADE, null=True)
-    email = models.EmailField(unique=True)
+# class User(AbstractUser):
+#     # User Login Information
+#     is_student = models.ForeignKey(Student, on_delete=models.CASCADE, null=True)
+#     is_faculty = models.ForeignKey(Faculty, on_delete=models.CASCADE, null=True)
+#     email = models.EmailField(unique=True)
 
-    def __repr__(self):
-        return "{0} - {1}".format(self.id, self.email)
+#     def __repr__(self):
+#         return "{0} - {1}".format(self.id, self.email)
 
 
 

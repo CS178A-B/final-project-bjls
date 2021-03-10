@@ -1,12 +1,13 @@
 from django.urls import path
-from .views import current_user, UserList, StudentList, FacultyList, JobList, CourseList
+from .views import current_student, current_faculty, StudentList, FacultyList, JobList, CourseList
 from rest_framework_jwt.views import obtain_jwt_token
 
 app_name = 'api'
 
 urlpatterns = [
-    path('api/user/', UserList.as_view(), name='api_user'),
-    path('api/current_user/', current_user),
+    # path('api/user/', UserList.as_view(), name='api_user'),
+    path('api/current_student/', current_student),
+    path('api/current_faculty/', current_faculty),
     path('api/token-auth/', obtain_jwt_token),
     path('api/student/', StudentList.as_view(), name='api_student'),
     path('api/faculty/', FacultyList.as_view(), name='api_faculty'),
