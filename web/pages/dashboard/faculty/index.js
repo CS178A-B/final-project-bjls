@@ -1,12 +1,17 @@
 import React, { createRef, useEffect, useRef, useState } from "react";
-import styles from "../../styles/pages/Dashboard.module.css";
-import NavBar from "../../components/NavBar";
-import ApplicantCard from "../../components/ApplicantCard";
-import { Container, Grid, Typography } from "@material-ui/core";
+import styles from "../../../styles/pages/Dashboard.module.css";
+import NavBar from "../../../components/NavBar";
+import ApplicantCard from "../../../components/ApplicantCard";
+import {
+    CircularProgress,
+    Container,
+    Grid,
+    Typography,
+} from "@material-ui/core";
 
 // import ApplyPopover from "../../components/ApplyPopover";
-import mockdata from "../../src/MockJob";
-import PostJobDialog from "../../components/PostJobDialog";
+import mockdata from "../../../src/MockJob";
+import PostJobDialog from "../../../components/PostJobDialog";
 import axios from "axios";
 
 import { useRouter } from "next/router";
@@ -14,7 +19,7 @@ import { useRouter } from "next/router";
 export default function DashBoard({ userInfo }) {
     const router = useRouter();
     const [logedIn, setLogedIn] = useState(true);
-    const [jobData, setJobData] = useState(mockdata);
+    const [jobData, setJobData] = useState();
     // const [postOpen, setPostOpen] = useState(false);
 
     const checkGreeting = () => {
@@ -49,9 +54,11 @@ export default function DashBoard({ userInfo }) {
                 .then((r) => {
                     console.log(r);
                     setJobData(r.data);
+                    setJobData(mockdata);
                 })
                 .catch((e) => {
                     console.log(e.response);
+                    setJobData(mockdata);
                 });
         }
 
@@ -101,7 +108,7 @@ export default function DashBoard({ userInfo }) {
                             );
                         })
                     ) : (
-                        <div>Loading</div>
+                        <CircularProgress />
                     )}
                 </Grid>
 

@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
         height: theme.spacing(10),
     },
     descriptionPaper: {
-        height: theme.spacing(10),
+        height: theme.spacing(18),
         padding: theme.spacing(2),
     },
     middlePaper: {
@@ -91,9 +91,12 @@ const CommentsItem = (title, description) => {
 
 function ProfilePage({ userData }) {
     const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+    const [resumePDF, setResumePDF] = useState();
+    const [transcriptPDF, setTranscriptPDF] = useState();
     const classes = useStyles();
     const [userInfo, setUserInfo] = useState({
-        name: "NaN",
+        firstname: "NaN",
+        lastname: "NaN",
         major: "NaN",
         department: "BCOE",
         school: "University of California, Riverside",
@@ -135,31 +138,51 @@ function ProfilePage({ userData }) {
             </div>
             <Container maxWidth="xl">
                 <Grid container spacing={5}>
-                    <Grid container item xs={10} spacing={4}>
+                    <Grid container item xs={12} spacing={4}>
                         <Grid item xs={1}>
                             <Avatar className={classes.profilePic} />
                         </Grid>
                         <Grid item xs={3}>
                             {updateState ? (
-                                <TextField
-                                    size="small"
-                                    label="Name"
-                                    value={userInfo.name}
-                                    onChange={(e) => {
-                                        setUserInfo({
-                                            ...userInfo,
-                                            name: e.target.value,
-                                        });
-                                    }}
-                                ></TextField>
+                                <div>
+                                    <TextField
+                                        style={{ padding: "8px" }}
+                                        size="small"
+                                        label="First Name"
+                                        value={userInfo.firstname}
+                                        onChange={(e) => {
+                                            setUserInfo({
+                                                ...userInfo,
+                                                firstname: e.target.value,
+                                            });
+                                        }}
+                                    ></TextField>
+                                    <TextField
+                                        style={{ padding: "8px" }}
+                                        size="small"
+                                        label="Last Name"
+                                        value={userInfo.lastname}
+                                        onChange={(e) => {
+                                            setUserInfo({
+                                                ...userInfo,
+                                                lastname: e.target.value,
+                                            });
+                                        }}
+                                    ></TextField>
+                                </div>
                             ) : (
                                 <Typography variant="h6" component="h2">
-                                    {userInfo ? userInfo.name : "NaN"}
+                                    {userInfo
+                                        ? userInfo.firstname +
+                                          " " +
+                                          userInfo.lastname
+                                        : "NaN"}
                                 </Typography>
                             )}
 
                             {updateState ? (
                                 <TextField
+                                    fullWidth
                                     size="small"
                                     label="School"
                                     value={userInfo.school}
@@ -179,6 +202,7 @@ function ProfilePage({ userData }) {
                             {updateState ? (
                                 <TextField
                                     size="small"
+                                    fullWidth
                                     label="Department"
                                     value={userInfo.department}
                                     onChange={(e) => {
@@ -196,6 +220,7 @@ function ProfilePage({ userData }) {
 
                             {updateState ? (
                                 <TextField
+                                    fullWidth
                                     size="small"
                                     label="GPA"
                                     value={userInfo.gpa}
@@ -213,12 +238,13 @@ function ProfilePage({ userData }) {
                             )}
                             {updateState ? (
                                 <TextField
+                                    fullWidth
                                     size="small"
                                     label="Expcted dates"
                                     value={userInfo.expDate}
                                     onChange={(e) => {
                                         setUserInfo({
-                                            ...UserInfo,
+                                            ...userInfo,
                                             expDate: e.target.value,
                                         });
                                     }}
@@ -230,21 +256,40 @@ function ProfilePage({ userData }) {
                             )}
                         </Grid>
                         <Grid item xs={8}>
-                            <Paper className={classes.descriptionPaper}>
-                                <Typography
-                                    variant="body2"
-                                    component="p"
-                                    value={userInfo.description}
-                                    onChange={(e) => {
-                                        setUserInfo({
-                                            ...userInfo,
-                                            description: e.target.value,
-                                        });
-                                    }}
-                                >
-                                    Description: {userInfo.description}
-                                </Typography>
-                            </Paper>
+                            {updateState ? (
+                                <Paper className={classes.descriptionPaper}>
+                                    <TextField
+                                        fullWidth
+                                        multiline
+                                        rows={4}
+                                        variant="filled"
+                                        label="Description"
+                                        value={userInfo.description}
+                                        onChange={(e) => {
+                                            setUserInfo({
+                                                ...userInfo,
+                                                description: e.target.value,
+                                            });
+                                        }}
+                                    ></TextField>
+                                </Paper>
+                            ) : (
+                                <Paper className={classes.descriptionPaper}>
+                                    <Typography
+                                        variant="body2"
+                                        component="p"
+                                        value={userInfo.description}
+                                        onChange={(e) => {
+                                            setUserInfo({
+                                                ...userInfo,
+                                                description: e.target.value,
+                                            });
+                                        }}
+                                    >
+                                        Description: {userInfo.description}
+                                    </Typography>
+                                </Paper>
+                            )}
                         </Grid>
                         <Grid item xs={4}>
                             <Paper className={classes.middlePaper}>
@@ -290,40 +335,48 @@ function ProfilePage({ userData }) {
                                 <Typography variant="h6" component="h2">
                                     Resume/CV
                                 </Typography>
-                                <Dropzone
-                                    onDrop={(acceptedFiles) =>
-                                        console.log(acceptedFiles)
-                                    }
-                                >
-                                    {({ getRootProps, getInputProps }) => (
-                                        <section>
-                                            <div {...getRootProps()}>
-                                                <input {...getInputProps()} />
-                                                <Paper>
-                                                    <Typography
-                                                        className={
-                                                            classes.middlePaperDropZone
-                                                        }
-                                                        variant="body2"
-                                                        color="textSecondary"
-                                                        component="h2"
-                                                        gutterBottom
-                                                    >
-                                                        Drop some files here, or
-                                                        click to select files
-                                                    </Typography>
-                                                </Paper>
-                                            </div>
-                                        </section>
+                                <Dropzone accept={"image/*, .pdf"}>
+                                    {({
+                                        acceptedFiles,
+                                        getRootProps,
+                                        getInputProps,
+                                    }) => (
+                                        <div {...getRootProps({})}>
+                                            <input {...getInputProps()} />
+                                            {acceptedFiles.length !== 0 ? (
+                                                setResumePDF(acceptedFiles[0])
+                                            ) : (
+                                                <></>
+                                            )}
+                                            <Paper>
+                                                <Typography
+                                                    className={
+                                                        classes.middlePaperDropZone
+                                                    }
+                                                    variant="body2"
+                                                    color="textSecondary"
+                                                    component="h2"
+                                                    gutterBottom
+                                                >
+                                                    {resumePDF
+                                                        ? resumePDF.path
+                                                        : "Drop some files here, or click to select files"}
+                                                </Typography>
+                                            </Paper>
+                                        </div>
                                     )}
                                 </Dropzone>
-                                <Button
-                                    variant="contained"
-                                    color="secondary"
-                                    className={classes.middlePaperButton}
-                                >
-                                    Upload
-                                </Button>
+                                {resumePDF ? (
+                                    <Button
+                                        variant="contained"
+                                        color="secondary"
+                                        className={classes.middlePaperButton}
+                                    >
+                                        Upload
+                                    </Button>
+                                ) : (
+                                    <></>
+                                )}
                             </Paper>
                         </Grid>
                         <Grid item xs={4}>
@@ -331,40 +384,50 @@ function ProfilePage({ userData }) {
                                 <Typography variant="h6" component="h2">
                                     Transcript
                                 </Typography>
-                                <Dropzone
-                                    onDrop={(acceptedFiles) =>
-                                        console.log(acceptedFiles)
-                                    }
-                                >
-                                    {({ getRootProps, getInputProps }) => (
-                                        <section>
-                                            <div {...getRootProps()}>
-                                                <input {...getInputProps()} />
-                                                <Paper>
-                                                    <Typography
-                                                        className={
-                                                            classes.middlePaperDropZone
-                                                        }
-                                                        variant="body2"
-                                                        color="textSecondary"
-                                                        component="h2"
-                                                        gutterBottom
-                                                    >
-                                                        Drop some files here, or
-                                                        click to select files
-                                                    </Typography>
-                                                </Paper>
-                                            </div>
-                                        </section>
+                                <Dropzone accept={"image/*, .pdf"}>
+                                    {({
+                                        acceptedFiles,
+                                        getRootProps,
+                                        getInputProps,
+                                    }) => (
+                                        <div {...getRootProps({})}>
+                                            <input {...getInputProps()} />
+                                            {acceptedFiles.length !== 0 ? (
+                                                setTranscriptPDF(
+                                                    acceptedFiles[0]
+                                                )
+                                            ) : (
+                                                <></>
+                                            )}
+                                            <Paper>
+                                                <Typography
+                                                    className={
+                                                        classes.middlePaperDropZone
+                                                    }
+                                                    variant="body2"
+                                                    color="textSecondary"
+                                                    component="h2"
+                                                    gutterBottom
+                                                >
+                                                    {transcriptPDF
+                                                        ? transcriptPDF.path
+                                                        : "Drop some files here, or click to select files"}
+                                                </Typography>
+                                            </Paper>
+                                        </div>
                                     )}
                                 </Dropzone>
-                                <Button
-                                    variant="contained"
-                                    color="secondary"
-                                    className={classes.middlePaperButton}
-                                >
-                                    Upload
-                                </Button>
+                                {transcriptPDF ? (
+                                    <Button
+                                        variant="contained"
+                                        color="secondary"
+                                        className={classes.middlePaperButton}
+                                    >
+                                        Upload
+                                    </Button>
+                                ) : (
+                                    <></>
+                                )}
                             </Paper>
                         </Grid>
                         <Grid item xs={12}>
@@ -375,7 +438,6 @@ function ProfilePage({ userData }) {
                                 <div className={classes.middlePaperPlaceholder}>
                                     {userInfo ? (
                                         userInfo.comments.map((item, index) => {
-                                            console.log("hello1");
                                             <Accordion>
                                                 <AccordionSummary
                                                     expandIcon={
@@ -412,7 +474,7 @@ function ProfilePage({ userData }) {
                 <Button
                     size="medium"
                     variant="contained"
-                    color="secondary"
+                    color={updateState ? "primary" : "secondary"}
                     className={classes.button}
                     onClick={() => {
                         setUpdateState(!updateState);

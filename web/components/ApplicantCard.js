@@ -5,10 +5,19 @@ import {
     CardActionArea,
     CardActions,
     CardContent,
+    Dialog,
     Divider,
     Grid,
     Typography,
 } from "@material-ui/core";
+
+const CheckApplicantsDialog = () => {
+    return(
+        <Dialog>
+            
+        </Dialog>
+    )
+};
 
 const ApplicantCard = ({
     name,

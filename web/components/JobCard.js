@@ -13,6 +13,7 @@ const JobCard = ({
     name,
     description,
     poster,
+    index,
     handleApplyClick,
     handleDetailClick,
 }) => {
@@ -44,7 +45,9 @@ const JobCard = ({
                     <Button
                         size="small"
                         color="secondary"
-                        onClick={handleApplyClick}
+                        onClick={(event) => {
+                            handleApplyClick(event, index);
+                        }}
                     >
                         Apply
                     </Button>

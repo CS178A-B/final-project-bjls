@@ -71,7 +71,7 @@ export default function ProfileDrawer({
                                 variant="h5"
                                 color="textPrimary"
                             >
-                                B
+                                Biqian Cheng
                             </Typography>
                         }
                         secondary={
@@ -79,7 +79,7 @@ export default function ProfileDrawer({
                                 <Typography
                                     component="span"
                                     variant="body2"
-                                    color="textSecondry"
+                                    color="textSecondary"
                                 >
                                     Seeking
                                     <IconButton

@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
-import styles from "../../styles/pages/Dashboard.module.css";
-import NavBar from "../../components/NavBar";
-import JobCard from "../../components/JobCard";
-import JobSingleLineList from "../../components/JobSingleLineList";
+import styles from "../../../styles/pages/Dashboard.module.css";
+import NavBar from "../../../components/NavBar";
+import JobCard from "../../../components/JobCard";
+import JobSingleLineList from "../../../components/JobSingleLineList";
 import {
     CircularProgress,
     Container,
@@ -10,8 +10,8 @@ import {
     Typography,
 } from "@material-ui/core";
 
-import ApplyJobPopover from "../../components/ApplyJobPopover";
-import mockdata from "../../src/MockJob";
+import ApplyJobPopover from "../../../components/ApplyJobPopover";
+import mockdata from "../../../src/MockJob";
 
 import axios from "axios";
 
@@ -26,10 +26,12 @@ export default function DashBoard() {
     const [anchorEl, setAnchorEl] = useState(null);
     const [popoverId, setPopoverId] = useState(null);
 
-    const handleApplyClick = (event) => {
+    const handleApplyClick = (event, index) => {
+        setPopoverId(index);
         setAnchorEl(event.currentTarget);
     };
     const handleApplyClose = () => {
+        setPopoverId(null);
         setAnchorEl(null);
     };
 
@@ -83,6 +85,7 @@ export default function DashBoard() {
             .catch((e) => {
                 console.log(e.response);
             });
+        setJobData(mockdata);
     }, []);
 
     return (
@@ -115,7 +118,7 @@ export default function DashBoard() {
                 )}
 
                 <Grid container justify="center" spacing={5}>
-                    <Grid item xs={12} style={{ paddingTop: "15rem" }}>
+                    <Grid item xs={12} style={{ paddingTop: "5rem" }}>
                         <Typography variant="h4" component="h2" gutterBottom>
                             All Available Jobs
                         </Typography>
@@ -124,25 +127,29 @@ export default function DashBoard() {
                     {jobData ? (
                         jobData.map((item, index) => {
                             return (
-                                <>
-                                    <Grid item xs={4}>
-                                        <JobCard
-                                            name={item.name}
-                                            description={item.description}
-                                            poster={item.poster}
-                                            handleApplyClick={handleApplyClick}
-                                        />
-                                        <ApplyJobPopover
-                                            data={item}
-                                            anchorEl={anchorEl}
-                                            handleClose={handleApplyClose}
-                                        />
-                                    </Grid>
-                                </>
+                                <Grid key={index} item xs={4}>
+                                    <JobCard
+                                        key={index}
+                                        name={item.name}
+                                        description={item.description}
+                                        poster={item.poster}
+                                        index={index}
+                                        handleApplyClick={handleApplyClick}
+                                    />
+                                </Grid>
                             );
                         })
                     ) : (
                         <CircularProgress />
+                    )}
+                    {popoverId ? (
+                        <ApplyJobPopover
+                            data={jobData[popoverId]}
+                            anchorEl={anchorEl}
+                            handleClose={handleApplyClose}
+                        />
+                    ) : (
+                        <></>
                     )}
                 </Grid>
             </Container>

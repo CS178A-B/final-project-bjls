@@ -18,10 +18,12 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const JobSingelLineList = ({ data }) => {
+const JobSingelLineList = ({ data, index }) => {
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = useState(null);
-    const handleApplyClick = (event) => {
+    const [popoverId, setPopoverId] = useState(null);
+    const handleApplyClick = (event, index) => {
+        setPopoverId(index);
         setAnchorEl(event.currentTarget);
     };
     const handleApplyClose = () => {
@@ -31,26 +33,35 @@ const JobSingelLineList = ({ data }) => {
     return (
         <React.Fragment>
             <List className={classes.flexContainer}>
-                {data.map((item) => {
-                    return (
-                        <ListItem className={classes.ListCard}>
-                            <ApplyJobPopover
-                                anchorEl={anchorEl}
-                                handleClose={handleApplyClose}
-                                data={item}
-                            />
-                            <JobCard
-                                // className={classes.card}
-                                key={item.name}
-                                name={item.name}
-                                description={item.description}
-                                poster={item.poster}
-                                handleApplyClick={handleApplyClick}
-                            />
-                        </ListItem>
-                    );
-                })}
+                {data ? (
+                    data.map((item, index) => {
+                        return (
+                            <ListItem key={index} className={classes.ListCard}>
+                                <JobCard
+                                    // className={classes.card}
+                                    key={index}
+                                    name={item.name}
+                                    index={index}
+                                    description={item.description}
+                                    poster={item.poster}
+                                    handleApplyClick={handleApplyClick}
+                                />
+                            </ListItem>
+                        );
+                    })
+                ) : (
+                    <></>
+                )}
             </List>
+            {popoverId ? (
+                <ApplyJobPopover
+                    data={data[popoverId]}
+                    anchorEl={anchorEl}
+                    handleClose={handleApplyClose}
+                />
+            ) : (
+                <></>
+            )}
         </React.Fragment>
     );
 };

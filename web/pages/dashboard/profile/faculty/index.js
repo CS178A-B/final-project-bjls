@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
         height: theme.spacing(10),
     },
     descriptionPaper: {
-        height: theme.spacing(10),
+        height: theme.spacing(18),
         padding: theme.spacing(2),
     },
     middlePaper: {
@@ -91,8 +91,9 @@ const CommentsItem = (title, description) => {
 function ProfilePage({ userData }) {
     const { enqueueSnackbar, closeSnackbar } = useSnackbar();
     const classes = useStyles();
-    const [userProfile, setUserProfile] = useState({
-        name: "NaN",
+    const [userInfo, setUserInfo] = useState({
+        firstname: "NaN",
+        lastname: "NaN",
         major: "NaN",
         department: "BCOE",
         school: "University of California, Riverside",
@@ -121,7 +122,7 @@ function ProfilePage({ userData }) {
 
     useEffect(() => {
         if (userData) {
-            setUserProfile(userData);
+            setUserInfo(userData);
         }
     }, [userData]);
     return (
@@ -137,117 +138,121 @@ function ProfilePage({ userData }) {
             </div>
             <Container maxWidth="xl">
                 <Grid container spacing={5}>
-                    <Grid container item xs={10} spacing={4}>
+                    <Grid container item xs={12} spacing={4}>
                         <Grid item xs={1}>
                             <Avatar className={classes.profilePic} />
                         </Grid>
                         <Grid item xs={3}>
                             {updateState ? (
-                                <TextField
-                                    size="small"
-                                    label="Name"
-                                    value={userProfile.name}
-                                    onChange={(e) => {
-                                        setUserProfile({
-                                            ...userProfile,
-                                            name: e.target.value,
-                                        });
-                                    }}
-                                ></TextField>
+                                <div>
+                                    <TextField
+                                        style={{ padding: "8px" }}
+                                        size="small"
+                                        label="First Name"
+                                        value={userInfo.firstname}
+                                        onChange={(e) => {
+                                            setUserInfo({
+                                                ...userInfo,
+                                                firstname: e.target.value,
+                                            });
+                                        }}
+                                    ></TextField>
+                                    <TextField
+                                        style={{ padding: "8px" }}
+                                        size="small"
+                                        label="Last Name"
+                                        value={userInfo.lastname}
+                                        onChange={(e) => {
+                                            setUserInfo({
+                                                ...userInfo,
+                                                lastname: e.target.value,
+                                            });
+                                        }}
+                                    ></TextField>
+                                </div>
                             ) : (
                                 <Typography variant="h6" component="h2">
-                                    {userProfile ? userProfile.name : "NaN"}
+                                    {userInfo
+                                        ? userInfo.firstname +
+                                          " " +
+                                          userInfo.lastname
+                                        : "NaN"}
                                 </Typography>
                             )}
 
                             {updateState ? (
                                 <TextField
+                                    fullWidth
                                     size="small"
                                     label="School"
-                                    value={userProfile.school}
+                                    value={userInfo.school}
                                     onChange={(e) => {
-                                        setUserProfile({
-                                            ...userProfile,
+                                        setUserInfo({
+                                            ...userInfo,
                                             school: e.target.value,
                                         });
                                     }}
                                 ></TextField>
                             ) : (
                                 <Typography variant="body2" component="p">
-                                    {userProfile.school}
+                                    {userInfo.school}
                                 </Typography>
                             )}
 
                             {updateState ? (
                                 <TextField
+                                    fullWidth
                                     size="small"
                                     label="Department"
-                                    value={userProfile.department}
+                                    value={userInfo.department}
                                     onChange={(e) => {
-                                        setUserProfile({
-                                            ...userProfile,
+                                        setUserInfo({
+                                            ...userInfo,
                                             department: e.target.value,
                                         });
                                     }}
                                 ></TextField>
                             ) : (
                                 <Typography variant="body2" component="p">
-                                    Department: {userProfile.department}
-                                </Typography>
-                            )}
-
-                            {updateState ? (
-                                <TextField
-                                    size="small"
-                                    label="GPA"
-                                    value={userProfile.gpa}
-                                    onChange={(e) => {
-                                        setUserProfile({
-                                            ...userProfile,
-                                            gpa: e.target.value,
-                                        });
-                                    }}
-                                ></TextField>
-                            ) : (
-                                <Typography variant="body2" component="p">
-                                    GPA: {userProfile.gpa}
-                                </Typography>
-                            )}
-                            {updateState ? (
-                                <TextField
-                                    size="small"
-                                    label="Expcted dates"
-                                    value={userProfile.expDate}
-                                    onChange={(e) => {
-                                        setUserProfile({
-                                            ...userProfile,
-                                            expDate: e.target.value,
-                                        });
-                                    }}
-                                ></TextField>
-                            ) : (
-                                <Typography variant="body2" component="p">
-                                    Expected graduate dates:{" "}
-                                    {userProfile.expDate}
+                                    Department: {userInfo.department}
                                 </Typography>
                             )}
                         </Grid>
                         <Grid item xs={8}>
-                            <Paper className={classes.descriptionPaper}>
-                                <Typography
-                                    variant="body2"
-                                    component="p"
-                                    value={userProfile.description}
-                                    onChange={(e) => {
-                                        setUserProfile({
-                                            ...userProfile,
-                                            description: e.target.value,
-                                        });
-                                    }}
-                                >
-                                    Description: {userProfile.description}
-                                </Typography>
-                            </Paper>
+                            {updateState ? (
+                                <Paper className={classes.descriptionPaper}>
+                                    <TextField
+                                        fullWidth
+                                        multiline
+                                        rows={4}
+                                        variant="filled"
+                                        label="Description"
+                                        value={userInfo.description}
+                                        onChange={(e) => {
+                                            setUserInfo({
+                                                ...userInfo,
+                                                description: e.target.value,
+                                            });
+                                        }}
+                                    ></TextField>
+                                </Paper>
+                            ) : (
+                                <Paper className={classes.descriptionPaper}>
+                                    <Typography
+                                        variant="body2"
+                                        component="p"
+                                        value={userInfo.description}
+                                        onChange={(e) => {
+                                            setUserInfo({
+                                                ...userInfo,
+                                                description: e.target.value,
+                                            });
+                                        }}
+                                    >
+                                        Description: {userInfo.description}
+                                    </Typography>
+                                </Paper>
+                            )}
                         </Grid>
                         <Grid item xs={8}>
                             <Paper className={classes.middlePaper}>
@@ -255,8 +260,8 @@ function ProfilePage({ userData }) {
                                     Comments:
                                 </Typography>
                                 <div className={classes.middlePaperPlaceholder}>
-                                    {userProfile ? (
-                                        userProfile.comments.map((item) => {
+                                    {userInfo ? (
+                                        userInfo.comments.map((item) => {
                                             CommentsItem(
                                                 item.course,
                                                 item.comment
@@ -284,8 +289,8 @@ function ProfilePage({ userData }) {
                                             classes.middlePaperPlaceholder
                                         }
                                     >
-                                        {userProfile ? (
-                                            userProfile.classes.map((item) => {
+                                        {userInfo ? (
+                                            userInfo.classes.map((item) => {
                                                 return (
                                                     <React.Fragment>
                                                         <ListSubheader>{`${item.year} ${item.term}`}</ListSubheader>
@@ -323,7 +328,7 @@ function ProfilePage({ userData }) {
                 <Button
                     size="medium"
                     variant="contained"
-                    color="secondary"
+                    color={updateState ? "secondary" : "primary"}
                     className={classes.button}
                     onClick={() => {
                         setUpdateState(!updateState);
