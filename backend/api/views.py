@@ -33,6 +33,20 @@ class UserViewSet(viewsets.ModelViewSet):
     permissions_classes = (permissions.UpdateOwnProfile,)
     serializer_class = UserSerializerWithToken
 
+    # def create(self, request, *args, **kwargs):
+    #     user_data = request.data
+
+    #     # ('id', 'token', 'first_name', 'last_name', 'username', 'password', 'email', 'is_student', 'is_faculty')
+    #     # new_user = User.objects.create(
+            
+    #     # )
+    #     if (user_data['is_student']):
+    #         new_student = Student(user=new_user)
+
+
+    # def perform_create(self,serializer):
+    #     serializer.save(user=self.request.user)
+
 # class UserList(APIView):
 #     """
 #     Create a new user. It's called 'UserList' because normally we'd have a get
@@ -76,3 +90,13 @@ class CourseViewSet(viewsets.ModelViewSet):
 class CommentViewSet(viewsets.ModelViewSet):
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
+
+class ApplicationViewSet(viewsets.ModelViewSet):
+    queryset = Comment.objects.all()
+    serializer_class = CommentSerializer
+
+class StudentCourseViewSet(viewsets.ModelViewSet):
+    queryset = Comment.objects.all()
+    serializer_class = CommentSerializer
+
+    

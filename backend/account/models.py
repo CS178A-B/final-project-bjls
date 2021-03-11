@@ -60,7 +60,7 @@ class Student(models.Model):
     resume_pdf = models.FileField(upload_to='pdf', null=True, blank=True)
     transcript = models.FileField(upload_to='pdf', null=True, blank=True)
     comments_recv = models.ManyToManyField('Comment', default=0, blank=True)
-    user = models.OneToOneField('User', on_delete=models.CASCADE, primary_key=True, default=0)
+    user = models.OneToOneField('User', related_name='student', on_delete=models.CASCADE, primary_key=True, default=0)
 
     def __repr__(self):
         return "{0} - {1} - {2}".format(self.id, self.major, self.GPA)
@@ -70,7 +70,7 @@ class Faculty(models.Model):
     profile_completeness = models.IntegerField(default=0)
     courses_taught = models.ManyToManyField(Course, default=0, blank=True)
     comments_made = models.ManyToManyField('Comment', default=0, blank=True)
-    user = models.OneToOneField('User', on_delete=models.CASCADE, primary_key=True, default=0)
+    user = models.OneToOneField('User', related_name='faculty', on_delete=models.CASCADE, primary_key=True, default=0)
 
     def __repr__(self):
         return "{0} - {1}".format(self.id, self.department)
