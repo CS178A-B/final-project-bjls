@@ -28,6 +28,11 @@ def current_user(request):
     serializer = UserSerializer(request.user)
     return Response(serializer.data)
 
+class UserRegisterViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    permissions_classes = (permissions.UpdateOwnProfile,)
+    serializer_class = UserSerializer
+
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     permissions_classes = (permissions.UpdateOwnProfile,)
@@ -99,4 +104,3 @@ class StudentCourseViewSet(viewsets.ModelViewSet):
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
 
-    
