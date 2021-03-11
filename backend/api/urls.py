@@ -1,15 +1,27 @@
 from django.urls import path
-from .views import current_user, UserList, StudentList, FacultyList, JobList, CourseList
+from django.conf.urls import url, include
+from .views import current_user, UserViewSet, StudentViewSet, FacultyViewSet, \
+    JobViewSet, CourseViewSet, CommentViewSet
 from rest_framework_jwt.views import obtain_jwt_token
+
+from rest_framework.routers import DefaultRouter
+
+
+router = DefaultRouter()
+
+router.register('user', UserViewSet)
+router.register('student', StudentViewSet)
+router.register('faculty', FacultyViewSet)
+router.register('job', JobViewSet)
+router.register('course', CourseViewSet)
+router.register('comment', CommentViewSet)
 
 app_name = 'api'
 
 urlpatterns = [
-    path('api/user/', UserList.as_view(), name='api_user'),
-    path('api/current_user/', current_user),
-    path('api/token-auth/', obtain_jwt_token),
-    path('api/student/', StudentList.as_view(), name='api_student'),
-    path('api/faculty/', FacultyList.as_view(), name='api_faculty'),
-    path('api/course/', CourseList.as_view(), name='api_course'),
-    path('api/job/', JobList.as_view(), name='api_job')
+    # path('user/', UserList.as_view(), name='api_user'),
+    path('current_user/', current_user),
+    path('token-auth/', obtain_jwt_token),
+    url(r'', include(router.urls))
+
 ]

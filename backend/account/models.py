@@ -77,8 +77,8 @@ class Faculty(models.Model):
 
 class User(AbstractUser):
     # User Login Information
-    is_student = models.BooleanField(Student, default=False)
-    is_faculty = models.BooleanField(Faculty, default=False)
+    is_student = models.BooleanField(default=False)
+    is_faculty = models.BooleanField(default=False)
     
 
     def __repr__(self):

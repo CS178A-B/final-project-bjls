@@ -4,6 +4,7 @@ from .serializers import UserSerializer, JobSerializer, StudentSerializer, Facul
 
 # Lead Viewset
 
+
 class JobViewSet(viewsets.ModelViewSet):
     queryset = Job.objects.all()
     permission_classes = [

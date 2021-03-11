@@ -1,12 +1,16 @@
 from django.shortcuts import render
 from account.models import User, Student, Faculty, Job, Course, Comment
 from .serializers import UserSerializer, UserSerializerWithToken, StudentSerializer, FacultySerializer, JobSerializer, CourseSerializer, CommentSerializer
-from rest_framework import generics, permissions, status
+from rest_framework import generics, status
 from django.http import HttpResponseRedirect
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User as AUser
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
+
+from rest_framework import viewsets
+
+from . import permissions
 
 
 # # Create your views here.
@@ -24,41 +28,51 @@ def current_user(request):
     serializer = UserSerializer(request.user)
     return Response(serializer.data)
 
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    permissions_classes = (permissions.UpdateOwnProfile,)
+    serializer_class = UserSerializerWithToken
 
-class UserList(APIView):
-    """
-    Create a new user. It's called 'UserList' because normally we'd have a get
-    method here too, for retrieving a list of all User objects.
-    """
+# class UserList(APIView):
+#     """
+#     Create a new user. It's called 'UserList' because normally we'd have a get
+#     method here too, for retrieving a list of all User objects.
+#     """
 
-    permission_classes = (permissions.AllowAny,)
+#     permission_classes = (permissions.AllowAny,)
 
-    def post(self, request, format=None):
-        serializer = UserSerializerWithToken(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+#     def post(self, request, format=None):
+#         serializer = UserSerializerWithToken(data=request.data)
+#         if serializer.is_valid():
+#             serializer.save()
+#             return Response(serializer.data, status=status.HTTP_201_CREATED)
+#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+#     def get(self, request, format=None):
+#         data = {"hi" : "hello"}
+#         return Response(data, status=status.HTTP_201_CREATED)
+    
 
 
-class StudentList(generics.ListCreateAPIView):
+
+class StudentViewSet(viewsets.ModelViewSet):
     queryset = Student.objects.all()
+
     serializer_class = StudentSerializer
 
 
-class FacultyList(generics.ListCreateAPIView):
+class FacultyViewSet(viewsets.ModelViewSet):
     queryset = Faculty.objects.all()
     serializer_class = FacultySerializer
 
 
-class JobList(generics.ListCreateAPIView):
+class JobViewSet(viewsets.ModelViewSet):
     queryset = Job.objects.all()
     serializer_class = JobSerializer
 
-class CourseList(generics.ListCreateAPIView):
+class CourseViewSet(viewsets.ModelViewSet):
     queryset = Course.objects.all()
     serializer_class = CourseSerializer
 
-class CommentList(generics.ListCreateAPIView):
+class CommentViewSet(viewsets.ModelViewSet):
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
