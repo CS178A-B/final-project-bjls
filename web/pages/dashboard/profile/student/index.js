@@ -23,6 +23,7 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Dropzone from "react-dropzone";
 import { useSnackbar } from "notistack";
 import NavBar from "../../../../components/NavBar";
+import Axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
     banner: {
@@ -119,6 +120,25 @@ function ProfilePage({ userData }) {
         ],
     });
     const [updateState, setUpdateState] = useState(false);
+
+    const handleUploadResume = () => {
+        if (resumePDF) {
+            axios
+                .get("http://localhost:8000/api/job", {
+                    headers: {
+                        Authorization: `JWT ${localStorage.getItem("tokenS")}`,
+                    },
+                })
+                .then((r) => {
+                    console.log(r);
+                    // router.push("/dashboard/student");
+                })
+                .catch((e) => {
+                    console.log(e.response);
+                });
+        }
+        }
+    };
 
     useEffect(() => {
         if (userData) {
