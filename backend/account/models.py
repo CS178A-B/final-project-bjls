@@ -22,6 +22,8 @@ class Comment(models.Model):
     def __repr__(self):
         return "{0} - {1} - {2}".format(self.id, self.body)
 
+
+
 class Job(models.Model):
     description = models.CharField(max_length=150)
     poster = models.ForeignKey('Faculty', on_delete=models.CASCADE, null=True)
@@ -62,6 +64,9 @@ class Student(models.Model):
     comments_recv = models.ManyToManyField('Comment', default=0, blank=True)
     user = models.OneToOneField('User', related_name='student', on_delete=models.CASCADE, primary_key=True, default=0)
 
+    def __str__(self):
+        return "{0}".format(self.user.username)
+
     def __repr__(self):
         return "{0} - {1} - {2}".format(self.id, self.major, self.GPA)
 
@@ -75,11 +80,14 @@ class Faculty(models.Model):
     def __repr__(self):
         return "{0} - {1}".format(self.id, self.department)
 
+    def __str__(self):
+        return "{0}".format(self.user.username)
+
 class User(AbstractUser):
     # User Login Information
     is_student = models.BooleanField(default=False)
     is_faculty = models.BooleanField(default=False)
-    
+
 
     def __repr__(self):
         return "{0} - {1}".format(self.id, self.email)

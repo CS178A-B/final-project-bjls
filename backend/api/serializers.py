@@ -11,9 +11,6 @@ class UserSerializer(serializers.ModelSerializer):
     student = serializers.PrimaryKeyRelatedField(many=False, read_only=True)
     faculty = serializers.PrimaryKeyRelatedField(many=False, read_only=True)
     
-    class Meta:
-        model = User
-        fields = '__all__'
     def create(self, validated_data):
         password = validated_data.pop('password', None)
         instance = self.Meta.model(**validated_data)
@@ -35,7 +32,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = '__all__'
+        fields = ('password', 'student', 'faculty')
         extra_kwargs = {'password' : {'write_only' : True}}
 
 

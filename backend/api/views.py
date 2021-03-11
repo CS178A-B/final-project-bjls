@@ -1,16 +1,17 @@
 from django.shortcuts import render
-from account.models import User, Student, Faculty, Job, Course, Comment
-from .serializers import UserSerializer, UserSerializerWithToken, StudentSerializer, FacultySerializer, JobSerializer, CourseSerializer, CommentSerializer
-from rest_framework import generics, status
+from account.models import User, Student, Faculty, Job, Course, Comment, Application, StudentCourse
+from .serializers import UserSerializer, UserSerializerWithToken, StudentSerializer, FacultySerializer, \
+    JobSerializer, CourseSerializer, CommentSerializer, StudentCourseSerializer, ApplicationSerializer
+from rest_framework import generics, status, viewsets, permissions, filters
 from django.http import HttpResponseRedirect
 from django.contrib.auth.models import User as AUser
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from rest_framework import viewsets
 
-from . import permissions
+
+from . import permissions as perm
 
 
 # # Create your views here.
@@ -30,13 +31,18 @@ def current_user(request):
 
 class UserRegisterViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
-    permissions_classes = (permissions.UpdateOwnProfile,)
+    permission_classes = (perm.UpdateOwnProfile,)
+    # permission_classes = [
+    #     permissions.AllowAny
+    # ]
+
     serializer_class = UserSerializer
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
-    permissions_classes = (permissions.UpdateOwnProfile,)
     serializer_class = UserSerializerWithToken
+    filter_backends = (filters.SearchFilter,)
+    search_fields = ('first_name', 'last_name', 'email')
 
     # def create(self, request, *args, **kwargs):
     #     user_data = request.data
@@ -88,6 +94,7 @@ class JobViewSet(viewsets.ModelViewSet):
     queryset = Job.objects.all()
     serializer_class = JobSerializer
 
+
 class CourseViewSet(viewsets.ModelViewSet):
     queryset = Course.objects.all()
     serializer_class = CourseSerializer
@@ -97,10 +104,12 @@ class CommentViewSet(viewsets.ModelViewSet):
     serializer_class = CommentSerializer
 
 class ApplicationViewSet(viewsets.ModelViewSet):
-    queryset = Comment.objects.all()
-    serializer_class = CommentSerializer
+    queryset = Application.objects.all()
+    serializer_class = ApplicationSerializer
+    filter_backends = (filters.SearchFilter,)
+    search_fields = ('student__user__first_name', 'student__user__last_name', 'student__user__email')
 
 class StudentCourseViewSet(viewsets.ModelViewSet):
-    queryset = Comment.objects.all()
-    serializer_class = CommentSerializer
+    queryset = StudentCourse.objects.all()
+    serializer_class = StudentCourseSerializer
 

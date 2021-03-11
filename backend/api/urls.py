@@ -1,7 +1,7 @@
 from django.urls import path
 from django.conf.urls import url, include
 from .views import current_user, UserViewSet, StudentViewSet, FacultyViewSet, \
-    JobViewSet, CourseViewSet, CommentViewSet,  UserRegisterViewSet
+    JobViewSet, CourseViewSet, CommentViewSet,  UserRegisterViewSet, ApplicationViewSet, StudentCourseViewSet
 from rest_framework_jwt.views import obtain_jwt_token
 
 from rest_framework.routers import DefaultRouter
@@ -16,6 +16,10 @@ router.register('job', JobViewSet)
 router.register('course', CourseViewSet)
 router.register('comment', CommentViewSet)
 router.register('registration', UserRegisterViewSet)
+
+router.register('application', ApplicationViewSet)
+router.register('studentCourse', StudentCourseViewSet)
+
 
 app_name = 'api'
 
