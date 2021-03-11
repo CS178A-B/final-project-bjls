@@ -81,8 +81,8 @@ class User(AbstractUser):
     is_faculty = models.BooleanField(default=False)
     
 
-#     def __repr__(self):
-#         return "{0} - {1}".format(self.id, self.email)
+    def __repr__(self):
+        return "{0} - {1}".format(self.id, self.email)
 
 
 

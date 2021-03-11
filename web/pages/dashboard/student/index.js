@@ -55,7 +55,7 @@ export default function DashBoard() {
     useEffect(() => {
         console.log("haha");
         if (!localStorage.getItem("tokenS")) {
-            router.push("/login");
+            router.push("/login/student");
         }
         axios
             .get("http://localhost:8000/api/current_user", {
@@ -65,7 +65,7 @@ export default function DashBoard() {
             })
             .then((r) => {
                 console.log(r);
-                setUserInfo(r.data.user);
+                setUserInfo(r.data);
             })
             .catch((e) => {
                 console.log(e.response);

@@ -24,6 +24,7 @@ import Dropzone from "react-dropzone";
 import { useSnackbar } from "notistack";
 import NavBar from "../../../../components/NavBar";
 import Axios from "axios";
+import { useRouter } from "next/router";
 
 const useStyles = makeStyles((theme) => ({
     banner: {
@@ -91,17 +92,17 @@ const CommentsItem = (title, description) => {
 // }
 
 function ProfilePage({ userData }) {
+    const router = useRouter();
     const { enqueueSnackbar, closeSnackbar } = useSnackbar();
     const [resumePDF, setResumePDF] = useState();
     const [transcriptPDF, setTranscriptPDF] = useState();
     const classes = useStyles();
     const [userInfo, setUserInfo] = useState({
-        firstname: "NaN",
-        lastname: "NaN",
-        major: "NaN",
+        firstname: "",
+        lastname: "",
+        major: "",
         department: "BCOE",
-        school: "University of California, Riverside",
-        gpa: "NaN",
+        gpa: "",
         expDate: "",
         description: "",
         courses: [
@@ -123,12 +124,11 @@ function ProfilePage({ userData }) {
 
     const handleUploadResume = () => {
         if (resumePDF) {
-            axios
-                .get("http://localhost:8000/api/job", {
-                    headers: {
-                        Authorization: `JWT ${localStorage.getItem("tokenS")}`,
-                    },
-                })
+            Axios.get("http://localhost:8000/api/student", {
+                headers: {
+                    Authorization: `JWT ${localStorage.getItem("tokenS")}`,
+                },
+            })
                 .then((r) => {
                     console.log(r);
                     // router.push("/dashboard/student");
@@ -137,17 +137,55 @@ function ProfilePage({ userData }) {
                     console.log(e.response);
                 });
         }
+    };
+
+    const handleLogout = () => {
+        if (typeof window !== "undefined") {
+            window.localStorage.removeItem("tokenS");
         }
+        router.push("/");
     };
 
     useEffect(() => {
-        if (userData) {
-            setUserInfo(userData);
-        }
-    }, [userData]);
+        Axios.get("http://localhost:8000/api/current_user", {
+            headers: {
+                Authorization: `JWT ${localStorage.getItem("tokenS")}`,
+            },
+        })
+            .then((r) => {
+                console.log(r.data);
+                Axios.get(
+                    "http://localhost:8000/api/student/" + r.data.student,
+                    {
+                        headers: {
+                            Authorization: `JWT ${localStorage.getItem(
+                                "tokenS"
+                            )}`,
+                        },
+                    }
+                ).then((res) => {
+                    console.log(res);
+                    setUserInfo({
+                        ...userInfo,
+                        firstname: r.data["first_name"],
+                        lastname: r.data["last_name"],
+                        major: res.data.major,
+                        gpa: res.data["GPA"],
+                        courses: res.data["course_taken"],
+                        comments: res.data["comments_recv"],
+                    });
+                    setResumePDF(res.data["resume_pdf"]);
+                    setTranscriptPDF(res.data.transcript);
+                });
+            })
+            .catch((e) => {
+                console.log(e);
+                router.push("/");
+            });
+    }, []);
     return (
         <>
-            <NavBar identity="student" />
+            <NavBar handleLogout={handleLogout} identity="student" />
             <div className={classes.banner}>
                 <Image
                     src="/images/ucrBanner.png"
@@ -200,24 +238,9 @@ function ProfilePage({ userData }) {
                                 </Typography>
                             )}
 
-                            {updateState ? (
-                                <TextField
-                                    fullWidth
-                                    size="small"
-                                    label="School"
-                                    value={userInfo.school}
-                                    onChange={(e) => {
-                                        setUserInfo({
-                                            ...userInfo,
-                                            school: e.target.value,
-                                        });
-                                    }}
-                                ></TextField>
-                            ) : (
-                                <Typography variant="body2" component="p">
-                                    {userInfo.school}
-                                </Typography>
-                            )}
+                            <Typography variant="body2" component="p">
+                                University of California, Riverside
+                            </Typography>
 
                             {updateState ? (
                                 <TextField
@@ -322,22 +345,26 @@ function ProfilePage({ userData }) {
                                             classes.middlePaperPlaceholder
                                         }
                                     >
-                                        {userInfo ? (
-                                            userInfo.courses.map((item) => {
-                                                return (
-                                                    <React.Fragment>
-                                                        <ListItem>
-                                                            <ListItemText
-                                                                primary={item}
-                                                            />
-                                                        </ListItem>
-                                                        <Divider />
-                                                    </React.Fragment>
-                                                );
-                                            })
-                                        ) : (
-                                            <></>
-                                        )}
+                                        {[
+                                            "CS171",
+                                            "CS180",
+                                            "CS165",
+                                            "CS105",
+                                            "CS100",
+                                            "CS061",
+                                            "CS235",
+                                        ].map((item) => {
+                                            return (
+                                                <React.Fragment>
+                                                    <ListItem>
+                                                        <ListItemText
+                                                            primary={item}
+                                                        />
+                                                    </ListItem>
+                                                    <Divider />
+                                                </React.Fragment>
+                                            );
+                                        })}
                                     </List>
                                 </Box>
 
@@ -391,6 +418,12 @@ function ProfilePage({ userData }) {
                                         variant="contained"
                                         color="secondary"
                                         className={classes.middlePaperButton}
+                                        onClick={() => {
+                                            enqueueSnackbar(
+                                                "Resume Upload Successful",
+                                                { variant: "success" }
+                                            );
+                                        }}
                                     >
                                         Upload
                                     </Button>
@@ -442,6 +475,12 @@ function ProfilePage({ userData }) {
                                         variant="contained"
                                         color="secondary"
                                         className={classes.middlePaperButton}
+                                        onClick={() => {
+                                            enqueueSnackbar(
+                                                "Transcript Upload Successful",
+                                                { variant: "success" }
+                                            );
+                                        }}
                                     >
                                         Upload
                                     </Button>
@@ -499,7 +538,9 @@ function ProfilePage({ userData }) {
                     onClick={() => {
                         setUpdateState(!updateState);
                         updateState
-                            ? enqueueSnackbar("Update Successful", "success")
+                            ? enqueueSnackbar("Update Successful", {
+                                  variant: "success",
+                              })
                             : {};
                     }}
                 >

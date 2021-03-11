@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
 export default function NavBar({
     jobData,
     setJobData,
-    UserInfo,
+    userInfo,
     identity,
     handleLogout,
 }) {
@@ -38,6 +38,7 @@ export default function NavBar({
     return (
         <React.Fragment>
             <ProfileDrawer
+                userInfo={userInfo}
                 drawerOpen={drawerOpen}
                 setDrawerOpen={setDrawerOpen}
                 handleLogout={handleLogout}

@@ -24,6 +24,7 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Dropzone from "react-dropzone";
 import { useSnackbar } from "notistack";
 import NavBar from "../../../../components/NavBar";
+import { useRouter } from "next/router";
 
 const useStyles = makeStyles((theme) => ({
     banner: {
@@ -89,12 +90,12 @@ const CommentsItem = (title, description) => {
 // }
 
 function ProfilePage({ userData }) {
+    const router = useRouter();
     const { enqueueSnackbar, closeSnackbar } = useSnackbar();
     const classes = useStyles();
     const [userInfo, setUserInfo] = useState({
-        firstname: "NaN",
-        lastname: "NaN",
-        major: "NaN",
+        firstname: "Shuang",
+        lastname: "Zhou",
         department: "BCOE",
         school: "University of California, Riverside",
         gpa: "NaN",
@@ -120,6 +121,13 @@ function ProfilePage({ userData }) {
     });
     const [updateState, setUpdateState] = useState(false);
 
+    const handleLogout = () => {
+        if (typeof window !== "undefined") {
+            window.localStorage.removeItem("tokenS");
+        }
+        router.push("/");
+    };
+
     useEffect(() => {
         if (userData) {
             setUserInfo(userData);
@@ -127,7 +135,7 @@ function ProfilePage({ userData }) {
     }, [userData]);
     return (
         <>
-            <NavBar identity="faculty" />
+            <NavBar handleLogout={handleLogout} identity="faculty" />
             <div className={classes.banner}>
                 <Image
                     src="/images/ucrBanner.png"
@@ -180,24 +188,9 @@ function ProfilePage({ userData }) {
                                 </Typography>
                             )}
 
-                            {updateState ? (
-                                <TextField
-                                    fullWidth
-                                    size="small"
-                                    label="School"
-                                    value={userInfo.school}
-                                    onChange={(e) => {
-                                        setUserInfo({
-                                            ...userInfo,
-                                            school: e.target.value,
-                                        });
-                                    }}
-                                ></TextField>
-                            ) : (
-                                <Typography variant="body2" component="p">
-                                    {userInfo.school}
-                                </Typography>
-                            )}
+                            <Typography variant="body2" component="p">
+                                University of California, Riverside
+                            </Typography>
 
                             {updateState ? (
                                 <TextField
@@ -333,7 +326,9 @@ function ProfilePage({ userData }) {
                     onClick={() => {
                         setUpdateState(!updateState);
                         updateState
-                            ? enqueueSnackbar("Update Successful", "success")
+                            ? enqueueSnackbar("Update Successful", {
+                                  variant: "success",
+                              })
                             : {};
                     }}
                 >

@@ -10,6 +10,7 @@ import {
     Popover,
     Typography,
 } from "@material-ui/core";
+import { useSnackbar } from "notistack";
 import React, { forwardRef, useImperativeHandle, useState } from "react";
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -28,6 +29,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ApplyJobPopover = ({ anchorEl, handleClose, data }) => {
+    const { enqueueSnackbar } = useSnackbar();
     const classes = useStyles();
     const open = Boolean(anchorEl);
     const id = open ? data.name : undefined;
@@ -58,13 +60,17 @@ const ApplyJobPopover = ({ anchorEl, handleClose, data }) => {
                         Your Resume
                     </Typography>
                     <Divider />
-                    <Box className={classes.resumeTab}>
-                        Biqian Cheng CV. pdf
-                    </Box>
+                    <Box className={classes.resumeTab}>Biqian Cheng CV.pdf</Box>
                     <Button
                         className={classes.buttonTab}
                         variant="contained"
                         color="primary"
+                        onClick={() => {
+                            handleClose();
+                            enqueueSnackbar("Apply Successful", {
+                                variant: "success",
+                            });
+                        }}
                     >
                         Use
                     </Button>
@@ -73,7 +79,9 @@ const ApplyJobPopover = ({ anchorEl, handleClose, data }) => {
                         className={classes.buttonTab}
                         variant="outlined"
                         color="primary"
-                        onClick={handleClose}
+                        onClick={() => {
+                            handleClose();
+                        }}
                     >
                         Cancel
                     </Button>

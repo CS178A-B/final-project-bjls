@@ -5,6 +5,7 @@ from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from dateutil.relativedelta import relativedelta
 from .forms import LoginForm
+from .models import User
 # from .forms import LoginForm, StudentUpdateForm, StudentForm
 from django.contrib import messages
 from django.utils import timezone
@@ -51,42 +52,42 @@ class LoginView(View):
         return render(request, self.template_name, {'form': login_form})
 
 
-# class RegisterStudentView(View):
-#     """This how the register page is handled when attempting GET and POST requests
-#     """
-#     template_name = "account/register.html"
-#     model = User
+class RegisterStudentView(View):
+    """This how the register page is handled when attempting GET and POST requests
+    """
+    template_name = "account/register.html"
+    model = User
 
-#     # If a user is logged in, they should not have access to the registration page, so we redirect them to their dashboard
-#     # If a user is not logged in, they should not have access to the registration page, so we redirect them to the login page
-#     # If a user is a superuser, they are the ONLY people that should be able to access the registration page, so we render the page and form for them
-#     def get(self, request):
-#         student_form = StudentForm()
-#         if request.user.is_authenticated:
-#             # is_SuperUser = request.user.is_superuser
-#             # if is_SuperUser:
-#             return redirect(reverse('account:dashboard'))
-#         return render(request, self.template_name, {'form': student_form})
+    # If a user is logged in, they should not have access to the registration page, so we redirect them to their dashboard
+    # If a user is not logged in, they should not have access to the registration page, so we redirect them to the login page
+    # If a user is a superuser, they are the ONLY people that should be able to access the registration page, so we render the page and form for them
+    def get(self, request):
+        student_form = StudentForm()
+        if request.user.is_authenticated:
+            # is_SuperUser = request.user.is_superuser
+            # if is_SuperUser:
+            return redirect(reverse('account:dashboard'))
+        return render(request, self.template_name, {'form': student_form})
 
-#     # When a user submits the fields on the login page, we want to ensure that the registration credentials are correct
-#     # If they are, we redirect them to their dashboard page
-#     # If they aren't, we render the registration page again, this time with an error message
-#     def post(self, request):
-#         student_form = StudentForm(request.POST)
-#         if student_form.is_valid():
-#             student_form.instance.username = student_form.instance.email
-#             student_form.instance.is_student = True
-#             # customer_form.instance.billing_start_date = self.getBillingStart()
-#             student_form.save()
-#             return redirect(reverse('account:login'))
-#         return render(request, self.template_name, {'form': student_form})
+    # When a user submits the fields on the login page, we want to ensure that the registration credentials are correct
+    # If they are, we redirect them to their dashboard page
+    # If they aren't, we render the registration page again, this time with an error message
+    def post(self, request):
+        student_form = StudentForm(request.POST)
+        if student_form.is_valid():
+            student_form.instance.username = student_form.instance.email
+            student_form.instance.is_student = True
+            # customer_form.instance.billing_start_date = self.getBillingStart()
+            student_form.save()
+            return redirect(reverse('account:login'))
+        return render(request, self.template_name, {'form': student_form})
 
-#     # def getBillingStart(self):
-#     #     today = datetime.today()
-#     #     firstThis = today.replace(day=1)
+    # def getBillingStart(self):
+    #     today = datetime.today()
+    #     firstThis = today.replace(day=1)
 
-#     #     firstNext = firstThis + relativedelta(months=+1)
-#     #     return firstNext
+    #     firstNext = firstThis + relativedelta(months=+1)
+    #     return firstNext
 
 
 # class RegisterFacultyView(View):

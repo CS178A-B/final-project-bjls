@@ -21,7 +21,7 @@ export default function PostJobDialog({ jobData, setJobData, open, setOpen }) {
     };
 
     const handleSubmit = () => {
-        setJobData({ ...jobData, newJobData });
+        setJobData([...jobData, newJobData]);
         setOpen(false);
     };
     return (

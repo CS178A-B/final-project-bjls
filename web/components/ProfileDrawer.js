@@ -71,7 +71,11 @@ export default function ProfileDrawer({
                                 variant="h5"
                                 color="textPrimary"
                             >
-                                Biqian Cheng
+                                {userInfo
+                                    ? userInfo["first_name"] +
+                                      " " +
+                                      userInfo["last_name"]
+                                    : "NaN"}
                             </Typography>
                         }
                         secondary={

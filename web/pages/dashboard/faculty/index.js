@@ -35,35 +35,33 @@ export default function DashBoard({ userInfo }) {
     const handleLogout = () => {
         setLogedIn(false);
         if (typeof window !== "undefined") {
-            window.localStorage.removeItem("token");
+            window.localStorage.removeItem("tokenF");
         }
         router.push("/");
     };
 
     useEffect(() => {
-        if (typeof window !== "undefined") {
-            window.localStorage.getItem("token")
-                ? setLogedIn(true)
-                : setLogedIn(false);
-            axios
-                .get("http://localhost:8000/api/job", {
-                    headers: {
-                        Authorization: `JWT ${localStorage.getItem("token")}`,
-                    },
-                })
-                .then((r) => {
-                    console.log(r);
-                    setJobData(r.data);
-                    setJobData(mockdata);
-                })
-                .catch((e) => {
-                    console.log(e.response);
-                    setJobData(mockdata);
-                });
-        }
+        window.localStorage.getItem("tokenF")
+            ? setLogedIn(true)
+            : setLogedIn(false);
+        axios
+            .get("http://localhost:8000/api/job", {
+                headers: {
+                    Authorization: `JWT ${localStorage.getItem("tokenF")}`,
+                },
+            })
+            .then((r) => {
+                console.log(r);
+                setJobData(r.data);
+                setJobData(mockdata);
+            })
+            .catch((e) => {
+                console.log(e.response);
+                setJobData(mockdata);
+            });
 
         if (!logedIn) {
-            router.push("/login");
+            router.push("/login/faculty");
         }
     }, []);
 

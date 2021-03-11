@@ -1,28 +1,28 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, PasswordResetForm, SetPasswordForm
 # from .models import User, Student, Faculty
-from .models import Student, Faculty
+from .models import User, Student, Faculty
 
-# class UserForm(UserCreationForm):
-#     class Meta:
-#         model = User
-#         # model.is_student = True
-#         fields = ('username', 'email', 'password1', 'password2')
-#         # model.save()
+class UserForm(UserCreationForm):
+    class Meta:
+        model = User
+        # model.is_student = True
+        fields = ('username', 'email', 'password1', 'password2')
+        # model.save()
 
-#     # def save(self):
-#     #     user = super().save(commit=False)
-#     #     user.is_student = True
-#     #     user.save()
-#     #     student = Student.objects.create(user=user)
-#     #     # student.interests.add(*self.cleaned_data.get('interests'))
-#     #     return user
+    # def save(self):
+    #     user = super().save(commit=False)
+    #     user.is_student = True
+    #     user.save()
+    #     student = Student.objects.create(user=user)
+    #     # student.interests.add(*self.cleaned_data.get('interests'))
+    #     return user
 
-#     def __init__(self, *args, **kwargs):
-#         super(UserForm, self).__init__(*args, **kwargs)
-#         self.fields['password1'].help_text = "Minimum length of 8 characters."
-#         self.fields['password2'].label = "Password Confirmation"
-#         self.fields['password2'].help_text = "Enter the same password for confirmation."
+    def __init__(self, *args, **kwargs):
+        super(UserForm, self).__init__(*args, **kwargs)
+        self.fields['password1'].help_text = "Minimum length of 8 characters."
+        self.fields['password2'].label = "Password Confirmation"
+        self.fields['password2'].help_text = "Enter the same password for confirmation."
 
 
 class LoginForm(AuthenticationForm):

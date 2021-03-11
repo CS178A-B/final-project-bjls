@@ -19,6 +19,7 @@ export default function FacultySignUp() {
         username: "",
         password: "",
         department: "",
+        is_faculty: true,
     });
 
     const [signUpSuccess, setSignUpSuccess] = useState(false);
@@ -67,7 +68,7 @@ export default function FacultySignUp() {
                         <Typography component="h1" variant="h5">
                             Sign Up Successful.
                         </Typography>
-                        <Link href="/login" variant="body2">
+                        <Link href="/login/faculty" variant="body2">
                             Click here to log in.
                         </Link>
                     </React.Fragment>
@@ -198,7 +199,7 @@ export default function FacultySignUp() {
                         </Grid>
                         <Grid container justify="flex-end">
                             <Grid item className={styles.signinDirect}>
-                                <Link href="/login" variant="body2">
+                                <Link href="/login/faculty" variant="body2">
                                     Already have an account? Sign in
                                 </Link>
                             </Grid>

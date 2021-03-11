@@ -8,8 +8,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from rest_framework import viewsets
-
+from rest_framework import viewsets, permissions as p
 from . import permissions
 
 
@@ -20,13 +19,22 @@ from . import permissions
 
 
 @api_view(['GET'])
-def current_student(request):
+def current_user(request):
     """
     Determine the current user by their token, and return their data
     """
 
-    serializer = StudentSerializer(request.user)
+    serializer = UserSerializer(request.user)
     return Response(serializer.data)
+
+
+class UserRegisterViewSet(viewsets.ModelViewSet):
+    permission_classes = [
+        p.AllowAny
+    ]
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
@@ -38,11 +46,10 @@ class UserViewSet(viewsets.ModelViewSet):
 
     #     # ('id', 'token', 'first_name', 'last_name', 'username', 'password', 'email', 'is_student', 'is_faculty')
     #     # new_user = User.objects.create(
-            
+
     #     # )
     #     if (user_data['is_student']):
     #         new_student = Student(user=new_user)
-
 
     # def perform_create(self,serializer):
     #     serializer.save(user=self.request.user)
@@ -64,8 +71,6 @@ class UserViewSet(viewsets.ModelViewSet):
 #     def get(self, request, format=None):
 #         data = {"hi" : "hello"}
 #         return Response(data, status=status.HTTP_201_CREATED)
-    
-
 
 
 class StudentViewSet(viewsets.ModelViewSet):
@@ -83,20 +88,22 @@ class JobViewSet(viewsets.ModelViewSet):
     queryset = Job.objects.all()
     serializer_class = JobSerializer
 
+
 class CourseViewSet(viewsets.ModelViewSet):
     queryset = Course.objects.all()
     serializer_class = CourseSerializer
+
 
 class CommentViewSet(viewsets.ModelViewSet):
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
 
+
 class ApplicationViewSet(viewsets.ModelViewSet):
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
 
+
 class StudentCourseViewSet(viewsets.ModelViewSet):
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
-
-    

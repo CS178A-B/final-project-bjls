@@ -20,6 +20,7 @@ export default function StudentSignUp() {
         password: "",
         major: "",
         department: "",
+        is_student: true,
     });
 
     const [signUpSuccess, setSignUpSuccess] = useState(false);
@@ -39,7 +40,7 @@ export default function StudentSignUp() {
     const handleSubmit = () => {
         setErrorHandling({});
         axios
-            .post("http://localhost:8000/api/user/", signUpInfo)
+            .post("http://localhost:8000/api/registration/", signUpInfo)
             .then((r) => {
                 console.log(r);
                 if (r.status === 201) {
@@ -68,7 +69,7 @@ export default function StudentSignUp() {
                         <Typography component="h1" variant="h5">
                             Sign Up Successful.
                         </Typography>
-                        <Link href="/login" variant="body2">
+                        <Link href="/login/student" variant="body2">
                             Click here to log in.
                         </Link>
                     </React.Fragment>
@@ -207,7 +208,7 @@ export default function StudentSignUp() {
                         </Grid>
                         <Grid container justify="flex-end">
                             <Grid item className={styles.signinDirect}>
-                                <Link href="/login" variant="body2">
+                                <Link href="/login/student" variant="body2">
                                     Already have an account? Sign in
                                 </Link>
                             </Grid>
