@@ -80,29 +80,38 @@ class UserSerializerWithToken(serializers.ModelSerializer):
 class StudentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Student
+
         fields = '__all__'
+
 
 
 class FacultySerializer(serializers.ModelSerializer):
     class Meta:
         model = Faculty
+
         fields = '__all__'
+
 
 
 # Job Serializer
 class JobSerializer(serializers.ModelSerializer):
     class Meta:
         model = Job
+
         fields = '__all__'
+
 
 class CourseSerializer(serializers.ModelSerializer):
     class Meta:
         model = Course
+
         fields = '__all__'
+
     
 class CommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment
+
         fields = '__all__'
 
 class ApplicationSerializer(serializers.ModelSerializer):

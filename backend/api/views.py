@@ -1,8 +1,10 @@
 from django.shortcuts import render
+
 from account.models import User, Student, Faculty, Job, Course, Comment, Application, StudentCourse
 from .serializers import UserSerializer, UserSerializerWithToken, StudentSerializer, FacultySerializer, \
     JobSerializer, CourseSerializer, CommentSerializer, StudentCourseSerializer, ApplicationSerializer
 from rest_framework import generics, status, viewsets, permissions, filters
+
 from django.http import HttpResponseRedirect
 from django.contrib.auth.models import User as AUser
 from rest_framework.decorators import api_view
@@ -98,6 +100,7 @@ class JobViewSet(viewsets.ModelViewSet):
 class CourseViewSet(viewsets.ModelViewSet):
     queryset = Course.objects.all()
     serializer_class = CourseSerializer
+
 
 class CommentViewSet(viewsets.ModelViewSet):
     queryset = Comment.objects.all()
