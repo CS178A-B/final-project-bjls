@@ -1,5 +1,5 @@
 coverage==5.1
-Django==2.2.13
+Django==2.2.18
 psycopg2-binary==2.8.5
 python-dateutil==2.6.1
 django-crispy-forms==1.9.2
